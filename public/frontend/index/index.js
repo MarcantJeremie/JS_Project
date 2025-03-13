@@ -10,11 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     playBtn.addEventListener('click', () => {
         window.location.href = adress + '/game/start';
-        
     }
     );
-
-
 
 
 });

@@ -12,9 +12,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
-app.get('/', require('./routes/index.routes'));
+app.use('/', require('./routes/index.routes'));
+app.use('/', require('./routes/pending_routes.routes'))
 
-app.get('/game/start', require('./routes/game.routes'));
+app.use('/game', require('./routes/game.routes'));
+
+app.use('/register', require('./routes/register.routes'));
+
+app.use('/login', require('./routes/login.routes'));
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
