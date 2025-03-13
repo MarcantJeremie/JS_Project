@@ -14,6 +14,8 @@ app.use(express.static('public'));
 
 app.get('/', require('./routes/index.routes'));
 
+app.get('/game/start', require('./routes/game.routes'));
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
