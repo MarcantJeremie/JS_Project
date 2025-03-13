@@ -1,0 +1,45 @@
+body {
+    font-family: "Roboto";
+    background-color: #333333;
+    color: #CCCCCC;
+}
+
+.main_title {
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    position: relative;
+    background-color: gray;
+    text-align: center;
+}
+
+.main1 {
+    height : 80vh;
+    background-color : black;
+    display: flex;
+    justify-content : space-evenly;
+    align-items : center;
+}
+
+.play {
+    width: 40%;
+    height: 60vh;
+    text-align: center;
+    background-color: red;
+}
+
+.rules {
+    width: 40%;
+    height : 60vh;
+    background-color: blue;
+}
+
+.rules div {
+    text-align : center;
+}
+
+.rules p{
+    padding-left : 5%;
+    padding-right : 5%;
+    padding-bottom : 5%;
+}
