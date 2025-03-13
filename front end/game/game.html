@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="game.css" />
   </head>
   <body>
-    
+    <div class="container">
+      <div id="timer">30</div>
+      <button onclick="startTimer()">Démarrer</button>
+    </div>
+
+    <div id="question">
+      <h2>TEST</h2>
+    </div>
+
+    <div id="answers">
+      <input type="text" placeholder="Veuillez répondre ici" class="answer"/>
+    </div>
+
+    <script src="game.js"></script>
   </body>
 </html>
