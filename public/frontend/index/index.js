@@ -13,17 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-import { connectWithCookie } from "../global";
+import { connectWithCookie } from "../global.js";
 
 const logButton = document.getElementById("log-button");
-
 connectWithCookie();
-displayConnectButton();
 
 const displayConnectButton = () => {
   const is_connect = sessionStorage.getItem("IsConnect");
 
-  if (is_connect) {
+  if (is_connect == "true") {
     logButton.classList.add("connected");
     logButton.classList.remove("log");
     logButton.textContent = "profil";
@@ -33,3 +31,7 @@ const displayConnectButton = () => {
     logButton.textContent = "connexion";
   }
 };
+
+// Partie code
+
+displayConnectButton();
