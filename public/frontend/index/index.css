@@ -3,6 +3,7 @@
   --color2: #b7b7b7;
   --color3: #f5f5f5;
   --green: #45a017;
+  --green2: #5cbf2a;
 }
 
 body {
@@ -21,7 +22,7 @@ body {
   margin: auto;
 }
 
-/* Partie Menu  */
+/* Partie Menu */
 
 #menu {
   display: flex;
@@ -34,7 +35,12 @@ body {
 
   border-bottom: 0.3px solid var(--color2);
   border-radius: 0% 0% 10% 10%;
+
+  transition: 0.3s;
   box-shadow: 0px 1px 30px var(--color2);
+}
+#menu:hover {
+  box-shadow: 0px 5px 20px var(--color2);
 }
 
 #menu > .logo {
@@ -52,22 +58,68 @@ body {
 #menu > .log:hover {
   background-color: var(--green);
   color: var(--color3);
+
+  cursor: pointer;
+}
+
+#menu > .log:active {
+  background-color: var(--green2);
+  border-color: var(--green2);
 }
 
 /* Partie choix du jeu */
+
+#list_game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 5%;
+  padding-bottom: 5%;
+
+  height: 100%;
+}
 
 .game {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  box-shadow: 0px 0px 10px var(--color2);
+  transition: 0.3s;
+
+  width: 80vh;
+}
+.game:hover {
+  box-shadow: 0px 0px 30px var(--color2);
+}
+
+@media (max-width: 480px) {
+  .game {
+    width: 80%;
+  }
+}
+
+.game > img {
+  height: 100%;
+  width: 100%;
 }
 
 .play-button {
-  padding: 2%;
+  padding: 2% 0% 2% 0%;
   text-transform: uppercase;
   font-weight: bold;
+  text-align: center;
+
+  width: 100%;
 }
 .play-button:hover {
   background-color: var(--color2);
+
+  cursor: pointer;
+}
+.play-button:active {
+  background-color: var(--green);
+  color: var(--color3);
 }
