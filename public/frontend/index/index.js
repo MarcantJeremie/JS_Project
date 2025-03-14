@@ -22,6 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(adress);
 
   logBtn.addEventListener("click", () => {
-    window.location.href = adress + "/profil";
+    window.location.href = adress + "/profile";
   });
 });
