@@ -3,8 +3,8 @@ const router = express.Router();
 
 const publicPath = require("path").join(__dirname, "../../public");
 
-router.get("/profil", (req, res) => {
-  res.sendFile(publicPath + "/frontend/profil/profil.html");
+router.get("/", (req, res) => {
+  res.sendFile(publicPath + "/frontend/profile/profile.html");
 });
 
 module.exports = router;

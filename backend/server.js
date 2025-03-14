@@ -19,7 +19,8 @@ app.use(express.static("public"));
 
 app.use("/", require("./routes/index.routes"));
 app.use("/", require("./routes/pending_routes.routes"));
-app.use("/", require("./routes/profil.routes"));
+
+app.use("/profile", require("./routes/profile.routes"));
 
 app.use('/requests', require('./routes/client_requests.routes'))
 
