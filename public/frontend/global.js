@@ -4,7 +4,7 @@ address = address[address.length - 2];
 address = "http://" + address;
 
 export const connectWithCookie = () => {
-  let cookieValue = Cookies.get("login");
+  let cookieValue = localStorage.getItem("UserLogin");
   if (cookieValue === undefined) {
     // Le cookie de connexion n'existe pas
     sessionStorage.setItem("IsConnect", false);
@@ -12,6 +12,26 @@ export const connectWithCookie = () => {
     // Le cookie de connexion existe
     sessionStorage.setItem("IsConnect", false);
   }
+
+  return true;
+};
+
+const setItemWithExpiration = (key, value, expirationMinutes) => {
+  const now = new Date().getTime();
+  const item = { value, expiry: now + expirationMinutes * 60 * 1000 };
+  localStorage.setItem(key, JSON.stringify(item));
+};
+const getItemWithExpiration = (key) => {
+  const itemStr = localStorage.getItem(key);
+  if (!itemStr) return null;
+
+  const { value, expiry } = JSON.parse(itemStr);
+  if (new Date().getTime() > expiry) {
+    localStorage.removeItem(key);
+    return null;
+  }
+
+  return value;
 };
 
 // /**
