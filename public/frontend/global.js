@@ -1,14 +1,16 @@
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 
 export const connectWithCookie = () => {
-  let cookieValue = Cookies.get("login");
-  if (cookieValue === undefined) {
-    // Le cookie de connexion n'existe pas
-    sessionStorage.setItem("IsConnect", false);
-  } else {
-    // Le cookie de connexion existe
-    sessionStorage.setItem("IsConnect", false);
-  }
+  // let cookieValue = Cookies.get("login");
+  // if (cookieValue === undefined) {
+  //   // Le cookie de connexion n'existe pas
+  //   sessionStorage.setItem("IsConnect", false);
+  // } else {
+  //   // Le cookie de connexion existe
+  //   sessionStorage.setItem("IsConnect", false);
+  // }
+
+  return true;
 };
 
 /**
@@ -18,8 +20,8 @@ export const connectWithCookie = () => {
  * @returns {Promise<string>} Le mot de passe haché.
  */
 const hashPassword = async (password) => {
-  const saltRounds = 10;
-  return await bcrypt.hash(password, saltRounds);
+  // const saltRounds = 10;
+  // return await bcrypt.hash(password, saltRounds);
 };
 
 /**

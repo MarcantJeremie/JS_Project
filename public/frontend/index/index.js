@@ -11,4 +11,17 @@ document.addEventListener("DOMContentLoaded", () => {
   playBtn.addEventListener("click", () => {
     window.location.href = adress + "/game/start";
   });
+
+  let logBtn = document.getElementById("log-button");
+
+  adress = window.location.href;
+  adress = adress.split("/");
+  adress = adress[adress.length - 2];
+  adress = "http://" + adress;
+
+  console.log(adress);
+
+  logBtn.addEventListener("click", () => {
+    window.location.href = adress + "/profil";
+  });
 });
