@@ -27,6 +27,7 @@ function addPage(path_html, access){
 //Dont edit above this line / Ne pas modifier au dessus de cette ligne
 
 addPage("sync/sync.html", "game/play");
+addPage("game/game.html", "gamepage");
 
 
 
