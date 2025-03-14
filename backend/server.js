@@ -22,6 +22,8 @@ app.use(express.static('public'));
 app.use('/', require('./routes/index.routes'));
 app.use('/', require('./routes/pending_routes.routes'))
 
+app.use('/requests', require('./routes/client_requests.routes'))
+
 app.use('/game', require('./routes/game.routes'));
 
 app.use('/register', require('./routes/register.routes'));

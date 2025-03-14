@@ -1,4 +1,7 @@
-const bcrypt = require("bcryptjs");
+let address = window.location.href;
+address = address.split("/");
+address = address[address.length - 2];
+address = "http://" + address;
 
 export const connectWithCookie = () => {
   let cookieValue = Cookies.get("login");
@@ -11,56 +14,54 @@ export const connectWithCookie = () => {
   }
 };
 
-/**
- * Hache un mot de passe en utilisant bcrypt.
- *
- * @param {string} password - Le mot de passe en clair.
- * @returns {Promise<string>} Le mot de passe haché.
- */
-const hashPassword = async (password) => {
-  const saltRounds = 10;
-  return await bcrypt.hash(password, saltRounds);
-};
+// /**
+//  * Hache un mot de passe en utilisant bcrypt.
+//  *
+//  * @param {string} password - Le mot de passe en clair.
+//  * @returns {Promise<string>} Le mot de passe haché.
+//  */
+// const hashPassword = async (password) => {
+//   const saltRounds = 10;
+//   return await bcrypt.hash(password, saltRounds);
+// };
 
 /**
- * Permet d'avoir le pseudo d'un certain login
+ * Permet d'avoir les informations d'un utilisateur à partir de son login.
  *
  * @param {string} login - Le login d'un utilisateur.
- * @returns {string} - Renvoi le pseudo.
+ * @returns {Promise} - Renvoi l'utilisateur.
+ * Exemple d'utilisation : 
+ * getUser("Test").then((data) => {
+  console.log(data);
+    });
+ * ATTENTION /!\ Ne renvoie pas directement l'utilisateur, il faut utiliser then pour récupérer les données.
+ * 
  */
-export const getPseudo = (login) => {
-  //
+export const getUser = async (login) => {
+  try {
+    const response = await fetch(address + "/requests/getuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ login: login }),
+      
+    });
+
+
+    if (!response.ok) {
+      console.error("Erreur serveur :", response.status);
+      return null;
+    }
+
+    const data = await response.json(); // Attendre et récupérer les données JSON
+    return data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'utilisateur :", error);
+    return null;
+  }
 };
 
-/**
- * Permet d'avoir l'email d'un certain login
- *
- * @param {string} login - Le login d'un utilisateur.
- * @returns {string} - Renvoi l'email.
- */
-export const getEmail = (login) => {
-  //
-};
-
-/**
- * Permet d'avoir le mdp hashé de la db
- *
- * @param {string} login - Le login d'un utilisateur.
- * @returns {string} - Renvoi le mdp hashé de la db.
- */
-export const getHashPassword = (login) => {
-  //
-};
-
-/**
- * Vérifie si un mot de passe correspond à son hash stocké.
- *
- * @param {string} password - Le mot de passe saisi par l'utilisateur.
- * @param {string} hashedPassword - Le hash du mot de passe stocké dans la base de données.
- * @returns {Promise<boolean>} `true` si le mot de passe est valide, sinon `false`.
- */
-const verifyPassword = async (password, hashedPassword) =>
-  await bcrypt.compare(password, hashedPassword);
 
 /**
  * Permet de créer des nouveaux compte dans la base de donné.
