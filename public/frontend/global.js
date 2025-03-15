@@ -5,17 +5,14 @@ address = "http://" + address;
 
 export const connectWithCookie = () => {
   let cookieValue = localStorage.getItem("UserLogin");
-  console.log(cookieValue);
 
-  if (cookieValue === undefined) {
+  if (cookieValue === null) {
     // Le cookie de connexion n'existe pas
     sessionStorage.setItem("IsConnect", false);
   } else {
     // Le cookie de connexion existe
     sessionStorage.setItem("IsConnect", true);
   }
-
-  return true;
 };
 
 const setItemWithExpiration = (key, value, expirationMinutes) => {
