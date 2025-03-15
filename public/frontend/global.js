@@ -9,6 +9,7 @@ export const connectWithCookie = () => {
   if (cookieValue === null) {
     // Le cookie de connexion n'existe pas
     sessionStorage.setItem("IsConnect", false);
+    sessionStorage.setItem("UserLogin", cookieValue);
   } else {
     // Le cookie de connexion existe
     sessionStorage.setItem("IsConnect", true);
@@ -88,10 +89,8 @@ export const getUser = async (login) => {
  * @param {boolean} remember - Permet de savoir si on doit créer un cookie ou non
  * @returns {boolean} - Renvoi vrai, si le compte s'est créé sans problème, false sinon
  */
-export const createNewAccount = (email, pseudo, password) => {
-  // la fonction de hashage est juste au dessus
-  // Utiliser cette ligne de code, pour créer le cookie en question (on sauvegarde le login)
-  // Cookies.set('login', 'valeur', { expires: 30 });
+export const createNewAccount = (email, pseudo, password, remember) => {
+  //
 };
 
 /**
@@ -107,10 +106,22 @@ export const deleteAccount = (login) => {
 /**
  * Permet de créer des nouveaux compte dans la base de donné.
  *
+ * @param {string} login - Le login du compte à modifier.
  * @param {string} pseudo - Le nouveau pseudo du compte.
  * @param {string} password - Le nouveau mdp du compte (pas encore hashé).
  * @returns {boolean} - Renvoi vrai, si le compte s'est modifié sans problème, false sinon
  */
 export const modifyAccount = (pseudo, password) => {
+  //
+};
+
+/**
+ * Permet de savoir si les informations rentré dans le formulaire login, sont correct ou non.
+ *
+ * @param {string} gmail - Le nouveau pseudo du compte.
+ * @param {string} password - Le nouveau mdp du compte (pas encore hashé).
+ * @returns {boolean} - Renvoi vrai si tout est bon, sinon non
+ */
+export const valideConnection = (gmail, password) => {
   //
 };

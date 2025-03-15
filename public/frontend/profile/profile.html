@@ -35,32 +35,52 @@
       <div id="form-container">
         <form id="form-connection" class="" action="">
           <div class="question">
-            <input type="text" name="L-pseudo" id="L-pseudo" />
-            <label for="L-pseudo">Pseudo</label>
+            <input
+              type="email"
+              name="L-email"
+              id="L-email"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+              required
+            />
+            <label for="L-email">Email</label>
           </div>
           <div class="question">
-            <input type="text" name="L-password" id="L-password" />
+            <input type="text" name="L-password" id="L-password" required />
             <label for="L-password">Password</label>
+          </div>
+          <div class="question">
+            <input type="checkbox" id="L-horns" name="L-horns" />
+            <label for="L-horns">Se rappeler de moi</label>
           </div>
           <input type="submit" value="Valider" />
         </form>
 
         <form id="form-register" class="hide-left" action="">
           <div class="question">
-            <input type="text" name="R-pseudo" id="R-pseudo" />
+            <input type="text" name="R-pseudo" id="R-pseudo" required />
             <label for="R-pseudo">Pseudo</label>
           </div>
           <div class="question">
-            <input type="gmail" name="R-email" id="R-email" />
+            <input
+              type="email"
+              name="R-email"
+              id="R-email"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+              required
+            />
             <label for="R-email">Email</label>
           </div>
           <div class="question">
-            <input type="text" name="R-password" id="R-password" />
+            <input type="text" name="R-password" id="R-password" required />
             <label for="R-password">Mot de passe</label>
           </div>
           <div class="question">
-            <input type="text" name="R-Cpassword" id="R-Cpassword" />
+            <input type="text" name="R-Cpassword" id="R-Cpassword" required />
             <label for="R-Cpassword">Confirmer Mdp</label>
+          </div>
+          <div class="question">
+            <input type="checkbox" id="R-horns" name="R-horns" />
+            <label for="R-horns">Se rappeler de moi</label>
           </div>
           <input type="submit" value="Valider" />
         </form>
