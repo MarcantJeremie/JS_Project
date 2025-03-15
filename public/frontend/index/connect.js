@@ -7,7 +7,7 @@ import { getUser } from "../global.js";
 // const displayConnectButton = () => {
 //   const is_connect = sessionStorage.getItem("IsConnect");
 
-//   if (is_connect == "true") {  
+//   if (is_connect == "true") {
 //     logButton.classList.add("connected");
 //     logButton.classList.remove("log");
 //     logButton.textContent = "profil";
@@ -22,6 +22,5 @@ import { getUser } from "../global.js";
 getUser("Test").then((data) => {
   console.log(data);
 });
-
 
 // displayConnectButton();

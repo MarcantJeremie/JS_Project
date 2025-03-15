@@ -20,6 +20,37 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
+}
+
+#back-to-menu {
+  position: absolute;
+
+  top: 5%;
+  left: 5%;
+
+  font-size: 5vh;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.3s;
+
+  cursor: pointer;
+}
+#back-to-menu:hover {
+  transform: translateX(-10%);
+}
+
+#back-to-menu > span {
+  font-size: 3vh;
+}
+#back-to-menu:active > span {
+  text-decoration: underline;
 }
 
 /* Affichage de la page de connexion */
@@ -29,8 +60,158 @@ body {
   border-radius: 20px;
 
   padding: 3%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
 }
 
 #connection > h1 {
   text-transform: uppercase;
+}
+
+#selection-button {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  max-width: 400px;
+
+  font-size: 100%;
+
+  padding: 3%;
+
+  position: relative;
+
+  background-color: white;
+  border-radius: 10px;
+}
+
+#login, #signin {
+  width: 50%;
+  text-align: center;
+
+  z-index: 3;
+
+  cursor: pointer;
+}
+#selected-button {
+  width: 50%;
+  height: 100%;
+
+  position: absolute;
+
+  background-color: var(--color2);
+  border-radius: 10px;
+
+  transition: 0.3s;
+}
+.left {
+  left: 0%;
+}
+.right {
+  left: 50%;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+input[type="submit"] {
+  color: var(--color3);
+  font-weight: bold;
+
+  padding: 1%;
+  background-color: var(--green);
+  border-radius: 10px;
+
+  font-size: 20px;
+
+  transition: transform 0.2s;
+}
+input[type="submit"]:hover{
+  background-color: var(--green2);
+}
+input[type="submit"]:active {
+  transform: scale(0.7);
+}
+
+#connection > #form-container {
+  width: 80vh;
+  height: 50vh;
+
+  position: relative;
+}
+
+@media (max-width: 768px) {  
+  #connection > #form-container {
+    width: 35vh;
+    height: 50vh;
+  }
+}
+
+#connection > #form-container > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+
+  transition: 0.4s;
+  z-index: 2;
+}
+
+.hide-left {
+  transform: translateX(-100%);
+  opacity: 0;
+  z-index: 0;
+}
+.hide-right {
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 0;
+}
+
+.question {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 90%;
+}
+.question > input[type="text"], .question > input[type="gmail"] {
+  background-color: var(--color2);
+  border-radius: 5px;
+
+  width: 90%;
+
+  font-size: 20px;
+  font-family: 'Roboto';
+
+  padding: 3%;
+
+  transition: 0.2s;
+}
+.question > input[type="text"]:focus, .question > input[type="gmail"]:focus {
+  background-color: white;
+}
+input[type="text"] + label, input[type="gmail"] + label {
+  position: absolute;
+  font-size: 120%;
+  
+  top: 25%;
+  left: 10%;
+  transition: 0.3s;
+}
+input[type="text"]:focus + label, input[type="gmail"]:focus + label {
+  scale: 0.8;
+  top: -20%;
+  left: 5%;
 }

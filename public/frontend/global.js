@@ -5,12 +5,14 @@ address = "http://" + address;
 
 export const connectWithCookie = () => {
   let cookieValue = localStorage.getItem("UserLogin");
+  console.log(cookieValue);
+
   if (cookieValue === undefined) {
     // Le cookie de connexion n'existe pas
     sessionStorage.setItem("IsConnect", false);
   } else {
     // Le cookie de connexion existe
-    sessionStorage.setItem("IsConnect", false);
+    sessionStorage.setItem("IsConnect", true);
   }
 
   return true;
@@ -65,9 +67,7 @@ export const getUser = async (login) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ login: login }),
-      
     });
-
 
     if (!response.ok) {
       console.error("Erreur serveur :", response.status);
@@ -81,7 +81,6 @@ export const getUser = async (login) => {
     return null;
   }
 };
-
 
 /**
  * Permet de créer des nouveaux compte dans la base de donné.
