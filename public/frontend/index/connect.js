@@ -1,8 +1,5 @@
-import { connectWithCookie } from "../global.js";
-import { getUser } from "../global.js";
-
 const logButton = document.getElementById("log-button");
-connectWithCookie();
+window.connectWithCookie();
 
 const displayConnectButton = () => {
   const is_connect = sessionStorage.getItem("IsConnect");
@@ -22,6 +19,6 @@ const displayConnectButton = () => {
 
 displayConnectButton();
 
-getUser("Test").then((data) => {
+window.getUser("Test").then((data) => {
   console.log(data);
 });

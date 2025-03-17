@@ -33,6 +33,7 @@ async function checkPassword(entered_password, db_password) {
 
 
 router.post('/', async (req, res)=>{
+    console.log(req.body);
     if(!req.body.login || !req.body.password){
         return res.status(400).json({ message: 'All fields marked by * are required' });
     }
@@ -47,7 +48,8 @@ router.post('/', async (req, res)=>{
         return res.status(400).json({ message: 'Invalid password' });
     }
     else{
-        res.status(200).json({ message: 'Login successful' });
+        console.log("User connected : ", login);
+        res.status(200).json({ msg: 'Connected' });
     }
 }
 );

@@ -33,16 +33,15 @@
         <div id="selected-button" class="left"></div>
       </div>
       <div id="form-container">
-        <form id="form-connection" class="" action="">
+        <form id="form-connection" method="POST" class="" action="">
           <div class="question">
             <input
-              type="email"
-              name="L-email"
-              id="L-email"
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+              type="text"
+              name="L-login"
+              id="L-login"
               required
             />
-            <label for="L-email">Email</label>
+            <label for="L-login">Login</label>
           </div>
           <div class="question">
             <input type="text" name="L-password" id="L-password" required />
@@ -55,7 +54,7 @@
           <input type="submit" value="Valider" />
         </form>
 
-        <form id="form-register" class="hide-right" action="">
+        <form id="form-register" method="POST" class="hide-right" action="">
           <div class="question">
             <input type="text" name="R-login" id="R-login" required />
             <label for="R-login">* Nom d'utilisateur</label>
@@ -69,7 +68,6 @@
               type="email"
               name="R-email"
               id="R-email"
-              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
               required
             />
             <label for="R-email">* Email</label>
@@ -90,7 +88,7 @@
         </form>
       </div>
     </div>
-
+    <script src="../frontend/global.js"></script>
     <script src="../frontend/profile/profile.js"></script>
   </body>
 </html>

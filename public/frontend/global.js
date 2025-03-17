@@ -3,25 +3,26 @@ address = address.split("/");
 address = address[address.length - 2];
 address = "http://" + address;
 
-export const connectWithCookie = () => {
-  let cookieValue = localStorage.getItem("UserLogin");
+window.connectWithCookie = () => {
+  let cookieValue = getItemWithExpiration("UserLogin");
 
   if (cookieValue === null) {
     // Le cookie de connexion n'existe pas
     sessionStorage.setItem("IsConnect", false);
-    sessionStorage.setItem("UserLogin", cookieValue);
   } else {
     // Le cookie de connexion existe
     sessionStorage.setItem("IsConnect", true);
+    sessionStorage.setItem("UserLogin", cookieValue);
   }
 };
 
-const setItemWithExpiration = (key, value, expirationMinutes) => {
+window.setItemWithExpiration = (key, value, expirationMinutes) => {
   const now = new Date().getTime();
   const item = { value, expiry: now + expirationMinutes * 60 * 1000 };
   localStorage.setItem(key, JSON.stringify(item));
 };
-const getItemWithExpiration = (key) => {
+
+window.getItemWithExpiration = (key) => {
   const itemStr = localStorage.getItem(key);
   if (!itemStr) return null;
 
@@ -57,7 +58,7 @@ const getItemWithExpiration = (key) => {
  * ATTENTION /!\ Ne renvoie pas directement l'utilisateur, il faut utiliser then pour récupérer les données.
  * 
  */
-export const getUser = async (login) => {
+window.getUser = async (login) => {
   try {
     const response = await fetch(address + "/requests/getuser", {
       method: "POST",
@@ -80,48 +81,48 @@ export const getUser = async (login) => {
   }
 };
 
-/**
- * Permet de créer des nouveaux compte dans la base de donné.
- *
- * @param {string} email - L'email du compte.
- * @param {string} pseudo - Le pseudo du compte.
- * @param {string} password - Le mdp du compte (pas encore hashé).
- * @param {boolean} remember - Permet de savoir si on doit créer un cookie ou non
- * @returns {boolean} - Renvoi vrai, si le compte s'est créé sans problème, false sinon
- */
-export const createNewAccount = (email, pseudo, password, remember) => {
-  //
-};
+// /**
+//  * Permet de créer des nouveaux compte dans la base de donné.
+//  *
+//  * @param {string} email - L'email du compte.
+//  * @param {string} pseudo - Le pseudo du compte.
+//  * @param {string} password - Le mdp du compte (pas encore hashé).
+//  * @param {boolean} remember - Permet de savoir si on doit créer un cookie ou non
+//  * @returns {boolean} - Renvoi vrai, si le compte s'est créé sans problème, false sinon
+//  */
+// export const createNewAccount = (email, pseudo, password, remember) => {
+//   //
+// };
 
-/**
- * Permet de supprimer des compte de la base de donné à partir d'un login.
- *
- * @param {string} login - Le login du compte.
- * @returns {boolean} - Renvoi vrai, si le compte s'est supprimé sans problème, false sinon
- */
-export const deleteAccount = (login) => {
-  //
-};
+// /**
+//  * Permet de supprimer des compte de la base de donné à partir d'un login.
+//  *
+//  * @param {string} login - Le login du compte.
+//  * @returns {boolean} - Renvoi vrai, si le compte s'est supprimé sans problème, false sinon
+//  */
+// export const deleteAccount = (login) => {
+//   //
+// };
 
-/**
- * Permet de créer des nouveaux compte dans la base de donné.
- *
- * @param {string} login - Le login du compte à modifier.
- * @param {string} pseudo - Le nouveau pseudo du compte.
- * @param {string} password - Le nouveau mdp du compte (pas encore hashé).
- * @returns {boolean} - Renvoi vrai, si le compte s'est modifié sans problème, false sinon
- */
-export const modifyAccount = (pseudo, password) => {
-  //
-};
+// /**
+//  * Permet de créer des nouveaux compte dans la base de donné.
+//  *
+//  * @param {string} login - Le login du compte à modifier.
+//  * @param {string} pseudo - Le nouveau pseudo du compte.
+//  * @param {string} password - Le nouveau mdp du compte (pas encore hashé).
+//  * @returns {boolean} - Renvoi vrai, si le compte s'est modifié sans problème, false sinon
+//  */
+// export const modifyAccount = (pseudo, password) => {
+//   //
+// };
 
-/**
- * Permet de savoir si les informations rentré dans le formulaire login, sont correct ou non.
- *
- * @param {string} gmail - Le nouveau pseudo du compte.
- * @param {string} password - Le nouveau mdp du compte (pas encore hashé).
- * @returns {boolean} - Renvoi vrai si tout est bon, sinon non
- */
-export const valideConnection = (gmail, password) => {
-  //
-};
+// /**
+//  * Permet de savoir si les informations rentré dans le formulaire login, sont correct ou non.
+//  *
+//  * @param {string} gmail - Le nouveau pseudo du compte.
+//  * @param {string} password - Le nouveau mdp du compte (pas encore hashé).
+//  * @returns {boolean} - Renvoi vrai si tout est bon, sinon non
+//  */
+// export const valideConnection = (gmail, password) => {
+//   //
+// };
