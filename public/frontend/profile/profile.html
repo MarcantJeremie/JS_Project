@@ -57,8 +57,12 @@
 
         <form id="form-register" class="hide-left" action="">
           <div class="question">
-            <input type="text" name="R-pseudo" id="R-pseudo" required />
-            <label for="R-pseudo">Pseudo</label>
+            <input type="text" name="R-login" id="R-login" required />
+            <label for="R-login">* Nom d'utilisateur</label>
+          </div>
+          <div class="question">
+            <input type="text" name="R-pseudo" id="R-pseudo"/>
+            <label for="R-pseudo">  Nom d'affichage</label>
           </div>
           <div class="question">
             <input
@@ -68,15 +72,15 @@
               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
               required
             />
-            <label for="R-email">Email</label>
+            <label for="R-email">* Email</label>
           </div>
           <div class="question">
             <input type="text" name="R-password" id="R-password" required />
-            <label for="R-password">Mot de passe</label>
+            <label for="R-password">* Mot de passe</label>
           </div>
           <div class="question">
             <input type="text" name="R-Cpassword" id="R-Cpassword" required />
-            <label for="R-Cpassword">Confirmer Mdp</label>
+            <label for="R-Cpassword">* Confirmer Mdp</label>
           </div>
           <div class="question">
             <input type="checkbox" id="R-horns" name="R-horns" />
