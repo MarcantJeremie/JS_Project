@@ -6,8 +6,8 @@
   --green: #45a017;
   --green2: #5cbf2a;
 
-  --red : #d32f2f;
-  --red2 : #f44336;
+  --red: #d32f2f;
+  --red2: #f44336;
 }
 
 body {
@@ -92,7 +92,8 @@ body {
   border-radius: 10px;
 }
 
-#login, #signin {
+#login,
+#signin {
   width: 50%;
   text-align: center;
 
@@ -134,7 +135,7 @@ input[type="submit"] {
 
   transition: transform 0.2s;
 }
-input[type="submit"]:hover{
+input[type="submit"]:hover {
   background-color: var(--green2);
 }
 input[type="submit"]:active {
@@ -148,7 +149,7 @@ input[type="submit"]:active {
   position: relative;
 }
 
-@media (max-width: 768px) {  
+@media (max-width: 768px) {
   #connection > #form-container {
     width: 35vh;
     height: 50vh;
@@ -189,31 +190,35 @@ input[type="submit"]:active {
 
   width: 90%;
 }
-.question > input[type="text"], .question > input[type="email"] {
+.question > input[type="text"],
+.question > input[type="email"] {
   background-color: var(--color2);
   border-radius: 5px;
 
   width: 90%;
 
   font-size: 20px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 
   padding: 3%;
 
   transition: 0.3s;
 }
-.question > input[type="text"]:focus, .question > input[type="email"]:focus {
+.question > input[type="text"]:focus,
+.question > input[type="email"]:focus {
   background-color: white;
 }
-input[type="text"] + label, input[type="email"] + label {
+input[type="text"] + label,
+input[type="email"] + label {
   position: absolute;
   font-size: 120%;
-  
+
   top: 25%;
   left: 10%;
   transition: 0.3s;
 }
-input[type="text"]:focus + label, input[type="email"]:focus + label {
+input[type="text"]:focus + label,
+input[type="email"]:focus + label {
   scale: 0.8;
   top: -20%;
   left: 5%;
@@ -280,14 +285,17 @@ input[type="text"]:focus + label, input[type="email"]:focus + label {
   border: solid 2px var(--color2-5);
 }
 
-#disconnect, #remove {
+#disconnect,
+#remove {
   border: solid 2px var(--red);
 }
-#disconnect:hover, #remove:hover {
+#disconnect:hover,
+#remove:hover {
   color: var(--color3);
   background-color: var(--red);
 }
-#disconnect:active, #remove:active {
+#disconnect:active,
+#remove:active {
   color: var(--color3);
   background-color: var(--red2);
   border: solid 2px var(--red2);

@@ -7,7 +7,7 @@ const http = require("http");
 
 const port = process.env.PORT;
 
-connectDB();
+// connectDB();
 
 const app = express();
 const server = http.createServer(app);
@@ -22,9 +22,9 @@ app.use("/", require("./routes/pending_routes.routes"));
 
 app.use("/profile", require("./routes/profile.routes"));
 
-app.use('/requests', require('./routes/client_requests.routes'))
+app.use("/requests", require("./routes/client_requests.routes"));
 
-app.use('/game', require('./routes/game.routes'));
+app.use("/game", require("./routes/game.routes"));
 
 app.use("/register", require("./routes/register.routes"));
 
