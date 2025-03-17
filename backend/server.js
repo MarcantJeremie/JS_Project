@@ -30,6 +30,8 @@ app.use("/register", require("./routes/register.routes"));
 
 app.use("/login", require("./routes/login.routes"));
 
+app.use("/questions", require("./routes/questions.routes"));
+
 //Timer part
 let timer = 30;
 let interval = null;
