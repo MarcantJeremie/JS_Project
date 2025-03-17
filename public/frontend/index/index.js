@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(adress);
 
   logBtn.addEventListener("click", () => {
-    window.location.href = adress + "/profile";
+    if (sessionStorage.getItem("IsConnect") == "true") {
+      window.location.href = adress + "/profile/account";
+    } else {
+      window.location.href = adress + "/profile/login";
+    }
   });
 });
