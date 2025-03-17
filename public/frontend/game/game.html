@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game</title>
     <link rel="stylesheet" href="frontend/game/game.css" />
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <div class="container">
       <div id="timer">30</div>
-      <button onclick="startTimer()">Démarrer</button>
     </div>
 
     <div id="question">
@@ -19,7 +19,8 @@
     <div id="answers">
       <input type="text" placeholder="Veuillez répondre ici" class="answer"/>
     </div>
-
+    <script src="frontend/global.js"></script>
+    <script src= "frontend/game/socket.js"></script>
     <script src="frontend/game/game.js"></script>
   </body>
 </html>

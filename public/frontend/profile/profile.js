@@ -107,11 +107,22 @@ form_connection.addEventListener("submit", (e) => {
         sessionStorage.setItem("UserLogin", login);
         if (rememberme) {
           window.setItemWithExpiration("UserLogin", login, 30);
+          window.setItemWithExpiration("CanPlay", "true", 30);
+          window.getUser(login).then((data) => {
+            window.setItemWithExpiration("DisplayName", data.displayName, 30);
+        });  
         }
+        else {
+          window.getUser(login).then((data) => {
+            window.setItemWithExpiration("DisplayName", data.displayName, 1);
+        });
+        }
+
         window.location.href = adress + "/profile/account";
-    };
+      };
+    
+    });
   });
-});
 }
 catch(e){
   

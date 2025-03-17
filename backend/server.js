@@ -1,9 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
-//Ajout
 const { Server } = require("socket.io");
 const http = require("http");
+const { playGame, getQuestion } = require("./game_manager");
+const { set } = require("mongoose");
 
 const port = process.env.PORT;
 
@@ -32,39 +33,30 @@ app.use("/login", require("./routes/login.routes"));
 
 app.use("/questions", require("./routes/questions.routes"));
 
-//Timer part
-let timer = 30;
-let interval = null;
 
-function startTimer() {
-  if (!interval) {
-    interval = setInterval(() => {
-      if (timer > 0) {
-        timer--;
-        io.emit("timerUpdate", timer); // Envoie la mise à jour à tous les clients
-      } else {
-        clearInterval(interval);
-        interval = null;
-      }
-    }, 1000);
-  }
-}
+var answermap = new Map();
+var currentQuestion = 0;
+var timer = 30;
+
+setInterval(() => {
+  timer--;
+  io.emit("timer", timer);
+  if (timer == 0) {
+    currentQuestion++;
+    timer = 30;
+    io.emit("newQuestion", getQuestion(currentQuestion));
+  }}, 1000);
 
 io.on("connection", (socket) => {
-  // Envoie le temps actuel au nouveau client
-  socket.emit("timerUpdate", timer);
+  
 
+  
   // Réception de la commande pour démarrer le timer
-  socket.on("startTimer", () => {
-    if (!interval) {
-      console.log("Le timer démarre !");
-      startTimer();
-      io.emit("timerStarted"); // Notifie tous les clients que le timer démarre
-    }
-  });
+  socket.emit("newQuestion", getQuestion(currentQuestion));
 
-  socket.on("join", (userId) => {
-    console.log("User joined with id:", userId);
+  socket.on("join", (userId, displayName) => {
+    console.log("User joined with id:", userId, " his name is ", displayName);
+    answermap.set(userId, []);
   });
 
   socket.on("disconnect", () => {
@@ -83,6 +75,11 @@ io.on("connection", (socket) => {
 // socket.on("connect", () => {
 //     socket.emit("join", userId);
 // });
+
+// import { getQuestion } from "./game_manager";
+
+var params = [5, ["TEST", "OUPI"], 2, 2, 1, 0];
+playGame(params);
 
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
