@@ -5,10 +5,7 @@ const selected_button = document.getElementById("selected-button");
 
 const form_connection = document.getElementById("form-connection");
 const form_register = document.getElementById("form-register");
-
-const account_modify_button = document.getElementById("modify-account");
-const account_disconnect_button = document.getElementById("disconnect");
-const account_remove_button = document.getElementById("remove");
+const form_modify = document.getElementById("form-modify");
 
 adress = window.location.href;
 adress = adress.split("/");
@@ -20,6 +17,22 @@ const back_to_menu_button = document.getElementById("back-to-menu");
 back_to_menu_button.addEventListener("click", () => {
   window.location.href = adress + "/";
 });
+
+document
+  .querySelectorAll(
+    'input[type="text"], input[type="email"], input[type="password"]'
+  )
+  .forEach((elem) => {
+    elem.addEventListener("input", (e) => {
+      const label = elem.closest(".question").querySelector("label");
+
+      if (e.target.value === "") {
+        label.classList.remove("stay-up");
+      } else {
+        label.classList.add("stay-up");
+      }
+    });
+  });
 
 try {
   const changeSelectionLoginPage = () => {
@@ -123,61 +136,75 @@ try {
   });
 } catch (e) {}
 
-document
-  .querySelectorAll(
-    'input[type="text"], input[type="email"], input[type="password"]'
-  )
-  .forEach((elem) => {
-    elem.addEventListener("input", (e) => {
-      const label = elem.closest(".question").querySelector("label");
-
-      if (e.target.value === "") {
-        label.classList.remove("stay-up");
-      } else {
-        label.classList.add("stay-up");
-      }
-    });
-  });
-
 // Partie des boutons de la page account
 
-account_disconnect_button.addEventListener("click", () => {
-  sessionStorage.removeItem("UserLogin");
-  sessionStorage.removeItem("IsConnect");
-  localStorage.removeItem("UserLogin");
-  localStorage.removeItem("DisplayName");
-  localStorage.removeItem("CanPlay");
-  window.location.href = adress + "/profile/login";
-});
+try {
+  const submit_form_modify = form_modify.querySelector('input[type="submit"]');
 
-account_remove_button.addEventListener("click", () => {
-  if (confirm("Etes vous sûr de vouloir supprimer votre compte ?")) {
-    login = sessionStorage.getItem("UserLogin");
+  const account_modify_button = document.getElementById("modify-account");
+  const account_disconnect_button = document.getElementById("disconnect");
+  const account_remove_button = document.getElementById("remove");
+
+  const show_pseudo = document.getElementById("show-pseudo");
+  const show_email = document.getElementById("show-email");
+
+  window.getUser(sessionStorage.getItem("UserLogin")).then((data) => {
+    show_email.innerText = data.email;
+    show_pseudo.innerText = data.displayName;
+
+    document.getElementById("M-pseudo").value = data.displayName;
+    document.getElementById("M-email").value = data.email;
+  });
+  // Partie des boutons de la page account
+
+  account_modify_button.addEventListener("click", () => {
+    account_disconnect_button.setAttribute("disabled", "disabled");
+    account_modify_button.setAttribute("disabled", "disabled");
+    account_remove_button.setAttribute("disabled", "disabled");
+    show_email.setAttribute("disabled", "disabled");
+    show_pseudo.setAttribute("disabled", "disabled");
+
+    submit_form_modify.removeAttribute("disabled");
+    document.querySelectorAll('input[type="text"]').removeAttribute("disabled");
+  });
+
+  account_disconnect_button.addEventListener("click", () => {
     sessionStorage.removeItem("UserLogin");
     sessionStorage.removeItem("IsConnect");
     localStorage.removeItem("UserLogin");
     localStorage.removeItem("DisplayName");
     localStorage.removeItem("CanPlay");
-    // fetch pour delete un compte
-
-    fetch(adress + "/delete/delete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        login: login
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message) {
-          alert(data.message);
-        }
-      });
-
     window.location.href = adress + "/profile/login";
-  } else {
+  });
 
-  }
-});
+  account_remove_button.addEventListener("click", () => {
+    if (confirm("Etes vous sûr de vouloir supprimer votre compte ?")) {
+      login = sessionStorage.getItem("UserLogin");
+      sessionStorage.removeItem("UserLogin");
+      sessionStorage.removeItem("IsConnect");
+      localStorage.removeItem("UserLogin");
+      localStorage.removeItem("DisplayName");
+      localStorage.removeItem("CanPlay");
+      // fetch pour delete un compte
+
+      fetch(adress + "/delete/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          login: login,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message) {
+            alert(data.message);
+          }
+        });
+
+      window.location.href = adress + "/profile/login";
+    } else {
+    }
+  });
+} catch (e) {}
