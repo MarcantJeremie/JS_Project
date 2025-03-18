@@ -45,3 +45,17 @@ socket.on("newQuestion", (question) => {
 socket.on("timer", (timer)=>{
     document.getElementById("timer").innerHTML = timer;
 })
+
+let resonse = "";
+
+document.getElementById("rep-field").addEventListener("input", (e) => {
+    response = e.target.value;
+    console.log(response);
+});
+
+
+socket.on("need_response", (question) => {
+    socket.emit("response", userId, response, question);
+    document.getElementById("rep-field").value = "";
+    response = "";
+});

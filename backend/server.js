@@ -40,19 +40,33 @@ var answermap = new Map();
 var currentQuestion = 0;
 var timer = 30;
 
-setInterval(() => {
+const startGame = setInterval(() => {
   timer--;
   io.emit("timer", timer);
   if (timer == 0) {
+    io.emit("need_response", currentQuestion);
     currentQuestion++;
     timer = 30;
     io.emit("newQuestion", getQuestion(currentQuestion));
   }}, 1000);
 
+  
+var params = [5, ["TEST", "OUPI"], 2, 2, 1, 0];
 io.on("connection", (socket) => {
   
+  socket.on("start_lobby", (params) => {
+    playGame(params);
+    console.log("Game started");
+    startGame;
 
+  });
   
+  socket.on("response", (userId, response, question) => {
+    answermap.get(userId)[question] = response;
+    console.log(answermap);
+    console.log("got the response")
+  });
+
   // Réception de la commande pour démarrer le timer
   socket.emit("newQuestion", getQuestion(currentQuestion));
 
@@ -65,6 +79,7 @@ io.on("connection", (socket) => {
     console.log("Un client s'est déconnecté :", socket.id);
   });
 });
+
 
 // à mettre dans le html à mettre pour connecter les joueurs :
 // let userId = localStorage.getItem('userId');
@@ -80,8 +95,6 @@ io.on("connection", (socket) => {
 
 // import { getQuestion } from "./game_manager";
 
-var params = [5, ["TEST", "OUPI"], 2, 2, 1, 0];
-playGame(params);
 
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
