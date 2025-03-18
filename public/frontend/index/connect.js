@@ -18,7 +18,3 @@ const displayConnectButton = () => {
 // Partie code
 
 displayConnectButton();
-
-window.getUser("Test").then((data) => {
-  console.log(data);
-});

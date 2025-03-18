@@ -35,6 +35,10 @@ window.getItemWithExpiration = (key) => {
   return value;
 };
 
+window.removeItemWithExpiration = (key) => {
+  localStorage.removeItem(key);
+}
+
 // /**
 //  * Hache un mot de passe en utilisant bcrypt.
 //  *

@@ -7,5 +7,9 @@ router.get('/start', (req, res) => {
   res.sendFile(publicPath+'/frontend/begin/begin.html');
 });
 
+router.get('/game', (req, res) => {
+  res.sendFile(publicPath+'/frontend/game/game.html');
+});
+
 
 module.exports = router;

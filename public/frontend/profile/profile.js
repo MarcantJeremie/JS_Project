@@ -145,6 +145,8 @@ account_disconnect_button.addEventListener("click", () => {
   sessionStorage.removeItem("UserLogin");
   sessionStorage.removeItem("IsConnect");
   localStorage.removeItem("UserLogin");
+  localStorage.removeItem("DisplayName");
+  localStorage.removeItem("CanPlay");
   window.location.href = adress + "/profile/login";
 });
 

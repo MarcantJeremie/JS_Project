@@ -3,7 +3,7 @@ const router = express.Router();
 
 const publicPath = require('path').join(__dirname, '../../public');
 
-function addPage(path_html, access){
+const addPage = function(path_html, access){
     new_path = publicPath + "/frontend/" + path_html;
     router.get("/" + access, (req, res) => {
         res.sendFile(new_path);
@@ -25,12 +25,6 @@ function addPage(path_html, access){
 //Code à écrire : addPage("game/game.html", "game/current");
 
 //Dont edit above this line / Ne pas modifier au dessus de cette ligne
-
-addPage("sync/sync.html", "game/play");
-addPage("game/game.html", "gamepage");
-addPage("create_question/create_question.html", "questions/create");
-
-
 
 
 //Dont edit below this line / Ne pas modifier en dessous de cette ligne
