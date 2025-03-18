@@ -190,9 +190,9 @@ input[type="submit"]:active {
 
   width: 90%;
 }
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.question > input[type="text"],
+.question > input[type="email"],
+.question > input[type="password"] {
   background-color: var(--color2);
   border-radius: 5px;
 
@@ -205,14 +205,14 @@ input[type="password"] {
 
   transition: 0.3s;
 }
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
+.question > input[type="text"]:focus,
+.question > input[type="email"]:focus,
+.question > input[type="password"]:focus {
   background-color: white;
 }
-input[type="text"] + label,
-input[type="email"] + label,
-input[type="password"] + label {
+.question > input[type="text"] + label,
+.question > input[type="email"] + label,
+.question > input[type="password"] + label {
   position: absolute;
   font-size: 100%;
 
@@ -220,12 +220,12 @@ input[type="password"] + label {
   left: 10%;
   transition: 0.3s;
 }
-input[type="text"]:focus + label,
-input[type="email"]:focus + label,
-input[type="password"]:focus + label,
-input[type="text"] + label.stay-up,
-input[type="email"] + label.stay-up,
-input[type="password"] + label.stay-up {
+.question > input[type="text"]:focus + label,
+.question > input[type="email"]:focus + label,
+.question > input[type="password"]:focus + label,
+.question > input[type="text"] + label.stay-up,
+.question > input[type="email"] + label.stay-up,
+.question > input[type="password"] + label.stay-up {
   scale: 0.8;
   top: -20%;
   left: 5%;
