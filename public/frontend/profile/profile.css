@@ -233,6 +233,10 @@ input[type="submit"]:active {
 
 /* Affichage du profil */
 
+#form-modify {
+  display: flex;
+}
+
 #show-profil {
   font-weight: bold;
   box-shadow: 0 0 10px var(--color1);
@@ -288,4 +292,8 @@ input[type="submit"]:active {
   color: var(--color3);
   background-color: var(--red2);
   border: solid 2px var(--red2);
+}
+
+[disabled] {
+  display: none;
 }

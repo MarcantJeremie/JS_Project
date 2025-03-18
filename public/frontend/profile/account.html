@@ -25,17 +25,27 @@
       <span>Menu</span>
     </div>
 
-    <div id="show-profil">
-      <h1>Votre profil</h1>
-      <p>Pseudo : <span id="show-pseudo"></span></p>
-      <p>Email : <span id="show-email"></span></p>
+    <form action="" id="form-modify">
+      <div id="show-profil">
+        <h1>Votre profil</h1>
+        <p>
+          Pseudo : <span id="show-pseudo"></span>
+          <input type="text" name="M-pseudo" id="M-pseudo" disabled />
+        </p>
+        <p>
+          Email : <span id="show-email"></span>
+          <input type="text" name="M-email" id="M-email" disabled />
+        </p>
 
-      <div id="account-buttons">
-        <div id="modify-account">Modifier</div>
-        <div id="disconnect">Déconnecter</div>
-        <div id="remove">Supprimer</div>
+        <div id="account-buttons">
+          <div id="modify-account">Modifier</div>
+          <div id="disconnect">Déconnecter</div>
+          <div id="remove">Supprimer</div>
+          <input type="submit" value="Valider" disabled />
+        </div>
       </div>
-    </div>
+    </form>
+
     <script src="../frontend/global.js"></script>
     <script src="../frontend/profile/profile.js"></script>
   </body>
