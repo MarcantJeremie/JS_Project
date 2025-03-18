@@ -6,6 +6,10 @@ const selected_button = document.getElementById("selected-button");
 const form_connection = document.getElementById("form-connection");
 const form_register = document.getElementById("form-register");
 
+const account_modify_button = document.getElementById("modify-account");
+const account_disconnect_button = document.getElementById("disconnect");
+const account_remove_button = document.getElementById("remove");
+
 adress = window.location.href;
 adress = adress.split("/");
 adress = adress[2];
@@ -134,3 +138,12 @@ document
       }
     });
   });
+
+// Partie des boutons de la page account
+
+account_disconnect_button.addEventListener("click", () => {
+  sessionStorage.removeItem("UserLogin");
+  sessionStorage.removeItem("IsConnect");
+  localStorage.removeItem("UserLogin");
+  window.location.href = adress + "/profile/login";
+});
