@@ -321,6 +321,8 @@ p > input[type="password"] {
   background-color: var(--color2);
   padding: 1%;
   border-radius: 5px;
+
+  width: 50%;
 }
 p > span + input[type="text"]:focus,
 p > input[type="password"]:focus {
