@@ -1,6 +1,6 @@
 let address = window.location.href;
 address = address.split("/");
-address = address[address.length - 2];
+address = address[2];
 address = "http://" + address;
 
 window.connectWithCookie = () => {
