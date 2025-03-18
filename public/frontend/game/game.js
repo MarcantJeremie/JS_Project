@@ -16,12 +16,3 @@ function startTimer() {
 function stopTimer() {
     clearInterval(countdown);
 }
-
-function checkAnswer() {
-    let answer = document.getElementById("answer").value;
-    if (answer === "42") {
-        alert("Bonne réponse !");
-    } else {
-        alert("Mauvaise réponse !");
-    }
-}

@@ -84,9 +84,3 @@ button:hover {
 }
 
 /* Partie gestion du responsive */
-
-@media (max-width: 600px) {
-    #question {
-        width: 90%;
-    }
-}

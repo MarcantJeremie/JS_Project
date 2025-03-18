@@ -28,6 +28,7 @@ function addPage(path_html, access){
 
 addPage("sync/sync.html", "game/play");
 addPage("game/game.html", "gamepage");
+addPage("create_question/create_question.html", "questions/create");
 
 
 
