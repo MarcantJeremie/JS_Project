@@ -190,9 +190,9 @@ input[type="submit"]:active {
 
   width: 90%;
 }
-.question > input[type="text"],
-.question > input[type="email"],
-.question > input[type="password"] {
+input[type="text"],
+input[type="email"],
+input[type="password"] {
   background-color: var(--color2);
   border-radius: 5px;
 
@@ -205,9 +205,9 @@ input[type="submit"]:active {
 
   transition: 0.3s;
 }
-.question > input[type="text"]:focus,
-.question > input[type="email"]:focus,
-.question > input[type="password"]:focus {
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
   background-color: white;
 }
 input[type="text"] + label,
@@ -222,7 +222,10 @@ input[type="password"] + label {
 }
 input[type="text"]:focus + label,
 input[type="email"]:focus + label,
-input[type="password"]:focus + label {
+input[type="password"]:focus + label,
+input[type="text"] + label.stay-up,
+input[type="email"] + label.stay-up,
+input[type="password"] + label.stay-up {
   scale: 0.8;
   top: -20%;
   left: 5%;
