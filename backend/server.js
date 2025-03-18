@@ -33,6 +33,8 @@ app.use("/login", require("./routes/login.routes"));
 
 app.use("/questions", require("./routes/questions.routes"));
 
+app.use("/delete", require("./routes/delete_account.routes"));
+
 
 var answermap = new Map();
 var currentQuestion = 0;

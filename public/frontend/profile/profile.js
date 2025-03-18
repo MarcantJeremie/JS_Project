@@ -151,15 +151,33 @@ account_disconnect_button.addEventListener("click", () => {
 });
 
 account_remove_button.addEventListener("click", () => {
-  if (confirm("Vous êtes sûr de vouloir faire ça ?")) {
+  if (confirm("Etes vous sûr de vouloir supprimer votre compte ?")) {
+    login = sessionStorage.getItem("UserLogin");
     sessionStorage.removeItem("UserLogin");
     sessionStorage.removeItem("IsConnect");
     localStorage.removeItem("UserLogin");
-
+    localStorage.removeItem("DisplayName");
+    localStorage.removeItem("CanPlay");
     // fetch pour delete un compte
+
+    fetch(adress + "/delete/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login: login
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          alert(data.message);
+        }
+      });
 
     window.location.href = adress + "/profile/login";
   } else {
-    history.back();
+
   }
 });

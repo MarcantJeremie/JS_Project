@@ -29,3 +29,12 @@ module.exports.setUsers = async(req, res) => {
     });
     res.status(201).json(user);
 }
+
+module.exports.deleteAccount = async(req, res) => {
+    const user = await UserModel.findOne({login: req.body.login});
+    if(!user){
+        return res.status(400).json({ message: 'User not found' });
+    }
+    await UserModel.deleteOne({login: req.body.login});
+    res.status(200).json({ message: 'Account deleted' });
+};

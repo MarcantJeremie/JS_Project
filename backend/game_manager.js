@@ -18,7 +18,6 @@ const searchForQuestions = async (params) => {
     const tags = params[1];
     const difficulty = params.slice(2, 6);
     const questions = await Questions.find({tags: {$in: tags}, verified: true});
-    console.log(questions);
     let questionsToReturn = [];
     for (let i = 0; i < questions.length; i++) {
         if(difficulty[questions[i].difficulty - 1] > 0 && questionsToReturn.length < totalQuestions){
@@ -31,7 +30,6 @@ const searchForQuestions = async (params) => {
         const j = Math.floor(Math.random() * (i + 1));
         [questionsToReturn[i], questionsToReturn[j]] = [questionsToReturn[j], questionsToReturn[i]];
     }
-    console.log(questionsToReturn);
     return questionsToReturn;
 }
 
