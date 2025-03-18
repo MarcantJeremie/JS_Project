@@ -152,8 +152,8 @@ try {
     show_email.innerText = data.email;
     show_pseudo.innerText = data.displayName;
 
-    document.getElementById("M-pseudo").value = data.displayName;
-    document.getElementById("M-email").value = data.email;
+    document.getElementById("M-pseudo").setAttribute("value", data.displayName);
+    document.getElementById("M-email").setAttribute("value", data.email);
   });
   // Partie des boutons de la page account
 
@@ -165,7 +165,9 @@ try {
     show_pseudo.setAttribute("disabled", "disabled");
 
     submit_form_modify.removeAttribute("disabled");
-    document.querySelectorAll('input[type="text"]').removeAttribute("disabled");
+    document.querySelectorAll("input[type='text']").forEach((element) => {
+      element.removeAttribute("disabled");
+    });
   });
 
   account_disconnect_button.addEventListener("click", () => {
