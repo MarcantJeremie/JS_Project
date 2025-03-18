@@ -147,6 +147,7 @@ try {
 
   const show_pseudo = document.getElementById("show-pseudo");
   const show_email = document.getElementById("show-email");
+  const show_password = document.getElementById("show-password");
 
   window.getUser(sessionStorage.getItem("UserLogin")).then((data) => {
     show_email.innerText = data.email;
@@ -165,6 +166,7 @@ try {
     show_pseudo.setAttribute("disabled", "disabled");
 
     submit_form_modify.removeAttribute("disabled");
+    show_password.removeAttribute("disabled");
     document.querySelectorAll("input[type='text']").forEach((element) => {
       element.removeAttribute("disabled");
     });
@@ -208,5 +210,9 @@ try {
       window.location.href = adress + "/profile/login";
     } else {
     }
+
+    form_modify.addEventListener("submit", (e) => {
+      //
+    });
   });
 } catch (e) {}

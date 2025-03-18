@@ -316,6 +316,17 @@ input[type="submit"]:active {
   border: solid 2px var(--red2);
 }
 
+p > span + input[type="text"],
+p > input[type="password"] {
+  background-color: var(--color2);
+  padding: 1%;
+  border-radius: 5px;
+}
+p > span + input[type="text"]:focus,
+p > input[type="password"]:focus {
+  background-color: white;
+}
+
 [disabled] {
   display: none;
 }
