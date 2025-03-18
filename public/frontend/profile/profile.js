@@ -147,3 +147,17 @@ account_disconnect_button.addEventListener("click", () => {
   localStorage.removeItem("UserLogin");
   window.location.href = adress + "/profile/login";
 });
+
+account_remove_button.addEventListener("click", () => {
+  if (confirm("Vous êtes sûr de vouloir faire ça ?")) {
+    sessionStorage.removeItem("UserLogin");
+    sessionStorage.removeItem("IsConnect");
+    localStorage.removeItem("UserLogin");
+
+    // fetch pour delete un compte
+
+    window.location.href = adress + "/profile/login";
+  } else {
+    history.back();
+  }
+});
