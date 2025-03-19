@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Start a game</title>
+    <title>Début de partie</title>
 
-    <link rel="stylesheet" href="../../frontend/begin/begin.css" />
+    <link rel="stylesheet" href="../frontend/begin/begin.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,54 +18,33 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+
+    <script src="/socket.io/socket.io.js"></script>
   </head>
-
-
   <body>
-      <h1 class="main_title"> GTRCultue </h1>
-      <div class="main1">
-          
-          <!-- Play cntainer -->
-          <div class="play">
-              <div class="play_title">
-                  <h1> JOUER </h1>
-                  <div class="choose caracter">
-                      <h2> choisisser votre caractère </h2>
-                  </div>
-                  <div class="play_name">
-                      <input type="text" id="pseudoInput" placeholder="Entrez votre pseudo">
-                  </div>
-                  <div class="creategame">
-                      <button class="creategame"> Créer votre partie privée </button>
-                  </div>
-                  <div class="joingame">
-                      <button class="joinrandomgame"> Rejoigner une partie aléatoire </button>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Rules container -->
-          <div class="rules">
-
-              <div>
-                  <h3> 
-                      <b><u> Les règles : </u></b> 
-                  </h3>
-              </div>
-
-              <p> 
-              Testez votre culture entre amis ou en famille grâce à ce quizz de 40 questions.
-              Rebus, têtes mélangées, Petit Bac et des tas d'autres questions vous attendent.
-              Chaque question peut vous rapporter de 1 à 3 points en fonction de sa difficulté 
-              (vert pour les plus faciles, rouge pour les plus dures).
-              Le but du jeu étant donc de marquer le plus de points et de finir devant tous vos adversaires. <br /> <br />
-              <b>Les parties s'organiseront donc en 2 temps :</b> <br />
-              le temps de réponse aux questions en temps limité et le temps de correction réalisé par le créateur de la partie.
-              Ne vous en faîtes pas si vous vous trompez lors de la correction d'un participant, gardez en tête votre erreur,
-              vous aurez la possibilité de rajouter (ou enlever) des points à chaque participant à la fin de la partie.
-              </p>
-
-          </div>
+    <div id="start-game">
+      <h1>Commencer une partie</h1>
+      <p class="little">Entrez un pseudo pour rejoindre ou créer une partie.</p>
+      <div id="show-pseudo">
+        <i class="bx bxs-user"></i>
+        <input type="text" placeholder="Votre Pseudo" />
       </div>
+
+      <div id="join-game" class="button-begin">Rejoindre</div>
+      <div id="create-game" class="button-begin">Créer</div>
+    </div>
+
+    <div id="div-join-game" class="hide">
+      <div class="back-button"><i class="bx bxs-left-arrow"></i></div>
+      <h1>Rejoindre une partie</h1>
+    </div>
+
+    <div id="div-create-game" class="hide">
+      <div class="back-button"><i class="bx bxs-left-arrow"></i></div>
+      <h1>Créer une partie</h1>
+    </div>
+
+    <script src="../frontend/global.js"></script>
+    <script src="../frontend/begin/begin.js"></script>
   </body>
 </html>

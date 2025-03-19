@@ -151,6 +151,9 @@ try {
     "show-previous-password"
   );
   const show_new_password = document.getElementById("show-new-password");
+  const show_confirm_new_password = document.getElementById(
+    "show-confirm-new-password"
+  );
 
   window.getUser(sessionStorage.getItem("UserLogin")).then((data) => {
     show_email.innerText = data.email;
@@ -171,6 +174,7 @@ try {
     submit_form_modify.removeAttribute("disabled");
     show_previous_password.removeAttribute("disabled");
     show_new_password.removeAttribute("disabled");
+    show_confirm_new_password.removeAttribute("disabled");
     document.querySelectorAll("input[type='text']").forEach((element) => {
       element.removeAttribute("disabled");
     });
@@ -185,38 +189,98 @@ try {
     window.location.href = adress + "/profile/login";
   });
 
-  account_remove_button.addEventListener("click", () => {
-    if (confirm("Etes vous sûr de vouloir supprimer votre compte ?")) {
-      login = sessionStorage.getItem("UserLogin");
-      sessionStorage.removeItem("UserLogin");
-      sessionStorage.removeItem("IsConnect");
-      localStorage.removeItem("UserLogin");
-      localStorage.removeItem("DisplayName");
-      localStorage.removeItem("CanPlay");
-      // fetch pour delete un compte
+  account_remove_button.addEventListener("click", (e) => {
+    e.preventDefault();
+    userpswd = prompt("Please enter your password to delete your account");
+  
+    login = sessionStorage.getItem("UserLogin");
+    
+    // fetch pour delete un compte
 
-      fetch(adress + "/delete/delete", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          login: login,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.message) {
+    fetch(adress + "/accounts/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login: login,
+        password: userpswd,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          if(data.message === "Account deleted"){
+            sessionStorage.removeItem("UserLogin");
+            sessionStorage.removeItem("IsConnect");
+            localStorage.removeItem("UserLogin");
+            localStorage.removeItem("DisplayName");
+            localStorage.removeItem("CanPlay");
+            window.location.href = adress + "/profile/login";
+            alert("Your account has been deleted");
+          }
+          else{
             alert(data.message);
           }
-        });
+        }
+      });
 
-      window.location.href = adress + "/profile/login";
-    } else {
+  }
+
+    
+  );
+
+  form_modify.addEventListener("submit", (e) => {
+    e.preventDefault();
+    form_data = new FormData(form_modify);
+    login = sessionStorage.getItem("UserLogin");
+    oldPassword = form_data.get("M-previous-password");
+    newPassword = form_data.get("M-new-password");
+    email = form_data.get("M-email");
+    displayName = form_data.get("M-pseudo");
+    confirmPassword = form_data.get("M-confirm-new-password");
+    if(!displayName){
+      displayName = login;
     }
+    if(newPassword || confirmPassword){
+      if (newPassword.length < 6) {
+        alert("Password must be at least 6 characters long");
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+    }
+    else{
+      newPassword = oldPassword;
+    }
+    fetch(adress + "/accounts/edit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        login: login,
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+        email: email,
+        displayName: displayName,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          alert(data.message);
+        } else {
 
-    form_modify.addEventListener("submit", (e) => {
-      //
-    });
+        }
+        window.location.href = adress + "/profile/account";
+      });
+
   });
-} catch (e) {}
+
+} 
+catch (e) {
+
+}
