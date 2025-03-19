@@ -151,6 +151,9 @@ try {
     "show-previous-password"
   );
   const show_new_password = document.getElementById("show-new-password");
+  const show_confirm_new_password = document.getElementById(
+    "show-confirm-new-password"
+  );
 
   window.getUser(sessionStorage.getItem("UserLogin")).then((data) => {
     show_email.innerText = data.email;
@@ -171,6 +174,7 @@ try {
     submit_form_modify.removeAttribute("disabled");
     show_previous_password.removeAttribute("disabled");
     show_new_password.removeAttribute("disabled");
+    show_confirm_new_password.removeAttribute("disabled");
     document.querySelectorAll("input[type='text']").forEach((element) => {
       element.removeAttribute("disabled");
     });
