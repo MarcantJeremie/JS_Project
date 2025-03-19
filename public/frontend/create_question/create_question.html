@@ -5,26 +5,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create a question</title>
-    <link rel="stylesheet" href="../frontend/create_question/cretate_question.css" />
+    <link rel="stylesheet" href="../frontend/create_question/create_question.css" />
 </head>
 
 <body>
-    <form method="post" id="creation">
-        <div class="question">
-            <input type="text" placeholder="quelle question voulez-vous créer ?">  
-        </div>
-        <div class="answer">
-            <input type="text" placeholder="quelle est la réponse à votre question ?">
-        </div>
-        <div class="tags">
-            <input type="text" placeholder="ajoutez des tags à votre question">
-        </div>
-        <div class="difficulty">
-            <input type="text" placeholder="quelle est la difficulté de votre question ?">
-        </div>
+    <form action="" method="post" id="creation" enctype="multipart/form-data">
+        <label for="Question">Question</label>
+        <input type="text" class="ecriture" name="Question"> 
+            
+        <label for="Réponse">Réponse</label>
+        <input type="text" class="ecriture" name="Réponse">
+        
+        <label for="Réponse">Tags</label>
+        <input type="text" class="ecriture" name="Tags">
+        
+        <label for="Réponse">Difficulté</label>
+        <input type="text" class="ecriture" name="Difficulté">
 
+        <label for="image">Ajouter une image</label>
+        <input type="file" class="ecriture" name="image" accept="image/*">
     </form>
 
+    <input type="submit" value="Valider" />
 
     <script src="../frontend/global.js"></script>
     <script src="../frontend/create_question/cretate_question.js"></script>

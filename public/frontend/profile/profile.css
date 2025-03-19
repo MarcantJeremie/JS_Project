@@ -235,6 +235,8 @@ input[type="submit"]:active {
 
 #form-modify {
   display: flex;
+
+  width: 80%;
 }
 
 #show-profil {
@@ -243,6 +245,11 @@ input[type="submit"]:active {
   padding: 2% 4% 2% 4%;
 
   border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
 }
 #show-profil > p > span {
   font-weight: normal;
@@ -252,6 +259,8 @@ input[type="submit"]:active {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  flex-wrap: wrap;
 }
 #account-buttons > div {
   border-radius: 10px;
@@ -263,6 +272,19 @@ input[type="submit"]:active {
   text-transform: uppercase;
 
   cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  #account-buttons > div {
+    padding: 2%;
+    font-size: 17px;
+
+    margin-top: 3%;
+  }
+
+  #form-modify {
+    width: 90%;
+  }
 }
 
 #modify-account {
@@ -292,6 +314,19 @@ input[type="submit"]:active {
   color: var(--color3);
   background-color: var(--red2);
   border: solid 2px var(--red2);
+}
+
+p > span + input[type="text"],
+p > input[type="password"] {
+  background-color: var(--color2);
+  padding: 1%;
+  border-radius: 5px;
+
+  width: 50%;
+}
+p > span + input[type="text"]:focus,
+p > input[type="password"]:focus {
+  background-color: white;
 }
 
 [disabled] {

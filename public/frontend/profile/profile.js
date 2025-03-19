@@ -147,13 +147,17 @@ try {
 
   const show_pseudo = document.getElementById("show-pseudo");
   const show_email = document.getElementById("show-email");
+  const show_previous_password = document.getElementById(
+    "show-previous-password"
+  );
+  const show_new_password = document.getElementById("show-new-password");
 
   window.getUser(sessionStorage.getItem("UserLogin")).then((data) => {
     show_email.innerText = data.email;
     show_pseudo.innerText = data.displayName;
 
-    document.getElementById("M-pseudo").value = data.displayName;
-    document.getElementById("M-email").value = data.email;
+    document.getElementById("M-pseudo").setAttribute("value", data.displayName);
+    document.getElementById("M-email").setAttribute("value", data.email);
   });
   // Partie des boutons de la page account
 
@@ -165,7 +169,11 @@ try {
     show_pseudo.setAttribute("disabled", "disabled");
 
     submit_form_modify.removeAttribute("disabled");
-    document.querySelectorAll('input[type="text"]').removeAttribute("disabled");
+    show_previous_password.removeAttribute("disabled");
+    show_new_password.removeAttribute("disabled");
+    document.querySelectorAll("input[type='text']").forEach((element) => {
+      element.removeAttribute("disabled");
+    });
   });
 
   account_disconnect_button.addEventListener("click", () => {
@@ -206,5 +214,9 @@ try {
       window.location.href = adress + "/profile/login";
     } else {
     }
+
+    form_modify.addEventListener("submit", (e) => {
+      //
+    });
   });
 } catch (e) {}

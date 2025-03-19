@@ -4,5 +4,83 @@ html {--color1: #000000;
 --color3: #f5f5f5;
 --green: #45a017;
 --green2: #5cbf2a;
-background-color: var(--color3);
 }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--color3);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 400px;
+    margin: auto;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+.ecriture {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white;
+}
+
+input[type="file"] {
+    border: none;
+    background: none;
+}
+
+.ecriture {
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #666666;
+    border: none;
+    width: 500px;
+    text-align: center;
+}
+
+input[type="submit"] {
+    color: var(--color3);
+    font-weight: bold;
+
+    padding: 1%;
+    background-color: var(--green);
+    border: none;
+    border-radius: 10px;
+
+    font-size: 20px;
+
+    transition: transform 0.2s;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--green2);
+}
+
+input[type="submit"]:active {
+    transform: scale(0.7);
+}
+
+/* Partie gestion du responsive */
