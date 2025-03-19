@@ -40,7 +40,7 @@ var answermap = new Map();
 var currentQuestion = 0;
 var timer = 30;
 
-const startGame = setInterval(() => {
+const startGame = ()=> setInterval(() => {
   timer--;
   io.emit("timer", timer);
   if (timer == 0) {
@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
   socket.on("start_lobby", (params) => {
     playGame(params);
     console.log("Game started");
-    startGame;
+    startGame();
 
   });
   
@@ -94,7 +94,6 @@ io.on("connection", (socket) => {
 // });
 
 // import { getQuestion } from "./game_manager";
-
 
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);

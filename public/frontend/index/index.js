@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   adress = window.location.href;
   adress = adress.split("/");
-  adress = adress[adress.length - 2];
+  adress = adress[2];
   adress = "http://" + adress;
 
   console.log(adress);
