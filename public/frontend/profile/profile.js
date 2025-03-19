@@ -195,7 +195,7 @@ try {
       localStorage.removeItem("CanPlay");
       // fetch pour delete un compte
 
-      fetch(adress + "/delete/delete", {
+      fetch(adress + "/accounts/delete", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -216,7 +216,9 @@ try {
     }
 
     form_modify.addEventListener("submit", (e) => {
-      //
+      form_data = new FormData(form_modify);
+      login = sessionStorage.getItem("UserLogin");
+      
     });
   });
 } catch (e) {}

@@ -33,7 +33,7 @@ app.use("/login", require("./routes/login.routes"));
 
 app.use("/questions", require("./routes/questions.routes"));
 
-app.use("/delete", require("./routes/delete_account.routes"));
+app.use("/accounts", require("./routes/accounts.routes"));
 
 
 var answermap = new Map();
