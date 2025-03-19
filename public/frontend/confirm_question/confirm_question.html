@@ -7,7 +7,7 @@
 
     <link
       rel="stylesheet"
-      href="../frontend/confirm_question/confirm_question.css"
+      href="../../frontend/confirm_question/confirm_question.css"
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,8 +23,29 @@
     />
   </head>
   <body>
-    test
+      <div id="main_container">
+          <div id="img_container">
+              <div class="img"> image </div>
+          </div>
 
-    <script src="../frontend/confirm_question/confirm_question.js"></script>
+          <div id="main2">
+              <h2 class="title_question"><u>Question</u></h2>
+              <div id="question">
+                  <h3> text </h3>
+              </div>
+
+              <div id="valider_question">
+                  <button class="valid_question" id="non_valid">
+                      <h3>Refuser</h3>
+                  </button>
+
+                  <button class="valid_question" id="valid">
+                      <h3>Valider</h3>
+                  </button>
+              </div>
+          </div>
+      </div>
+
+      <script src="../../frontend/confirm_question/confirm_question.js"></script>
   </body>
 </html>
