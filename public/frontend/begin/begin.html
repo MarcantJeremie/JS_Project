@@ -34,15 +34,24 @@
       <div id="create-game" class="button-begin">Créer</div>
     </div>
 
-    <div id="div-join-game" class="hide">
+    <form id="div-join-game" class="hide">
       <div class="back-button"><i class="bx bxs-left-arrow"></i></div>
       <h1>Rejoindre une partie</h1>
-    </div>
+      <label for="get-id-game">Id de partie</label>
+      <input
+        type="text"
+        placeholder="Rentrez l'id de la partie"
+        id="get-id-game"
+      />
+      <input type="submit" value="Valider" />
+    </form>
 
-    <div id="div-create-game" class="hide">
+    <form id="div-create-game" class="hide">
       <div class="back-button"><i class="bx bxs-left-arrow"></i></div>
       <h1>Créer une partie</h1>
-    </div>
+      <p class="little">Cliquez sur Valider pour créer une partie.</p>
+      <input type="submit" value="Valider" />
+    </form>
 
     <script src="../frontend/global.js"></script>
     <script src="../frontend/begin/begin.js"></script>
