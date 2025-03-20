@@ -7,6 +7,8 @@
     <title>Create a question</title>
     <link rel="stylesheet" href="../frontend/create_question/create_question.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -14,27 +16,34 @@
         <h1>CREATION DE QUESTIONS</h1>
     </div>
 
-    <form method="post" id="creation" enctype="multipart/form-data">
-        <label for="Question">Question</label>
-        <input type="text" class="ecriture" name="Question"> 
-            
-        <label for="Réponse">Réponse</label>
-        <input type="text" class="ecriture" name="Réponse">
-        
-        <label for="Réponse">Tags</label>
-        <input type="text" class="ecriture" name="Tags">
-        
-        <label for="Réponse">Difficulté</label>
-        <input type="text" class="ecriture" name="Difficulté">
+    <div>
+        <div id="back-to-menu">
+            <i class="bx bxs-left-arrow-circle"></i>
+            <span>Menu</span>
+        </div>
 
-        <label for="image">Ajouter une image</label>
-        <input type="file" class="ecriture" name="image" accept="image/*">
-    </form>
-
-    <input type="submit" value="Valider" />
+        <form method="post" id="creation" enctype="multipart/form-data">
+            <label for="Question">Question</label>
+            <input type="text" class="ecriture" name="Question">
+        
+            <label for="Réponse">Réponse</label>
+            <input type="text" class="ecriture" name="Réponse">
+        
+            <label for="Réponse">Tags</label>
+            <input type="text" class="ecriture" name="Tags">
+        
+            <label for="Réponse">Difficulté</label>
+            <input type="text" class="ecriture" name="Difficulté">
+        
+            <label for="image">Ajouter une image</label>
+            <input type="file" class="ecriture" name="image" accept="image/*">
+        </form>
+        
+        <input type="submit" value="Valider" />
+    </div>
 
     <script src="../frontend/global.js"></script>
-    <script src="../frontend/create_question/cretate_question.js"></script>
+    <script src="../frontend/create_question/create_question.js"></script>
 </body>
 
 </html>
