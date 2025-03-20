@@ -8,6 +8,20 @@ const div_start_game = document.getElementById("start-game");
 const div_join_game = document.getElementById("div-join-game");
 const div_create_game = document.getElementById("div-create-game");
 
+const back_button = document.querySelectorAll(".back-button");
+
+window.getUser(sessionStorage.getItem("UserLogin")).then((data) => {
+  get_pseudo.setAttribute("value", data.displayName);
+});
+
+back_button.forEach((elem) => {
+  elem.addEventListener("click", () => {
+    div_start_game.classList.remove("hide");
+    div_join_game.classList.add("hide");
+    div_create_game.classList.add("hide");
+  });
+});
+
 const clickOnButton = (event) => {
   div_start_game.classList.add("hide");
   if (event.target.id == join_game_button.id) {
@@ -29,4 +43,16 @@ get_pseudo.addEventListener("input", () => {
       elem.removeEventListener("click", clickOnButton);
     });
   }
+});
+
+div_join_game.addEventListener("click", (e) => {
+  e.preventDefault();
+  let pseudo = get_pseudo.value;
+  // Pour clément
+});
+
+div_create_game.addEventListener("click", (e) => {
+  e.preventDefault();
+  let pseudo = get_pseudo.value;
+  // Pour Clément
 });
