@@ -21,6 +21,12 @@ back_to_menu_button.addEventListener("click", () => {
 
 window.getUser(sessionStorage.getItem("UserLogin")).then((data) => {
   get_pseudo.setAttribute("value", data.displayName);
+  if (data.displayName.trim() !== "") {
+    list_button_begin.forEach((elem) => {
+      elem.classList.add("can-push");
+      elem.addEventListener("click", clickOnButton);
+    });
+  }
 });
 
 back_button.forEach((elem) => {
