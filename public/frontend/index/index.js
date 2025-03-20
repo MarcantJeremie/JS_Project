@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(adress);
 
   playBtn.addEventListener("click", () => {
-    // window.location.href = adress + "/game/start";
+    window.location.href = adress + "/game/start";
   });
 
   let logBtn = document.getElementById("log-button");

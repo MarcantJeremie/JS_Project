@@ -26,6 +26,36 @@ body {
   align-items: center;
 }
 
+#back-to-menu {
+  position: absolute;
+
+  top: 5%;
+  left: 5%;
+
+  font-size: 5vh;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--color2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.3s;
+
+  cursor: pointer;
+}
+#back-to-menu:hover {
+  transform: translateX(-10%);
+}
+
+#back-to-menu > span {
+  font-size: 3vh;
+}
+#back-to-menu:active > span {
+  text-decoration: underline;
+}
+
 .hide,
 #start-game.hide,
 #div-join-game.hide,
