@@ -23,6 +23,10 @@ body {
   margin: auto;
 }
 
+.margin-left {
+  margin-left: 5%;
+}
+
 /* Partie Menu */
 
 #menu {
@@ -30,15 +34,22 @@ body {
   justify-content: space-between;
   align-items: center;
 
-  padding: 1% 5% 1% 5%;
+  padding: 1.5% 7% 1.5% 7%;
 
   font-weight: bold;
+  font-size: 100%;
 
   border-bottom: 0.3px solid var(--color2);
   border-radius: 0% 0% 10% 10%;
 
   transition: 0.3s;
   box-shadow: 0px 1px 30px var(--color2);
+}
+
+@media (max-width: 600px) {
+  #menu {
+    font-size: 75%;
+  }
 }
 
 #menu:hover {
@@ -51,38 +62,47 @@ body {
   border-radius: 5px;
 }
 
-#menu > .log {
-  padding: 1%;
+#menu > #list-button-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#menu > #list-button-menu > .log {
+  padding: 3%;
   border: solid var(--green);
   border-radius: 5px;
 }
 
-#menu > .log:hover {
+#menu > #list-button-menu > .log:hover {
   background-color: var(--green);
   color: var(--color3);
 
   cursor: pointer;
 }
 
-#menu > .log:active {
+#menu > #list-button-menu > .log:active {
   background-color: var(--green2);
   border-color: var(--green2);
 }
 
-#menu > .connected {
-  padding: 1%;
+#menu > #list-button-menu > .connected,
+#menu > #list-button-menu > div {
+  padding: 3%;
   border: solid var(--color2);
   border-radius: 5px;
 }
 
-#menu > .connected:hover {
+#menu > #list-button-menu > .connected:hover,
+#menu > #list-button-menu > div:hover {
   background-color: var(--color2);
   color: var(--color3);
 
   cursor: pointer;
 }
 
-#menu > .connected:active {
+#menu > #list-button-menu > .connected:active,
+#menu > #list-button-menu > div:active {
   background-color: var(--color2-5);
   border-color: var(--color2-5);
 }

@@ -28,4 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = adress + "/profile/login";
     }
   });
+
+  let addQuestionBtn = document.getElementById("add-question-button");
+
+  adress = window.location.href;
+  adress = adress.split("/");
+  adress = adress[2];
+  adress = "http://" + adress;
+
+  console.log(adress);
+
+  addQuestionBtn.addEventListener("click", () => {
+    window.location.href = adress + "/questions/create";
+  });
 });
