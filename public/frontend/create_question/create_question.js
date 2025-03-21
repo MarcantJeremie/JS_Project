@@ -1,15 +1,10 @@
-document
-    .querySelectorAll(
-        'input[type="text"], input[type="email"], input[type="password"]'
-    )
-    .forEach((elem) => {
-        elem.addEventListener("input", (e) => {
-            const label = elem.closest(".question").querySelector("label");
+const back_to_menu_button = document.getElementById("back-to-menu");
 
-            if (e.target.value === "") {
-                label.classList.remove("stay-up");
-            } else {
-                label.classList.add("stay-up");
-            }
-        });
-    });
+adress = window.location.href;
+adress = adress.split("/");
+adress = adress[2];
+adress = "http://" + adress;
+
+back_to_menu_button.addEventListener("click", () => {
+    window.location.href = adress + "/";
+});

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(adress);
 
   playBtn.addEventListener("click", () => {
-    // window.location.href = adress + "/game/start";
+    window.location.href = adress + "/game/start";
   });
 
   let logBtn = document.getElementById("log-button");
@@ -27,5 +27,18 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       window.location.href = adress + "/profile/login";
     }
+  });
+
+  let addQuestionBtn = document.getElementById("add-question-button");
+
+  adress = window.location.href;
+  adress = adress.split("/");
+  adress = adress[2];
+  adress = "http://" + adress;
+
+  console.log(adress);
+
+  addQuestionBtn.addEventListener("click", () => {
+    window.location.href = adress + "/questions/create";
   });
 });
