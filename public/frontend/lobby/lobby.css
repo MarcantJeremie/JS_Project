@@ -1,0 +1,18 @@
+:root {
+  --color1: #333333;
+  --color1-5: #666666;
+  --color2: #ffffff;
+  --color2-5: #cccccc;
+
+  --green: #45a017;
+  --green2: #5cbf2a;
+
+  --red: #d32f2f;
+  --red2: #f44336;
+}
+
+body {
+  background-color: var(--color1);
+  color: var(--color2);
+  font-family: "Roboto";
+}
