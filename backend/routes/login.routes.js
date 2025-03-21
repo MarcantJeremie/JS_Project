@@ -48,6 +48,8 @@ router.post('/', async (req, res)=>{
         return res.status(400).json({ message: 'Invalid password' });
     }
     else{
+        await User.updateOne({$or: [{ login: login }, { email: login }]}, { last_connected_on: Date.now() });
+        req.session.login = login;
         console.log("User connected : ", login);
         res.status(200).json({ msg: 'Connected' });
     }

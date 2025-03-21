@@ -25,6 +25,23 @@ const questionsSchema = mongoose.Schema({
     img_path: {
         type: String,
         required: false
+    },
+    created_by: {
+        type: String,
+        required: true
+    },
+    verified_by: {
+        type: String,
+        required: false
+    },
+    created_on: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    verified_on: {
+        type: Date,
+        required: false
     }
 });
 

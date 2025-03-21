@@ -24,6 +24,21 @@ const userSchema = mongoose.Schema(
             type: String,
             required: true
         },
+        xp: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        account_created_on: {
+            type: Date,
+            required: true,
+            default: Date.now
+        },
+        last_connected_on: {
+            type: Date,
+            required: true,
+            default: Date.now
+        }
     }
 );
 

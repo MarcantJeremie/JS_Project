@@ -74,3 +74,11 @@ module.exports.editUser = async(req, res) => {
     res.status(200).json({ message: 'Account updated' });
 
 };
+
+module.exports.updateConnection = async(login) => {
+    const user = await UserModel.findOne({login: login});
+    if(!user){
+        return;
+    }
+    await UserModel.updateOne({login: login}, {last_connected_on: Date.now()});
+}
