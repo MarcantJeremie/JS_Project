@@ -192,9 +192,9 @@ try {
   account_remove_button.addEventListener("click", (e) => {
     e.preventDefault();
     userpswd = prompt("Please enter your password to delete your account");
-  
+
     login = sessionStorage.getItem("UserLogin");
-    
+
     // fetch pour delete un compte
 
     fetch(adress + "/accounts/delete", {
@@ -210,7 +210,7 @@ try {
       .then((response) => response.json())
       .then((data) => {
         if (data.message) {
-          if(data.message === "Account deleted"){
+          if (data.message === "Account deleted") {
             sessionStorage.removeItem("UserLogin");
             sessionStorage.removeItem("IsConnect");
             localStorage.removeItem("UserLogin");
@@ -218,17 +218,12 @@ try {
             localStorage.removeItem("CanPlay");
             window.location.href = adress + "/profile/login";
             alert("Your account has been deleted");
-          }
-          else{
+          } else {
             alert(data.message);
           }
         }
       });
-
-  }
-
-    
-  );
+  });
 
   form_modify.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -239,10 +234,10 @@ try {
     email = form_data.get("M-email");
     displayName = form_data.get("M-pseudo");
     confirmPassword = form_data.get("M-confirm-new-password");
-    if(!displayName){
+    if (!displayName) {
       displayName = login;
     }
-    if(newPassword || confirmPassword){
+    if (newPassword || confirmPassword) {
       if (newPassword.length < 6) {
         alert("Password must be at least 6 characters long");
         return;
@@ -251,8 +246,7 @@ try {
         alert("Passwords do not match");
         return;
       }
-    }
-    else{
+    } else {
       newPassword = oldPassword;
     }
     fetch(adress + "/accounts/edit", {
@@ -273,14 +267,8 @@ try {
         if (data.message) {
           alert(data.message);
         } else {
-
         }
         window.location.href = adress + "/profile/account";
       });
-
   });
-
-} 
-catch (e) {
-
-}
+} catch (e) {}
