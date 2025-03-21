@@ -30,3 +30,28 @@ creation_form.addEventListener("submit", (e) => {
         });
 
 });
+
+const selectElement = document.querySelector("select");
+selectElement.style.color = "green";
+
+selectElement.addEventListener("change", (e) => {
+    let select = e.target.value;
+
+    switch (select){
+        case "1":
+            selectElement.style.color = "green";
+            break;
+        case "2":
+            selectElement.style.color = "orange";
+            break;
+        case "3":
+            selectElement.style.color = "red";
+            break;
+        case '4':
+            selectElement.style.color = "purple";
+            break;
+        default:
+            selectElement.style.color = "black";
+    }
+    
+});

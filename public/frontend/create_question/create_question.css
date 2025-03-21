@@ -102,9 +102,10 @@ form {
     margin: auto;
     margin-top: 2%;
     margin-bottom: 1%;
-    border: 2px solid var(--color2);
+    border: 1px solid var(--color2);
     border-radius: 20px;
     box-shadow: 0px 5px 20px var(--color2);
+    transition: 0.3s;
 }
 
 form:hover {
@@ -133,6 +134,26 @@ input[type="file"]::file-selector-button:hover {
 
 input[type="file"]{
     text-align: center;
+}
+
+option{
+    text-align: center;
+}
+
+option.facile{
+    color: green;
+}
+
+option.moyen{
+    color: orange;
+}
+
+option.difficile{
+    color: red;
+}
+
+option.autiste{
+    color: purple;
 }
 
 .ecriture {
