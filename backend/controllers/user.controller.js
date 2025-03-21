@@ -27,6 +27,7 @@ module.exports.setUsers = async(req, res) => {
         role: role,
         displayName: displayName
     });
+    req.session.login = req.body.login;
     res.status(201).json(user);
 }
 
