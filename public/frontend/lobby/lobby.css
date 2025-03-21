@@ -83,4 +83,10 @@ body > form > h1 {
   }
 }
 
+.player > i,
+.player > .player_level {
+  width: 5vh;
+  text-align: center;
+}
+
 /* Partie de la liste des paramètre */
