@@ -1,10 +1,26 @@
+const params = document.getElementById("params");
+
 const list_players = document.getElementById("list_players");
 const list_selected_tag = document.getElementById("list-selected-tag");
 const tag_list = document.getElementById("tag-list");
+const easy_question_number = document.getElementById("easy-question-number");
+const medium_question_number = document.getElementById(
+  "medium-question-number"
+);
+const hard_question_number = document.getElementById("hard-question-number");
+const accoustic_question_number = document.getElementById(
+  "accoustic-question-number"
+);
 let selected_tag = []; // contient les id des tags
 let player_in_game = []; // contient les id des joueurs
 
-let id_host; // L'id de l'host de la partie
+let is_host = true; // L'id de l'host de la partie
+
+if (!is_host) {
+  document.querySelectorAll("input").forEach((elem) => {
+    elem.setAttribute("disabled", "disabled");
+  });
+}
 
 // Ajouter et Supprimer un joueur du lobby
 
@@ -17,14 +33,30 @@ const addPlayerToList = (id, pseudo, level, playerIsHost = false) => {
             : '<i class="bx bxs-user"></i>'
         }
         <p class="player_title">${pseudo}</p>
-        <p class="player_level">LvL <span>${level}</span></p>
+        ${
+          is_host
+            ? '<i class="bx bxs-x-circle"></i>'
+            : `<p class="player_level">LvL <span>${level}</span></p>`
+        }
     </div>
     `;
   player_in_game.push(id);
+  if (is_host) SelectedPlayerAddEventListener();
 };
 
 const removePlayerToList = (id) => {
   list_players.removeChild(document.getElementById(id));
+  player_in_game.pop(id);
+};
+
+const SelectedPlayerAddEventListener = () => {
+  document
+    .querySelectorAll("#players #list_players .player")
+    .forEach((elem) => {
+      elem.querySelector(".bxs-x-circle").addEventListener("click", () => {
+        removePlayerToList(elem.id);
+      });
+    });
 };
 
 addPlayerToList(0, "GGLEMARCHANT", "99", true);
@@ -48,7 +80,7 @@ const addTagToList = (id, text) => {
   list_selected_tag.innerHTML += `
   <div id="${id}" class="tag">
     <div class="tag_title">${text}</div>
-    <i class="bx bxs-x-circle"></i>
+    ${is_host ? '<i class="bx bxs-x-circle"></i>' : ""}
   </div>
   `;
   selected_tag.push(id);
@@ -86,7 +118,7 @@ document.querySelectorAll("#tag-list div").forEach((item) => {
     if (!selected_tag.includes(id_use)) {
       addTagToList(id_use, item.textContent);
 
-      selectedTagAddEventListener();
+      if (is_host) selectedTagAddEventListener();
     }
   });
 });

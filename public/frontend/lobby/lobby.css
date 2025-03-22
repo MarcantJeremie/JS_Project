@@ -71,7 +71,7 @@ body > form > h1 {
   padding: 3%;
 
   overflow: scroll;
-  height: 70vh;
+  height: 80vh;
 }
 @media (max-width: 850px) {
   #list_players {
@@ -86,7 +86,7 @@ body > form > h1 {
 }
 .player > .player_title {
   text-align: center;
-  margin: 0 3% 0 3%;
+  margin: 6% 3% 6% 3%;
 
   overflow: scroll;
   scrollbar-width: none;
@@ -111,6 +111,7 @@ body > form > h1 {
 .player > .player_level {
   width: 5vh;
   text-align: center;
+  margin: 0;
 }
 
 /* Partie de la liste des paramètre */
@@ -153,7 +154,7 @@ input[type="radio"]:checked + label {
 
   height: 30vh;
 }
-#searchBar {
+#searchBar, input[type="number"] {
   border: solid 2px var(--color1);
   border-radius: 10px;
   outline: none;
@@ -198,6 +199,12 @@ input[type="radio"]:checked + label {
 }
 #tag-list > div:hover {
   background-color: var(--color1-5);
+  cursor: pointer;
+}
+#tag-list > div:active {
+  background-color: var(--color1);
+  color: var(--color2);
+  cursor: pointer;
 }
 #searchBar:focus + #tag-list,
 #tag-list:hover, #tag-list:active {
@@ -215,12 +222,12 @@ input[type="radio"]:checked + label {
 
   font-size: 20px;
 }
-.tag > i:hover {
+.tag > i:hover, .bxs-x-circle:hover {
   color: var(--red);
 
   cursor: pointer;
 }
-.tag > i:active {
+.tag > i:active, .bxs-x-circle:active {
   color: var(--red2);
 }
 
@@ -236,4 +243,37 @@ input[type="radio"]:checked + label {
 }
 .tag > .tag_title:hover {
   text-decoration: underline;
+}
+
+input[type="submit"] {
+  color: var(--color2);
+  font-weight: bold;
+
+  margin-top: 3%;
+  padding: 3%;
+  background-color: var(--green);
+  border-radius: 10px;
+  outline: none;
+  border: none;
+
+  font-size: 20px;
+
+  transition: transform 0.2s;
+}
+input[type="submit"]:hover {
+  background-color: var(--green2);
+}
+input[type="submit"]:active {
+  transform: scale(0.7);
+}
+
+#question-number {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+[disabled] {
+  opacity: 0.5;
 }
