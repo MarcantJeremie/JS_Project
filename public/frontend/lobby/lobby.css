@@ -24,7 +24,7 @@ body {
   margin: 0;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 850px) {
   body {
     flex-direction: column;
   }
@@ -39,6 +39,7 @@ body > form {
   flex-direction: column;
 
   padding: 3%;
+  margin: 1%;
   border-radius: 20px;
 
   transition: transform 0.3s;
@@ -58,12 +59,24 @@ body > form > h1 {
   text-transform: uppercase;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Partie de liste des joueurs */
 
 #list_players {
   border: solid 2px var(--color1-5);
   border-radius: 10px;
   padding: 3%;
+
+  overflow: scroll;
+  height: 70vh;
+}
+@media (max-width: 850px) {
+  #list_players {
+    height: 35vh;
+  }
 }
 
 .player {
@@ -128,4 +141,99 @@ input[type="radio"] + label {
 input[type="radio"]:checked + label {
   background-color: var(--color1);
   color: var(--color2);
+}
+
+#tag-selection {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 30vh;
+}
+#searchBar {
+  border: solid 2px var(--color1);
+  border-radius: 10px;
+  outline: none;
+  padding: 2%;
+
+  width: 100%;
+}
+#list-selected-tag {
+  border: solid 2px var(--color1);
+  border-radius: 10px;
+  padding: 2%;
+
+  height: 70%;
+  width: 100%;
+
+  overflow: scroll;
+  scrollbar-width: none;
+}
+#tag-list {
+  position: absolute;
+
+  display: none;
+  align-items: center;
+
+  top: 18%;
+
+  text-align: center;
+  font-weight: bold;
+
+  border-radius: 10px;
+  background-color: var(--color2-5);
+
+  /* max-height: 50%; */
+  width: 100%;
+
+  overflow: scroll;
+  scrollbar-width: none;
+}
+#tag-list > div {
+  width: 100%;
+  padding: 2% 0 2% 0;
+}
+#tag-list > div:hover {
+  background-color: var(--color1-5);
+}
+#searchBar:focus + #tag-list,
+#tag-list:hover, #tag-list:active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 1% 2% 1% 2%;
+
+  font-size: 20px;
+}
+.tag > i:hover {
+  color: var(--red);
+
+  cursor: pointer;
+}
+.tag > i:active {
+  color: var(--red2);
+}
+
+.tag > .tag_title {
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+
+  overflow: scroll;
+  scrollbar-width: none;
+
+  font-weight: bold;
+}
+.tag > .tag_title:hover {
+  text-decoration: underline;
 }
