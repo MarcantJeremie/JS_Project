@@ -107,6 +107,10 @@ body > form > h1 {
   justify-content: space-between;
   align-items: center;
 }
+#list-time:has(:hover) :not(:hover) {
+  scale: 0.8;
+  filter: blur(1px);
+}
 input[type="radio"] {
   display: none;
 }
@@ -118,6 +122,8 @@ input[type="radio"] + label {
   font-weight: bold;
 
   cursor: pointer;
+
+  transition: 0.3s;
 }
 input[type="radio"]:checked + label {
   background-color: var(--color1);
