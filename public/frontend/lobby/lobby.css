@@ -101,3 +101,25 @@ body > form > h1 {
 }
 
 /* Partie de la liste des paramètre */
+
+#list-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+input[type="radio"] {
+  display: none;
+}
+input[type="radio"] + label {
+  border: solid 2px var(--color1);
+  border-radius: 10px;
+  padding: 2%;
+
+  font-weight: bold;
+
+  cursor: pointer;
+}
+input[type="radio"]:checked + label {
+  background-color: var(--color1);
+  color: var(--color2);
+}
