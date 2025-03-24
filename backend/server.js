@@ -15,6 +15,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+const socketManager = require("./socket_manager");
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -46,49 +48,10 @@ app.use("/questions", require("./routes/questions.routes"));
 app.use("/accounts", require("./routes/accounts.routes"));
 
 
-var answermap = new Map();
-var currentQuestion = 0;
-var timer = 30;
 
-const startGame = ()=> setInterval(() => {
-  timer--;
-  io.emit("timer", timer);
-  if (timer == 0) {
-    io.emit("need_response", currentQuestion);
-    currentQuestion++;
-    timer = 30;
-    io.emit("newQuestion", getQuestion(currentQuestion));
-  }}, 1000);
 
-  
-var params = [5, ["TEST", "OUPI"], 2, 2, 1, 0];
-io.on("connection", (socket) => {
-  
-  socket.on("start_lobby", (params) => {
-    playGame(params);
-    console.log("Game started");
-    startGame();
 
-  });
-  
-  socket.on("response", (userId, response, question) => {
-    answermap.get(userId)[question] = response;
-    console.log(answermap);
-    console.log("got the response")
-  });
-
-  // Réception de la commande pour démarrer le timer
-  socket.emit("newQuestion", getQuestion(currentQuestion));
-
-  socket.on("join", (userId, displayName) => {
-    console.log("User joined with id:", userId, " his name is ", displayName);
-    answermap.set(userId, []);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("Un client s'est déconnecté :", socket.id);
-  });
-});
+socketManager(io);
 
 
 // à mettre dans le html à mettre pour connecter les joueurs :

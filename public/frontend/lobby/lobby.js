@@ -24,7 +24,7 @@ if (!is_host) {
 
 // Ajouter et Supprimer un joueur du lobby
 
-const addPlayerToList = (id, pseudo, level, playerIsHost = false) => {
+window.addPlayerToList = (id, pseudo, level, playerIsHost = false) => {
   list_players.innerHTML += `
     <div id="${id}" class="player">
         ${
@@ -44,7 +44,7 @@ const addPlayerToList = (id, pseudo, level, playerIsHost = false) => {
   if (is_host) SelectedPlayerAddEventListener();
 };
 
-const removePlayerToList = (id) => {
+window.removePlayerToList = (id) => {
   list_players.removeChild(document.getElementById(id));
   player_in_game.pop(id);
 };
@@ -59,11 +59,6 @@ const SelectedPlayerAddEventListener = () => {
     });
 };
 
-addPlayerToList(0, "GGLEMARCHANT", "99", true);
-addPlayerToList(1, "GGLEMARCHANT", "99", true);
-addPlayerToList(2, "Romain", "0", 0);
-
-removePlayerToList(1);
 
 // Ajouter tout les tags de la barre de recherche
 
