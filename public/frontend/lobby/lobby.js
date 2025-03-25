@@ -18,14 +18,13 @@ const copy_code_party = document.getElementById("copy-code-party");
 let selected_tag = []; // contient les id des tags
 let player_in_game = []; // contient les id des joueurs
 
-let is_host = true; // L'id de l'host de la partie
-show_code_party.innerText = "HKLMP"; // code de la partie
+window.is_host; // L'id de l'host de la partie
 
-if (!is_host) {
-  document.querySelectorAll("input").forEach((elem) => {
-    elem.setAttribute("disabled", "disabled");
-  });
-}
+// if (!is_host) {
+//   document.querySelectorAll("input").forEach((elem) => {
+//     elem.setAttribute("disabled", "disabled");
+//   });
+// }
 
 // Back to menu
 
@@ -52,7 +51,7 @@ window.addPlayerToList = (id, pseudo, level, playerIsHost = false) => {
         }
         <p class="player_title">${pseudo}</p>
         ${
-          is_host
+          window.is_host
             ? '<i class="bx bxs-x-circle"></i>'
             : `<p class="player_level">LvL <span>${level}</span></p>`
         }
@@ -67,7 +66,7 @@ window.removePlayerToList = (id) => {
   player_in_game.pop(id);
 };
 
-const SelectedPlayerAddEventListener = () => {
+window.SelectedPlayerAddEventListener = () => {
   document
     .querySelectorAll("#players #list_players .player")
     .forEach((elem) => {
@@ -131,7 +130,7 @@ document.querySelectorAll("#tag-list div").forEach((item) => {
     if (!selected_tag.includes(id_use)) {
       addTagToList(id_use, item.textContent);
 
-      if (is_host) selectedTagAddEventListener();
+      if (window.is_host) selectedTagAddEventListener();
     }
   });
 });

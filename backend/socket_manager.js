@@ -39,6 +39,15 @@ module.exports = function(io){
             console.log(rooms[roomId].players);
             io.to(roomId).emit("updateRoomData", rooms[roomId]);
         })
+
+        socket.on("getDisplayInfo", ({roomId}, callback) =>{
+            let room = rooms[roomId];
+            if(room){
+                callback(room);
+            }else{
+                callback({error: "Room not found"});
+            }  
+        });
         
     });
 
