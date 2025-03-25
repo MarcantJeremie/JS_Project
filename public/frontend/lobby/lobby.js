@@ -11,6 +11,9 @@ const hard_question_number = document.getElementById("hard-question-number");
 const accoustic_question_number = document.getElementById(
   "accoustic-question-number"
 );
+
+const show_code_party = document.getElementById("show-code-party");
+
 let selected_tag = []; // contient les id des tags
 let player_in_game = []; // contient les id des joueurs
 
