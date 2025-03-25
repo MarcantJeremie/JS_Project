@@ -119,6 +119,26 @@ body > form > h1 {
 
 /* Partie de la liste des paramètre */
 
+#code-party {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.5em;
+  font-weight: bold;
+}
+#code-party * {
+  margin: 2%;
+}
+#code-party > #show-code-party {
+  filter: blur(5px);
+
+  transition: 0.2s;
+}
+#code-party > #show-code-party:hover {
+  filter: blur(0);
+}
+
 #list-time {
   display: flex;
   justify-content: space-between;
