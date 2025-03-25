@@ -22,6 +22,8 @@ body {
 
   min-height: 100vh;
   margin: 0;
+
+  position: relative;
 }
 
 @media (max-width: 850px) {
@@ -71,6 +73,7 @@ body > form > h1 {
   padding: 3%;
 
   overflow: scroll;
+  scrollbar-width: none;
   height: 80vh;
 }
 @media (max-width: 850px) {
@@ -154,7 +157,8 @@ input[type="radio"]:checked + label {
 
   height: 30vh;
 }
-#searchBar, input[type="number"] {
+#searchBar,
+input[type="number"] {
   border: solid 2px var(--color1);
   border-radius: 10px;
   outline: none;
@@ -207,7 +211,8 @@ input[type="radio"]:checked + label {
   cursor: pointer;
 }
 #searchBar:focus + #tag-list,
-#tag-list:hover, #tag-list:active {
+#tag-list:hover,
+#tag-list:active {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -222,12 +227,14 @@ input[type="radio"]:checked + label {
 
   font-size: 20px;
 }
-.tag > i:hover, .bxs-x-circle:hover {
+.tag > i:hover,
+.bxs-x-circle:hover {
   color: var(--red);
 
   cursor: pointer;
 }
-.tag > i:active, .bxs-x-circle:active {
+.tag > i:active,
+.bxs-x-circle:active {
   color: var(--red2);
 }
 
