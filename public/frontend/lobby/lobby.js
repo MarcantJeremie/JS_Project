@@ -27,6 +27,19 @@ if (!is_host) {
   });
 }
 
+// Back to menu
+
+const back_button = document.querySelectorAll(".back-button");
+
+adress = window.location.href;
+adress = adress.split("/");
+adress = adress[2];
+adress = "http://" + adress;
+const back_to_menu_button = document.getElementById("back-to-menu");
+back_to_menu_button.addEventListener("click", () => {
+  window.location.href = adress + "/game/start";
+});
+
 // Ajouter et Supprimer un joueur du lobby
 
 const addPlayerToList = (id, pseudo, level, playerIsHost = false) => {
