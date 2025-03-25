@@ -13,11 +13,13 @@ const accoustic_question_number = document.getElementById(
 );
 
 const show_code_party = document.getElementById("show-code-party");
+const copy_code_party = document.getElementById("copy-code-party");
 
 let selected_tag = []; // contient les id des tags
 let player_in_game = []; // contient les id des joueurs
 
 let is_host = true; // L'id de l'host de la partie
+show_code_party.innerText = "HKLMP"; // code de la partie
 
 if (!is_host) {
   document.querySelectorAll("input").forEach((elem) => {
@@ -143,3 +145,9 @@ const search = () => {
     }
   });
 };
+
+// Partie copier coller du code de la partie
+
+copy_code_party.addEventListener("click", () => {
+  navigator.clipboard.writeText(show_code_party.innerText);
+});

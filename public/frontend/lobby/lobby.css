@@ -138,6 +138,16 @@ body > form > h1 {
 #code-party > #show-code-party:hover {
   filter: blur(0);
 }
+#code-party > #copy-code-party {
+  transition: transform 0.2s;
+}
+#code-party > #copy-code-party:hover {
+  transform: scale(1.1);
+}
+#code-party > #copy-code-party:active {
+  color: var(--color2);
+  filter: drop-shadow(0 0 5px var(--color1));
+}
 
 #list-time {
   display: flex;
