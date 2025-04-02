@@ -22,6 +22,41 @@ body {
 
   min-height: 100vh;
   margin: 0;
+
+  position: relative;
+}
+
+#back-to-menu {
+  position: absolute;
+  z-index: 10;
+
+  top: 3%;
+  left: 3%;
+
+  font-size: 5vh;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--red);
+
+  padding: 1%;
+  border-radius: 10px;
+  background-color: var(--color2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.3s;
+
+  cursor: pointer;
+}
+#back-to-menu:hover {
+  transform: translateX(-10%);
+  color: var(--color2);
+  background-color: var(--red);
+}
+#back-to-menu:active {
+  background-color: var(--red2);
 }
 
 @media (max-width: 850px) {
@@ -30,7 +65,7 @@ body {
   }
 }
 
-body > div,
+body > div#players,
 body > form {
   background-color: var(--color2);
   color: var(--color1);
@@ -46,14 +81,14 @@ body > form {
 }
 
 @media (hover: hover) {
-  body > div:hover,
+  body > div#players:hover,
   body > form:hover {
     transform: scale(1.025);
     box-shadow: 0px 0px 10px var(--color2-5);
   }
 }
 
-body > div > h1,
+body > div#players > h1,
 body > form > h1 {
   text-align: center;
   text-transform: uppercase;
@@ -71,6 +106,7 @@ body > form > h1 {
   padding: 3%;
 
   overflow: scroll;
+  scrollbar-width: none;
   height: 80vh;
 }
 @media (max-width: 850px) {
@@ -116,6 +152,36 @@ body > form > h1 {
 
 /* Partie de la liste des paramètre */
 
+#code-party {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.5em;
+  font-weight: bold;
+}
+#code-party * {
+  margin: 2%;
+}
+#code-party > #show-code-party {
+  filter: blur(5px);
+
+  transition: 0.2s;
+}
+#code-party > #show-code-party:hover {
+  filter: blur(0);
+}
+#code-party > #copy-code-party {
+  transition: transform 0.2s;
+}
+#code-party > #copy-code-party:hover {
+  transform: scale(1.1);
+}
+#code-party > #copy-code-party:active {
+  color: var(--color2);
+  filter: drop-shadow(0 0 5px var(--color1));
+}
+
 #list-time {
   display: flex;
   justify-content: space-between;
@@ -154,7 +220,8 @@ input[type="radio"]:checked + label {
 
   height: 30vh;
 }
-#searchBar, input[type="number"] {
+#searchBar,
+input[type="number"] {
   border: solid 2px var(--color1);
   border-radius: 10px;
   outline: none;
@@ -207,7 +274,8 @@ input[type="radio"]:checked + label {
   cursor: pointer;
 }
 #searchBar:focus + #tag-list,
-#tag-list:hover, #tag-list:active {
+#tag-list:hover,
+#tag-list:active {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -222,12 +290,14 @@ input[type="radio"]:checked + label {
 
   font-size: 20px;
 }
-.tag > i:hover, .bxs-x-circle:hover {
+.tag > i:hover,
+.bxs-x-circle:hover {
   color: var(--red);
 
   cursor: pointer;
 }
-.tag > i:active, .bxs-x-circle:active {
+.tag > i:active,
+.bxs-x-circle:active {
   color: var(--red2);
 }
 
