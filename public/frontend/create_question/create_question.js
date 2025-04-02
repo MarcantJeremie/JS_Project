@@ -55,3 +55,73 @@ selectElement.addEventListener("change", (e) => {
     }
     
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tagsContainer = document.getElementById("tags-container");
+    const tagsInput = document.getElementById("tags-input");
+    const tagsHidden = document.getElementById("tags-hidden");
+    const tagsList = document.getElementById("tags-list");
+
+    // Liste de tags enregistrés (peut être récupérée d'une BDD plus tard)
+    let storedTags = ["HTML", "CSS", "JavaScript", "Python", "PHP", "React", "Vue", "Angular", "Node.js", "Java"];
+    let selectedTags = [];
+
+    function updateHiddenInput() {
+        tagsHidden.value = selectedTags.join(",");
+    }
+
+    function createTagElement(tag) {
+        const tagElement = document.createElement("span");
+        tagElement.classList.add("tag");
+        tagElement.textContent = tag;
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "×";
+        removeButton.addEventListener("click", function () {
+            selectedTags = selectedTags.filter(t => t !== tag);
+            tagsContainer.removeChild(tagElement);
+            updateHiddenInput();
+        });
+
+        tagElement.appendChild(removeButton);
+        tagsContainer.insertBefore(tagElement, tagsInput);
+    }
+
+    function addTag(tagText) {
+        if (!selectedTags.includes(tagText)) {
+            selectedTags.push(tagText);
+            createTagElement(tagText);
+            updateHiddenInput();
+        }
+        tagsInput.value = "";
+        displayTags();
+    }
+
+    function displayTags(filter = "") {
+        tagsList.innerHTML = ""; // Nettoyer la liste avant de la remplir
+        let filteredTags = storedTags.filter(tag => tag.toLowerCase().includes(filter.toLowerCase()));
+
+        filteredTags.forEach(tag => {
+            const tagItem = document.createElement("div");
+            tagItem.classList.add("tag-item");
+            tagItem.textContent = tag;
+            tagItem.addEventListener("click", function () {
+                addTag(tag);
+            });
+            tagsList.appendChild(tagItem);
+        });
+    }
+
+    tagsInput.addEventListener("input", function () {
+        displayTags(tagsInput.value);
+    });
+
+    tagsInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" && tagsInput.value.trim() !== "") {
+            event.preventDefault();
+            addTag(tagsInput.value.trim());
+        }
+    });
+
+    displayTags(); // Afficher tous les tags au début
+});

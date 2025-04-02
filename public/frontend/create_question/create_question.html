@@ -30,8 +30,11 @@
             <input type="text" class="ecriture" name="answer">
         
             <label for="tags">Tags</label>
-            <input type="text" class="ecriture" name="tags">
-        
+            <div class="tags-container" id="tags-container">
+                <input type="text" class="tags-input" id="tags-input" placeholder="Ajoutez un tag">
+            </div>
+            <input type="hidden" name="tags" id="tags-hidden">
+
             <label for="difficulty">Difficulté</label>
             <select class="ecriture" name="difficulty">
                 <option class="facile" value="1">Facile</option>
