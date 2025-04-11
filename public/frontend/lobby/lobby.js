@@ -11,6 +11,7 @@ const hard_question_number = document.getElementById("hard-question-number");
 const accoustic_question_number = document.getElementById(
   "accoustic-question-number"
 );
+const list_time = document.getElementById("list-time");
 
 const show_code_party = document.getElementById("show-code-party");
 const copy_code_party = document.getElementById("copy-code-party");
@@ -70,11 +71,19 @@ window.SelectedPlayerAddEventListener = () => {
   document
     .querySelectorAll("#players #list_players .player")
     .forEach((elem) => {
-      elem.querySelector(".bxs-x-circle").addEventListener("click", () => {
+      try{
+        elem.querySelector(".bxs-x-circle").addEventListener("click", () => {
         removePlayerToList(elem.id);
       });
+    }
+      catch (e) {
+        console.log(e);
+      }
     });
 };
+
+
+
 
 
 // Ajouter tout les tags de la barre de recherche
@@ -88,7 +97,7 @@ window.SelectedPlayerAddEventListener = () => {
  * @param {string} text - Le text content de l'élément ajouter.
  * @returns {void}
  */
-const addTagToList = (id, text) => {
+window.addTagToList = (id, text) => {
   list_selected_tag.innerHTML += `
   <div id="${id}" class="tag">
     <div class="tag_title">${text}</div>
@@ -114,11 +123,15 @@ const removeTagToList = (id) => {
  *
  * @returns {void}
  */
-const selectedTagAddEventListener = () => {
+window.selectedTagAddEventListener = () => {
   selected_tag.forEach((id) => {
-    document.querySelector(`#${id} i`).addEventListener("click", () => {
+    try{
+      document.querySelector(`#${id} i`).addEventListener("click", () => {
       removeTagToList(id);
-    });
+    });}
+    catch (e) {
+      
+    }
   });
 };
 

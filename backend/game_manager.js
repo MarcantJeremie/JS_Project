@@ -12,6 +12,7 @@ var currentQuestion = 0;
 * 3: number of requested question for difficulty 2
 * 4: number of requested question for difficulty 3
 * 5: number of requested question for difficulty 4
+* 6: timer duration
 */
 const searchForQuestions = async (params) => {
     const totalQuestions = params[0];
