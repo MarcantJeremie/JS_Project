@@ -17,31 +17,37 @@ module.exports = function(io){
     
         socket.on("createRoom", ({playerName, UserLogin}, callback) =>{
             const roomId = Math.random().toString(36).substring(2, 7);
-            rooms[roomId] = {
+            rooms.set(roomId, {
                 players: [{id: UserLogin, name: playerName, score: 0, host: true}],
                 host: UserLogin
-            }
+            });
             socket.join(roomId);
+            io.in(roomId).fetchSockets().then((sockets) => {
+                console.log("Sockets currently in room", roomId, ":", sockets.map(s => s.id));
+            });
             callback({roomId, role: "Host"});
             console.log(rooms);
-            console.log(rooms[roomId].players);
-            io.to(roomId).emit("updateRoomData", rooms[roomId]);
+            console.log(rooms.get(roomId).players);
+            io.to(roomId).emit("updateRoomData", rooms.get(roomId));
         })  
         
         socket.on("joinRoom", ({roomId, playerName, UserLogin}, callback) =>{
-            if(rooms[roomId] === undefined){
+            if(rooms.get(roomId) === undefined){
                 return callback({error: "Room not found"});
             }
-            rooms[roomId].players.push({id: UserLogin, name: playerName, score: 0, host: false});
+            rooms.get(roomId).players.push({id: UserLogin, name: playerName, score: 0, host: false});
             socket.join(roomId);
+            io.in(roomId).fetchSockets().then((sockets) => {
+                console.log("Sockets currently in room", roomId, ":", sockets.map(s => s.id));
+            });
             callback({roomId, role: "Player"});
             console.log(rooms);
-            console.log(rooms[roomId].players);
-            io.to(roomId).emit("updateRoomData", rooms[roomId]);
+            console.log(rooms.get(roomId).players);
+            io.to(roomId).emit("updateRoomData", rooms.get(roomId));
         })
 
         socket.on("getDisplayInfo", ({roomId}, callback) =>{
-            let room = rooms[roomId];
+            let room = rooms.get(roomId);
             if(room){
                 callback(room);
             }else{
@@ -49,6 +55,22 @@ module.exports = function(io){
             }  
         });
         
+        socket.on("rejoinRoom", ({roomId, userId}) => {
+            socket.join(roomId);
+            const room = rooms.get(roomId);
+            room.players[room.players.findIndex(player => player.id === userId)].socket = socket.id;
+            console.log(`Socket ${socket.id} rejoined room ${roomId}`);
+        });
+
+        socket.on("disconnect", () => {
+            console.log("Socket disconnected");
+            rooms.forEach((room, roomId) => {
+                room.players = room.players.filter(player => player.socket !== socket.id);
+
+                io.to(roomId).emit("updateRoomData", room);
+                
+            });
+        });
     });
 
 }
