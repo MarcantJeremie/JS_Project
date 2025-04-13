@@ -33,8 +33,37 @@ if (roomId){
         window.SelectedPlayerAddEventListener();
     });
 }
+
+const sendParameters = () => {
+    nb_quest1 = parseInt(easy_question_number.value);
+    nb_quest2 = parseInt(medium_question_number.value);
+    nb_quest3 = parseInt(hard_question_number.value);
+    nb_quest4 = parseInt(accoustic_question_number.value);
+    try{timer_duration = parseInt(list_time.querySelector("input:checked").value);}
+    catch (e){
+        timer_duration = -1;
+    }
+    tags = [];
+    list_selected_tag.querySelectorAll(".tag").forEach((elem) => {
+        tags.push(elem.getAttribute("id"));
+    });
+    total_question = nb_quest1 + nb_quest2 + nb_quest3 + nb_quest4;
+    socket.emit("hostParameters", {roomId, data: {total_question, tags, nb_quest1, nb_quest2, nb_quest3, nb_quest4, timer_duration}})
+}
+
+params.addEventListener("submit", (e) => {
+    e.preventDefault();
+    sendParameters();
+
+    socket.emit("moveToGame", { roomId });
+    
+});
+
 socket.on("connect", ()=>{
     
+    
+        
+
     socket.on("updateRoomData", (data) => {
         room = data;
         if (room.error){
@@ -97,23 +126,5 @@ interval = setInterval(() => {
     if (!window.is_host){
         return;
     }
-    nb_quest1 = 0;
-    nb_quest2 = 0;
-    nb_quest3 = 0;
-    nb_quest4 = 0;
-    timer_duration = - 1;
-    nb_quest1 = parseInt(easy_question_number.value);
-    nb_quest2 = parseInt(medium_question_number.value);
-    nb_quest3 = parseInt(hard_question_number.value);
-    nb_quest4 = parseInt(accoustic_question_number.value);
-    try{timer_duration = parseInt(list_time.querySelector("input:checked").value);}
-    catch (e){
-        timer_duration = -1;
-    }
-    tags = [];
-    list_selected_tag.querySelectorAll(".tag").forEach((elem) => {
-        tags.push(elem.getAttribute("id"));
-    });
-    total_question = nb_quest1 + nb_quest2 + nb_quest3 + nb_quest4;
-    socket.emit("hostParameters", {roomId, data: {total_question, tags, nb_quest1, nb_quest2, nb_quest3, nb_quest4, timer_duration}});
+    sendParameters();
 }, 2000);

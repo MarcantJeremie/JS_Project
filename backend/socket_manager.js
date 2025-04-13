@@ -1,17 +1,21 @@
-const startGame = (io)=> setInterval(() => {
-  timer--;
-  io.emit("timer", timer);
-  if (timer == 0) {
-    io.emit("need_response", currentQuestion);
-    currentQuestion++;
-    timer = 30;
-    io.emit("newQuestion", getQuestion(currentQuestion));
+const { getQuestion } = require("./game_manager");
+
+var rooms = new Map();
+
+const startGame = (io, roomId, params)=> setInterval(() => {
+  let room = rooms.get(roomId);
+  room.timer = room.timer - 1;
+  io.emit("timer", room.timer);
+  if (room.timer == 0) {
+    io.to(roomId).emit("need_response", room.currentQuestion);
+    room.currentQuestion++;
+    room.timer = params.timer_duration;
+    io.to(roomId).emit("newQuestion", getQuestion(room.currentQuestion));
   }}, 1000);
 
 
 
 module.exports = function(io){
-    var rooms = new Map();
     io.on("connection", (socket) => {
         console.log("New connection");
     
@@ -90,7 +94,6 @@ module.exports = function(io){
         });
 
         socket.on("hostParameters", ({roomId, data}) => {
-            console.log("Received new parameters :", data);
             const room = rooms.get(roomId);
             if (room) {
                 room.parameters = data;
@@ -98,6 +101,17 @@ module.exports = function(io){
             }
             
         });
-    });
 
+        socket.on("moveToGame", ({roomId}) => {
+            const room = rooms.get(roomId);
+            if (room) {
+                io.to(roomId).emit("startGame", room);
+                room.timer = room.parameters.timer_duration;
+                room.currentQuestion = 0;
+                room.questions = searchForQuestions(room.parameters);
+                startGame(io, roomId, room.parameters);
+            }
+        });
+
+    });
 }
