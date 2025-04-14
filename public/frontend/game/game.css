@@ -50,6 +50,18 @@ button:hover {
     background-color: #666666;
 }
 
+#image{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+#image img {
+    border-radius: 10px;
+}
+
 #question {
     background-color: #FFFFFF;
     color: #666666;
