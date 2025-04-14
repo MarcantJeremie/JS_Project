@@ -88,6 +88,33 @@ h1{
     text-decoration: underline;
 }
 
+#admin{
+    position: absolute;
+    
+        top: 5%;
+        right: 5%;
+        font-size: 4vh;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: black 1.5px solid;
+        padding: 1%;
+        border-radius: 15%;
+
+        transition: 0.3s;
+
+        cursor: pointer;
+}
+
+#admin:hover {
+    transform: translateX(10%);
+}
+
+#admin:active>span {
+    text-decoration: underline;
+}
+
 form {
     background-color: #f5f5f5;
     display: flex;
