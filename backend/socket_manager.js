@@ -68,7 +68,7 @@ module.exports = function(io){
         
         socket.on("rejoinRoom", ({roomId, userId, context}) => {
             if (context === "lobby" && rooms.get(roomId).started === true) {
-                socket.emit("redirectHome");
+                socket.emit("redirectCreateGame");
                 return;
             }
             socket.join(roomId);

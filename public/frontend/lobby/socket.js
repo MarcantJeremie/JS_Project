@@ -73,6 +73,13 @@ socket.on("redirectHome", ()=>{
     sessionStorage.removeItem("gameId");
 });
 
+socket.on("redirectCreateGame", ()=>{
+    window.location.href = adress + '/game/start';
+    sessionStorage.removeItem("roomId");
+    sessionStorage.removeItem("gameName");
+    sessionStorage.removeItem("gameId");
+});
+
 socket.on("startGame", async (room) => {
     window.location.href = adress + "/game/game";
     sessionStorage.setItem("roomId", roomId);
