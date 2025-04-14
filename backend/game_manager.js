@@ -1,8 +1,5 @@
 const Questions = require('./models/questions.model.js');
 
-var questions = [];
-var currentQuestion = 0;
-
 
 /**
 * is an array containing all parameters needed to search for questions
@@ -15,9 +12,10 @@ var currentQuestion = 0;
 * 6: timer duration
 */
 const searchForQuestions = async (params) => {
-    const totalQuestions = params[0];
-    const tags = params[1];
-    const difficulty = params.slice(2, 6);
+    const totalQuestions = params.total_question;
+    const tags = params.tags;
+    const difficulty = [params.nb_quest1, params.nb_quest2, params.nb_quest3, params.nb_quest4]; // 1, 2, 3, 4
+    // const totalDifficulty = difficulty.reduce((a, b) => a + b, 0);   ?????????????????????????
     const questions = await Questions.find({tags: {$in: tags}, verified: true});
     let questionsToReturn = [];
     for (let i = 0; i < questions.length; i++) {
@@ -44,4 +42,4 @@ const playGame = async (params) => {
     
 }
 
-module.exports = { playGame, getQuestion };
+module.exports = { playGame, getQuestion, searchForQuestions };

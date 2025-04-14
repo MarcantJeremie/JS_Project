@@ -14,7 +14,6 @@ creation_form = document.getElementById("creation");
 creation_form.addEventListener("submit", (e) => {
     e.preventDefault();
     formData = new FormData(creation_form);
-    console.log("nous y est");
     fetch(adress + "/questions/submit", {
         method: "POST",
         body: formData,

@@ -1,4 +1,4 @@
-const { getQuestion } = require("./game_manager");
+const { getQuestion, searchForQuestions } = require("./game_manager");
 
 var rooms = new Map();
 
@@ -10,7 +10,7 @@ const startGame = (io, roomId, params)=> setInterval(() => {
     io.to(roomId).emit("need_response", room.currentQuestion);
     room.currentQuestion++;
     room.timer = params.timer_duration;
-    io.to(roomId).emit("newQuestion", getQuestion(room.currentQuestion));
+    io.to(roomId).emit("newQuestion", room.questions[room.currentQuestion]);
   }}, 1000);
 
 
@@ -23,7 +23,8 @@ module.exports = function(io){
             const roomId = Math.random().toString(36).substring(2, 7);
             rooms.set(roomId, {
                 players: [{id: UserLogin, name: playerName, score: 0, host: true}],
-                host: UserLogin
+                host: UserLogin,
+                started: false
             });
             socket.join(roomId);
             io.in(roomId).fetchSockets().then((sockets) => {
@@ -65,10 +66,15 @@ module.exports = function(io){
             }  
         });
         
-        socket.on("rejoinRoom", ({roomId, userId}) => {
+        socket.on("rejoinRoom", ({roomId, userId, context}) => {
+            if (context === "lobby" && rooms.get(roomId).started === true) {
+                socket.emit("redirectHome");
+                return;
+            }
             socket.join(roomId);
             const room = rooms.get(roomId);
-            room.players[room.players.findIndex(player => player.id === userId)].socket = socket.id;
+            player = room.players[room.players.findIndex(player => player.id === userId)];
+            if (player) player.socket = socket.id;
             console.log(`Socket ${socket.id} rejoined room ${roomId}`);
             if (socket.disconnectTimeout) {
                 clearTimeout(socket.disconnectTimeout);
@@ -102,15 +108,21 @@ module.exports = function(io){
             
         });
 
-        socket.on("moveToGame", ({roomId}) => {
+        socket.on("moveToGame", async ({roomId}) => {
             const room = rooms.get(roomId);
             if (room) {
                 io.to(roomId).emit("startGame", room);
                 room.timer = room.parameters.timer_duration;
                 room.currentQuestion = 0;
-                room.questions = searchForQuestions(room.parameters);
+                room.questions = await searchForQuestions(room.parameters);
                 startGame(io, roomId, room.parameters);
-            }
+                await new Promise(r => setTimeout(r, 2000));
+                room.started = true;
+                io.in(roomId).fetchSockets().then((sockets) => {
+                    console.log("Sockets currently in room", roomId, ":", sockets.map(s => s.id));
+                });
+                io.to(roomId).emit("newQuestion", room.questions[room.currentQuestion]);
+            }   
         });
 
     });
