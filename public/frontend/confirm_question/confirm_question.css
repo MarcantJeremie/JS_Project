@@ -33,7 +33,7 @@ nav{
     align-items: flex-end;
     position: fixed;
     top: 20%;
-    left: -41%;
+    left: -80%;
     z-index: 10;
     background-color: var(--color3);
     box-shadow: -5px 0 5px rgba(0, 0, 0, 1);
@@ -85,8 +85,8 @@ nav svg{
 
 #img_container {
     background-color: gray;
-    height: 50vh;
-    width: 50vh;
+    height: 45vh;
+    width: 45vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -352,4 +352,24 @@ input[type="text"]:focus{
 /* form confirmer la validation de la question */
 .form_valider{
     display: none;
+}
+
+/* select */
+select,
+select::picker(select){
+    appearance: base-select;
+}
+
+select {
+    background-color: var(--color2-5);
+    width : 20vh;
+    height: 7.5vh;
+}
+
+select::picker-icon{
+    color : var(--color1);
+}
+
+select::picker(select) {
+    background-color: var(--color2-5);
 }
