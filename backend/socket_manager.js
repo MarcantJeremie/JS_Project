@@ -3,17 +3,34 @@ const { getQuestion, searchForQuestions } = require("./game_manager");
 var rooms = new Map();
 
 const startGame = (io, roomId, params)=> setInterval(() => {
-  let room = rooms.get(roomId);
-  room.timer = room.timer - 1;
-  io.emit("timer", room.timer);
-  if (room.timer == 0) {
-    io.to(roomId).emit("need_response", room.currentQuestion);
-    room.currentQuestion++;
-    room.timer = params.timer_duration;
-    io.to(roomId).emit("newQuestion", room.questions[room.currentQuestion]);
-  }}, 1000);
+  
+    let room = rooms.get(roomId);
+    if (room.currentQuestion > room.questions.length) {
+        clearInterval(room.timer);
+        return;
+    }
+    room.timer = room.timer - 1;
+    io.emit("timer", room.timer);
+    if (room.timer == 0) {
+        io.to(roomId).emit("need_response", room.currentQuestion);
+        room.currentQuestion++;
+        room.timer = params.timer_duration;
+        if (room.currentQuestion == room.questions.length) {
+            postGameStart(io, roomId);
+        }
+        else if (room.currentQuestion < room.questions.length) {
+            io.to(roomId).emit("newQuestion", room.questions[room.currentQuestion]);
+        }
+    }
+}, 1000);
 
-
+const postGameStart = (io, roomId) => {
+    let room = rooms.get(roomId);
+    room.postGame = true;
+    room.review_quest = 0;
+    room.review_player = 0;
+    io.to(roomId).emit("postgame_start", room); 
+}
 
 module.exports = function(io){
     io.on("connection", (socket) => {
@@ -123,6 +140,53 @@ module.exports = function(io){
                 });
                 io.to(roomId).emit("newQuestion", room.questions[room.currentQuestion]);
             }   
+        });
+
+        socket.on("response", (userId, roomId, response, nb_quest) => {
+            const room = rooms.get(roomId);
+            if (!room){
+                return;
+            }
+            const player = room.players.find(player => player.id === userId);
+            if (!player){
+                return;
+            }
+            if (nb_quest == 0){
+                player.answers = [];
+                player.answers_verif = [];
+            }
+            player.answers.push(response);
+            console.log(player.answers);
+        });
+
+        socket.on("postgame_button_state", (roomId, state) => {
+            io.to(roomId).emit("postgame_change_button_state", state);
+        });
+
+        socket.on("postgame_validate", (roomId, state)=>{
+            const room = rooms.get(roomId);
+            if (!room){
+                return;
+            }
+            const player = room.players[room.review_player];
+            if (!player){
+                return;
+            }
+            player.answers_verif.push(state);
+            room.review_player++;
+            if (room.review_player == room.players.length){
+                room.review_player = 0;
+                room.review_quest++;
+            }
+            if (room.review_quest == room.questions.length){
+                room.postGame = false;
+                room.review_quest = 0;
+                room.review_player = 0;
+                io.to(roomId).emit("postgame_end");
+            }
+            else{
+                io.to(roomId).emit("postgame_update", room);
+            }
         });
 
     });

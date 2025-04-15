@@ -8,7 +8,7 @@
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div id="timer_container" class="container">
       <div id="timer">30</div>
     </div>
 
@@ -18,6 +18,12 @@
 
     <div id="answers">
       <input id="rep-field" type="text" placeholder="Veuillez répondre ici" class="answer"/>
+      <div id="postgame" class="hidden"> 
+        <h3 id="post_username">Username</h3>
+        <h4 id="post_answer">Réponse</h4>
+        <button id="post_button" class="invalid">Invalide</button>
+        <button id="next_button" class="next">Suivant</button>
+      </div>
     </div>
     <script src="../frontend/global.js"></script>
     <script src= "../frontend/game/socket.js"></script>
