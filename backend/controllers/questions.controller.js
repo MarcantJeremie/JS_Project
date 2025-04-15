@@ -31,10 +31,23 @@ module.exports.createQuestions = async (req, res) => {
   res.status(201).json(question);
 };
 
-module.exports.getAllNoVerifiedQuestions = async (req, res) => {
-  const questions = await QuestionModel.find();
+module.exports.getQuestionById = async (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).json({ message: "Id's question is needed" });
+  }
 
-  res.status(201).json(questions);
+  const question = await QuestionModel.findOne({ _id: req.body.id });
+  if (!question) {
+    return res.status(400).json({ message: "Question doesn't exist" });
+  }
+
+  res.status(201).json(question);
+};
+
+module.exports.getAllNoVerifiedQuestions = async (req, res) => {
+  const result = await QuestionModel.find({ verified: false });
+
+  res.status(201).json(result);
 };
 
 module.exports.approvedQuestions = async (req, res) => {
@@ -78,6 +91,7 @@ module.exports.approvedQuestions = async (req, res) => {
       answer: req.body.answer,
       tags: req.body.tags,
       difficulty: req.body.difficulty,
+      verified: true,
       verified_by: req.body.id_user,
       verified_on: Date.now(),
     }

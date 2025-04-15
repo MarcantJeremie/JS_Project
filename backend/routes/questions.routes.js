@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   createQuestions,
+  getQuestionById,
   getAllNoVerifiedQuestions,
   approvedQuestions,
   removeQuestion,
@@ -22,6 +23,7 @@ const upload = multer({ storage: storage });
 const publicPath = require("path").join(__dirname, "../../public");
 
 router.post("/submit", upload.single("file"), createQuestions);
+router.post("/getQuestionById", getQuestionById);
 router.post("/getNoVerifiedQuestions", getAllNoVerifiedQuestions);
 router.put("/approvedQuestion", approvedQuestions);
 router.delete("/removeQuestion", removeQuestion);

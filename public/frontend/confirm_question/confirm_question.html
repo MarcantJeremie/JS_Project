@@ -55,42 +55,66 @@
             />
           </svg>
         </label>
-
-        <a href="#"> question 1 </a>
-        <a href="#"> question 2 </a>
-        <a href="#"> question 3 </a>
-        <a href="#"> question 4 </a>
-        <a href="#"> question 5 </a>
       </div>
     </nav>
 
     <div id="main_container">
       <!-- image -->
       <div id="img_container">
-        <div class="img">image</div>
+        <img id="img" src="" alt="image de la question" />
       </div>
 
       <form id="main2">
         <!-- titre -->
-        <h2 class="title_question">
+        <h2 class="title">
           <u>Question</u>
         </h2>
-
         <!-- texte de la question poser par l'utilisateur -->
-        <div id="question">
+        <div id="question" class="display">
           <input id="display_question" type="text" value="text" />
         </div>
+
+        <!-- titre -->
+        <h2 class="title">
+          <u>Réponse</u>
+        </h2>
+        <!-- texte de la réponse à la question -->
+        <div id="answer" class="display">
+          <input id="display_answer" type="text" value="text" />
+        </div>
+
+        <!-- titre -->
+        <h2 class="title">
+          <u>Difficulté</u>
+        </h2>
+        <!-- liste des difficulté -->
+        <select class="ecriture" name="difficulty">
+          <option class="facile" value="1">Facile</option>
+          <option class="moyen" value="2">Moyen</option>
+          <option class="difficile" value="3">Difficile</option>
+          <option class="autiste" value="4">Autiste</option>
+        </select>
+
+        <!-- titre -->
+        <h2 class="title">
+          <u>Tags</u>
+        </h2>
+        <!-- liste des tags -->
+        <div class="tags-container" id="tags-container">
+          <input
+            type="text"
+            class="tags-input"
+            id="tags-input"
+            placeholder="Ajoutez un tag"
+          />
+        </div>
+        <input type="hidden" name="tags" id="tags-hidden" />
 
         <!-- bouton valider/modifier/refuser la question -->
         <div id="valider_question">
           <!-- bouton valider -->
           <button type="button" class="valid_question" id="valid">
             <h3>Valider</h3>
-          </button>
-
-          <!-- bouton modifier -->
-          <button type="button" class="valid_question" id="modif">
-            <h3>Modifier</h3>
           </button>
 
           <!-- bouton refuser -->
