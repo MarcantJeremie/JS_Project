@@ -71,19 +71,6 @@ module.exports.approvedQuestions = async (req, res) => {
       .json({ message: "The question you want to approve doesn't exist" });
   }
 
-  // Si la question a été modifié
-  if (question.question !== req.body.question) {
-    // On vérifie si la nouvelle question n'est pas déjà dans la db
-    const existingQuestion = await QuestionModel.findOne({
-      question: req.body.question,
-    });
-    if (existingQuestion) {
-      return res
-        .status(400)
-        .json({ message: "The question you want to ask is already in use" });
-    }
-  }
-
   await QuestionModel.updateOne(
     { _id: req.body.id },
     {
