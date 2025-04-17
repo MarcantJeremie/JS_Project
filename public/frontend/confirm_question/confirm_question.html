@@ -23,29 +23,108 @@
     />
   </head>
   <body>
-      <div id="main_container">
-          <div id="img_container">
-              <div class="img"> image </div>
-          </div>
+    <!-- sidebar -->
+    <nav>
+      <input type="checkbox" id="sidebar-active" />
+      <label for="sidebar-active" class="open-sidebar-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="32px"
+          viewBox="0 -960 960 960"
+          width="32px"
+          fill="#1f1f1f"
+        >
+          <path
+            d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+          />
+        </svg>
+      </label>
 
-          <div id="main2">
-              <h2 class="title_question"><u>Question</u></h2>
-              <div id="question">
-                  <h3> text </h3>
-              </div>
+      <label id="overlay" for="sidebar-active"></label>
+      <div class="links_container">
+        <label for="sidebar-active" class="close-sidebar-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="32px"
+            viewBox="0 -960 960 960"
+            width="32px"
+            fill="#1f1f1f"
+          >
+            <path
+              d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+            />
+          </svg>
+        </label>
+      </div>
+    </nav>
 
-              <div id="valider_question">
-                  <button class="valid_question" id="non_valid">
-                      <h3>Refuser</h3>
-                  </button>
-
-                  <button class="valid_question" id="valid">
-                      <h3>Valider</h3>
-                  </button>
-              </div>
-          </div>
+    <div id="main_container">
+      <!-- image -->
+      <div id="img_container">
+        <img id="img" src="" alt="image de la question" />
       </div>
 
-      <script src="../../frontend/confirm_question/confirm_question.js"></script>
+      <form id="main2">
+        <!-- titre -->
+        <h2 class="title">
+          <u>Question</u>
+        </h2>
+        <!-- texte de la question poser par l'utilisateur -->
+        <div id="question" class="display">
+          <input id="display_question" type="text" value="text" />
+        </div>
+
+        <!-- titre -->
+        <h2 class="title">
+          <u>Réponse</u>
+        </h2>
+        <!-- texte de la réponse à la question -->
+        <div id="answer" class="display">
+          <input id="display_answer" type="text" value="text" />
+        </div>
+
+        <!-- titre -->
+        <h2 class="title">
+          <u>Difficulté</u>
+        </h2>
+        <!-- liste des difficulté -->
+        <select class="ecriture" name="difficulty">
+          <option class="facile" value="1">Facile</option>
+          <option class="moyen" value="2">Moyen</option>
+          <option class="difficile" value="3">Difficile</option>
+          <option class="autiste" value="4">Autiste</option>
+        </select>
+
+        <!-- titre -->
+        <h2 class="title">
+          <u>Tags</u>
+        </h2>
+        <!-- liste des tags -->
+        <div class="tags-container" id="tags-container">
+          <input
+            type="text"
+            class="tags-input"
+            id="tags-input"
+            placeholder="Ajoutez un tag"
+          />
+        </div>
+        <input type="hidden" name="tags" id="tags-hidden" />
+
+        <!-- bouton valider/modifier/refuser la question -->
+        <div id="valider_question">
+          <!-- bouton valider -->
+          <button type="button" class="valid_question" id="valid">
+            <h3>Valider</h3>
+          </button>
+
+          <!-- bouton refuser -->
+          <button type="button" class="valid_question" id="non_valid">
+            <h3>Refuser</h3>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script src="../../frontend/confirm_question/confirm_question.js"></script>
   </body>
 </html>

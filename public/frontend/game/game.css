@@ -10,29 +10,30 @@ body {
     height: 100vh;
 }
 
-.container {
+#container {
+    width: 8%;
+    height: 12%;
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 1%;
+    margin-top: 1%;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#timer {
+.timer {
     font-size: 2em;
-    width: 50px;
-    ;
-    height: 50px;
     border-radius: 50%;
     background-color: #FFFFFF;
     color: red;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px auto;
+    margin: 20%;
+    padding: 10%;
     cursor: default;
 }
 
@@ -44,6 +45,19 @@ button {
     cursor: pointer;
 }
 
+
+#image{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+#image img {
+    border-radius: 10px;
+}
 
 #question {
     background-color: #FFFFFF;
