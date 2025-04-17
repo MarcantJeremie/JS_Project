@@ -9,7 +9,7 @@ var postgame = false;
 userId = sessionStorage.getItem("gameId");
 displayName = sessionStorage.getItem("gameName");
 
-
+const postGameAnswer = document.getElementById("postgame_answer");
 const postGameDiv = document.getElementById("postgame");
 const postPseudoField = document.getElementById("post_username");
 const postAnswerField = document.getElementById("post_answer");
@@ -27,29 +27,24 @@ adress = adress.split("/");
 adress = adress[2];
 adress = "http://" + adress;
 
-
 socket.on("connect", () => {
-    socket.emit("join", userId, displayName);
+  socket.emit("join", userId, displayName);
 
-    if(roomId) {
-        socket.emit("rejoinRoom", { roomId, userId, context: "game" });
-    }
-    else{
-        window.location.href = adress;
-    }
-
-    
+  if (roomId) {
+    socket.emit("rejoinRoom", { roomId, userId, context: "game" });
+  } else {
+    window.location.href = adress;
+  }
 });
 
 socket.on("newQuestion", (question) => {
-    document.getElementById("question").innerHTML = question.question;
-    document.getElementById("image_field").src = "../" + question.img_path;
-    document.getElementById("image_field").alt = question.question;
-
+  document.getElementById("question").innerHTML = question.question;
+  document.getElementById("image_field").src = "../" + question.img_path;
+  document.getElementById("image_field").alt = question.question;
 });
-socket.on("timer", (timer)=>{
-    document.getElementById("timer").innerHTML = timer;
-})
+socket.on("timer", (timer) => {
+  document.getElementById("timer").innerHTML = timer;
+});
 
 let response = " ";
 
@@ -57,131 +52,119 @@ document.getElementById("rep-field").addEventListener("input", (e) => {
     response = e.target.value;
 });
 
-
 socket.on("need_response", (nb_quest) => {
     socket.emit("response", userId, roomId, response, nb_quest);
     document.getElementById("rep-field").value = "";
     response = " ";
 });
 
-socket.on("postgame_change_button_state", (state)=>{
-    
-    if(state){
+socket.on("postgame_change_button_state", (state) => {
+  if (state) {
+    validateButton.classList.remove("invalid");
+    validateButton.classList.add("valid");
+    validateButton.innerHTML = "Valide";
+  } else {
+    validateButton.classList.remove("valid");
+    validateButton.classList.add("invalid");
+    validateButton.innerHTML = "Invalide";
+  }
+});
+
+socket.on("postgame_start", (room) => {
+  switchPostGame();
+  const firstQuestion = room.questions[0];
+  const firstPlayer = room.players[0];
+  document.getElementById("question").innerHTML = firstQuestion.question;
+  document.getElementById("image_field").src = "../" + firstQuestion.img_path;
+  document.getElementById("image_field").alt = firstQuestion.question;
+  postPseudoField.innerHTML = firstPlayer.name;
+  postAnswerField.innerHTML = firstPlayer.answers[0];
+  if (room.host === userId) {
+    validateButton.addEventListener("click", () => {
+      if (validateButton.classList.contains("hidden")) {
+        return;
+      }
+      if (validateButton.classList.contains("invalid")) {
         validateButton.classList.remove("invalid");
         validateButton.classList.add("valid");
         validateButton.innerHTML = "Valide";
-    }
-    else{
+        socket.emit("postgame_button_state", roomId, true);
+      } else if (validateButton.classList.contains("valid")) {
         validateButton.classList.remove("valid");
         validateButton.classList.add("invalid");
         validateButton.innerHTML = "Invalide";
-    }
-});
+        socket.emit("postgame_button_state", roomId, false);
+      }
+    });
 
-
-
-socket.on("postgame_start", (room) =>{
-    switchPostGame();
-    const firstQuestion = room.questions[0];
-    const firstPlayer = room.players[0];
-    document.getElementById("question").innerHTML = firstQuestion.question;
-    document.getElementById("image_field").src = "../" + firstQuestion.img_path;
-    document.getElementById("image_field").alt = firstQuestion.question;
-    postPseudoField.innerHTML = firstPlayer.name;
-    postAnswerField.innerHTML = firstPlayer.answers[0];
-    if (room.host === userId){
-        validateButton.addEventListener("click", ()=>{
-            if(validateButton.classList.contains("hidden")){
-                return;
-            }
-            if(validateButton.classList.contains("invalid")){
-                validateButton.classList.remove("invalid");
-                validateButton.classList.add("valid");
-                validateButton.innerHTML = "Valide";
-                socket.emit("postgame_button_state", roomId, true);
-            }
-            else if(validateButton.classList.contains("valid")){
-                validateButton.classList.remove("valid");
-                validateButton.classList.add("invalid");
-                validateButton.innerHTML = "Invalide";
-                socket.emit("postgame_button_state", roomId, false);
-            }
-        });
-        
-        nextButton.addEventListener("click", ()=>{
-            if(nextButton.classList.contains("hidden")){
-                return;
-            }
-            if(validateButton.classList.contains("invalid")){
-                socket.emit("postgame_validate", roomId, false);
-            }
-            else if(validateButton.classList.contains("valid")){
-                socket.emit("postgame_validate", roomId, true);
-                validateButton.classList.remove("valid");
-                validateButton.classList.add("invalid");
-                validateButton.innerHTML = "Invalide";
-            }
-        });
-    }
-    else{
-        nextButton.classList.add("hidden");
-    }
-    
-});
-
-socket.on("postgame_update", (room) =>{
-    const question = room.questions[room.review_quest];
-    const player = room.players[room.review_player];
-    document.getElementById("question").innerHTML = question.question;
-    document.getElementById("image_field").src = "../" + question.img_path;
-    document.getElementById("image_field").alt = question.question;
-    postPseudoField.innerHTML = player.name;
-    postAnswerField.innerHTML = player.answers[room.review_quest];
-    if (room.host === userId){
-        validateButton.classList.remove("hidden");
-        nextButton.classList.remove("hidden");
-    }
-    else{
+    nextButton.addEventListener("click", () => {
+      if (nextButton.classList.contains("hidden")) {
+        return;
+      }
+      if (validateButton.classList.contains("invalid")) {
+        socket.emit("postgame_validate", roomId, false);
+      } else if (validateButton.classList.contains("valid")) {
+        socket.emit("postgame_validate", roomId, true);
         validateButton.classList.remove("valid");
         validateButton.classList.add("invalid");
         validateButton.innerHTML = "Invalide";
-        nextButton.classList.add("hidden");
-    }
+      }
+    });
+  } else {
+    nextButton.classList.add("hidden");
+  }
 });
 
-
-socket.on("redirectHome", ()=>{
-    window.location.href = adress;
-    sessionStorage.removeItem("roomId");
-    sessionStorage.removeItem("gameName");
-    sessionStorage.removeItem("gameId");
-});
-
-socket.on("redirectCreateGame", ()=>{
-    window.location.href = adress + '/game/start';
-    sessionStorage.removeItem("roomId");
-    sessionStorage.removeItem("gameName");
-    sessionStorage.removeItem("gameId");
-});
-
-socket.on("postgame_end", ()=>{
-    postgame = false;
-    postGameDiv.classList.add("hidden");
-    answerField.classList.remove("hidden");
-    timerField.classList.remove("hidden");
+socket.on("postgame_update", (room) => {
+  const question = room.questions[room.review_quest];
+  const player = room.players[room.review_player];
+  document.getElementById("question").innerHTML = question.question;
+  document.getElementById("image_field").src = "../" + question.img_path;
+  document.getElementById("image_field").alt = question.question;
+  postPseudoField.innerHTML = player.name;
+  postAnswerField.innerHTML = player.answers[room.review_quest];
+  if (room.host === userId) {
     validateButton.classList.remove("hidden");
     nextButton.classList.remove("hidden");
+  } else {
+    validateButton.classList.remove("valid");
+    validateButton.classList.add("invalid");
+    validateButton.innerHTML = "Invalide";
+    nextButton.classList.add("hidden");
+  }
 });
 
-const switchPostGame = () =>{
-    if(postgame){
-        
-    }
-    else{
-        postgame = true;
-        postGameDiv.classList.remove("hidden");
-        answerField.classList.add("hidden");
-        timerField.classList.add("hidden");
-    }
-}
+socket.on("redirectHome", () => {
+  window.location.href = adress;
+  sessionStorage.removeItem("roomId");
+  sessionStorage.removeItem("gameName");
+  sessionStorage.removeItem("gameId");
+});
 
+socket.on("redirectCreateGame", () => {
+  window.location.href = adress + "/game/start";
+  sessionStorage.removeItem("roomId");
+  sessionStorage.removeItem("gameName");
+  sessionStorage.removeItem("gameId");
+});
+
+socket.on("postgame_end", () => {
+  postgame = false;
+  postGameAnswer.classList.add("hidden");
+  postGameDiv.classList.add("hidden");
+  answerField.classList.remove("hidden");
+  timerField.classList.remove("hidden");
+  validateButton.classList.remove("hidden");
+  nextButton.classList.remove("hidden");
+});
+
+const switchPostGame = () => {
+  if (postgame) {
+  } else {
+    postgame = true;
+    postGameAnswer.classList.remove("hidden");
+    postGameDiv.classList.remove("hidden");
+    answerField.classList.add("hidden");
+    timerField.classList.add("hidden");
+  }
+};

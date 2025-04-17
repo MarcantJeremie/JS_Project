@@ -6,6 +6,11 @@
     <title>Game</title>
     <link rel="stylesheet" href="../frontend/game/game.css" />
     <script src="/socket.io/socket.io.js"></script>
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="timer_container" class="container">
@@ -13,32 +18,63 @@
     </div>
 
     <div id="image">
-      <img id="image_field" src="../files/GTRCulture_background.jpg" alt="Image" />
+      <img
+        id="image_field"
+        src="../files/GTRCulture_background.jpg"
+        alt="Image"
+      />
     </div>
 
     <div id="question">
       <h2>TEST</h2>
     </div>
+    <div id="postgame_answer" class="hidden">Test</div>
 
     <div id="answers">
-      <input id="rep-field" type="text" placeholder="Veuillez répondre ici" class="answer"/>
-      <div id="postgame" class="hidden"> 
-        <!-- Faut faire le style des textes ici j'ai fait que les boutons -->
+      <input
+        id="rep-field"
+        type="text"
+        placeholder="Veuillez répondre ici"
+        class="answer"
+      />
+      <div id="postgame" class="hidden">
         <h3 id="post_username">Username</h3>
         <h4 id="post_answer">Réponse</h4>
-        <button id="post_button" class="invalid">Invalide</button>
-        <button id="next_button" class="next">Suivant</button>
+        <div class="list_btn">
+          <button id="post_button" class="invalid">Invalide</button>
+          <button id="next_button" class="next">Suivant</button>
+        </div>
       </div>
     </div>
 
     <div id="bonuses" class="hidden">
-      <!-- Ici faut faire la page où on ajoute des points bonus aux joueurs -->
+      <span id="bonus_title">Bonus</span>
+      <div id="bonus_list">
+        <div class="bonus_elem">
+          <span class="bonus_elem_pseudo">Jean Michel</span>
+          <div class="bonus_elem_btn">
+            <i class="bx bx-message-alt-add bonus_elem_add"></i>
+            <i class="bx bx-message-alt-minus bonus_elem_remove"></i>
+          </div>
+          <span class="bonus_elem_score">0</span>
+        </div>
+      </div>
+      <div id="bonus_btn" class="next">Voir Classement</div>
     </div>
+
     <div id="scores" class="hidden">
-      <!-- Ici faut faire l'affichage final des scores  -->
+      <span id="score_title">Classement</span>
+      <div id="score_list">
+        <div class="score_elem">
+          <span class="score_elem_position">1er</span>
+          <span class="score_elem_pseudo">Jean Michel</span>
+          <span class="score_elem_score">0</span>
+        </div>
+      </div>
+      <div id="score_btn" class="next">Terminer la partie</div>
     </div>
     <script src="../frontend/global.js"></script>
-    <script src= "../frontend/game/socket.js"></script>
+    <script src="../frontend/game/socket.js"></script>
     <script src="../frontend/game/game.js"></script>
   </body>
 </html>
