@@ -198,11 +198,38 @@ module.exports = function(io){
                 room.postGame = false;
                 room.review_quest = 0;
                 room.review_player = 0;
-                io.to(roomId).emit("postgame_end");
+                io.to(roomId).emit("postgame_end", getSafeRoomData(room));
             }
             else{
                 io.to(roomId).emit("postgame_update", getSafeRoomData(room));
             }
+        });
+
+        socket.on("bonus", (roomId, userId, bonus) => {
+            const room = rooms.get(roomId);
+            if (!room){
+                return;
+            }
+            const player = room.players.find(player => player.id === userId);
+            if (!player){
+                return;
+            }
+            player.bonus = bonus;
+            io.to(roomId).emit("updateBonuses", getSafeRoomData(room));
+        });
+
+        socket.on("rankings", (roomId) => {
+            const room = rooms.get(roomId);
+            if (!room){
+                return;
+            }
+            room.players.forEach(player => {
+                bonus = player.bonus || 0;
+                player.score += bonus;
+            });
+
+            room.players.sort((a, b) => b.score - a.score);
+            io.to(roomId).emit("show_ranking", getSafeRoomData(room));
         });
 
     });
