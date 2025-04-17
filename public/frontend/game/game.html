@@ -6,6 +6,11 @@
     <title>Game</title>
     <link rel="stylesheet" href="../frontend/game/game.css" />
     <script src="/socket.io/socket.io.js"></script>
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="timer_container" class="container">
@@ -43,24 +48,30 @@
     </div>
 
     <div id="bonuses" class="hidden">
-      <div class="bonus_elem">
-        <span class="bonus_elem_pseudo">Jean Michel</span>
-        <div class="bonus_elem_btn">
-          <i class="bx bx-message-alt-add bonus_elem_add"></i>
-          <i class="bx bx-message-alt-minus bonus_elem_remove"></i>
+      <span id="bonus_title">Bonus</span>
+      <div id="bonus_list">
+        <div class="bonus_elem">
+          <span class="bonus_elem_pseudo">Jean Michel</span>
+          <div class="bonus_elem_btn">
+            <i class="bx bx-message-alt-add bonus_elem_add"></i>
+            <i class="bx bx-message-alt-minus bonus_elem_remove"></i>
+          </div>
+          <span class="bonus_elem_score">0</span>
         </div>
-        <span class="bonus_elem_score">0</span>
       </div>
+      <div id="bonus_btn" class="next">Voir Classement</div>
     </div>
 
     <div id="scores" class="hidden">
-      <h3 id="score_title">Classement</h3>
+      <span id="score_title">Classement</span>
       <div id="score_list">
         <div class="score_elem">
+          <span class="score_elem_position">1er</span>
           <span class="score_elem_pseudo">Jean Michel</span>
           <span class="score_elem_score">0</span>
         </div>
       </div>
+      <div id="score_btn" class="next">Terminer la partie</div>
     </div>
     <script src="../frontend/global.js"></script>
     <script src="../frontend/game/socket.js"></script>

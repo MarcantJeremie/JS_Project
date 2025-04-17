@@ -126,60 +126,91 @@ button {
     margin-right: 2%;
 }
 
-/* Partie Bonus */
+/* Partie Bonus et Score*/
 
-#bonuses {
+#bonuses, #scores {
     display: flex;
     justify-content: start;
     align-items: center;
 
     flex-direction: column;
-    width: 80%;
-}
-#bonuses > .bonus_elem {
-    width: 100%;
+    width: 60%;
+    padding: 2%;
+
     color: #FFFFFF;
 
-    display: flex;
-    justify-content: start;
-    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
-#bonuses > .bonus_elem > .bonus_elem_btn {
+#bonuses > #bonus_title, #scores > #score_title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 40px;
+}
+#bonuses > #bonus_list, #scores > #score_list {
+    width: 80%;
+}
+#bonuses > #bonus_list > .bonus_elem, #scores > #score_list > .score_elem {
+    width: 100%;
+    font-size: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+#bonuses > #bonus_list > .bonus_elem:hover > .bonus_elem_pseudo, #scores > #score_list > .score_elem:hover > .score_elem_pseudo {
+    text-decoration: underline;
+}
+#bonuses > #bonus_list > .bonus_elem *, #scores > #score_list > .score_elem * {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#bonuses > #bonus_list > .bonus_elem > .bonus_elem_btn {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 10%;
+    min-width: 60px;
     background-color: rgba(0, 0, 0, 0.1);
 }
-#bonuses > .bonus_elem * {
+#bonuses > #bonus_list > .bonus_elem > .bonus_elem_btn * {
     margin-left: 1%;
     margin-right: 1%;
 }
-#bonuses > .bonus_elem > .bonus_elem_btn *:hover {
+#bonuses > #bonus_list > .bonus_elem > .bonus_elem_btn *:hover {
     background-color: #636363;
 }
-#bonuses > .bonus_elem > .bonus_elem_btn *:active {
+#bonuses > #bonus_list > .bonus_elem > .bonus_elem_btn *:active {
     background-color: #FFFFFF;
     color: #333333;
 }
 
-/* Partie score */
-#scores {
-    display: flex;
-    justify-content: start;
-    align-items: center;
+#bonuses > #bonus_btn, #scores > #score_btn {
+    cursor: pointer;
 
-    flex-direction: column;
-    width: 50%;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    padding: 2%;
+    border-radius: 10px;
+    border: 2px solid #FFFFFF;
+    
+    background-color: #FFFFFF;
+    color: #333333;
 }
-#score > .bonus_elem {
-    width: 100%;
+#bonuses > #bonus_btn:hover, #scores > #score_btn:hover {
+    background-color: #636363;
+    border-color: #636363;
+    color: #333333;
+}
+
+#bonuses > #bonus_btn:active, #scores > #score_btn:active {
+    background-color: #333333;
     color: #FFFFFF;
-
-    display: flex;
-    justify-content: start;
-    align-items: center;
 }
-#score > .bonus_elem * {
-    margin-left: 1%;
-    margin-right: 1%;
-}
-
 
 /* Partie gestion du responsive */
