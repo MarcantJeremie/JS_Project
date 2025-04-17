@@ -1,6 +1,8 @@
 const QuestionModel = require("../models/questions.model");
 
 module.exports.createQuestions = async (req, res) => {
+    
+    console.log(req.body);
   if (
     !req.body.question ||
     !req.body.answer ||
@@ -19,10 +21,15 @@ module.exports.createQuestions = async (req, res) => {
   }
   const filePath = "files/uploads/non-verified/" + req.file.filename;
 
+    tags = req.body.tags.split(",");
+    for (let i = 0; i < tags.length; i++) {
+        tags[i] = tags[i].trim();
+    }
+    
   const question = await QuestionModel.create({
     question: req.body.question,
     answer: req.body.answer,
-    tags: req.body.tags,
+    tags: tags,
     difficulty: req.body.difficulty,
     verified: req.body.verified,
     img_path: filePath,

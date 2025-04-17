@@ -41,15 +41,10 @@ button {
     padding: 10px 20px;
     font-size: 1em;
     border: none;
-    background-color: #FFFFFF;
-    color: red;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #666666;
-}
 
 #image{
     width: 50%;
@@ -96,5 +91,28 @@ button:hover {
 .answer>input[type="text"] {
     font-family: 'Roboto', sans-serif;
 }
+
+/* Partie postgame */
+.hidden {
+    display: none;
+}
+
+#post_button.valid {
+    background-color: #00FF00;
+    color: #FFFFFF;
+}
+#post_button.invalid {
+    background-color: #FF0000;
+    color: #FFFFFF;
+}
+
+#next_button {
+    background-color: #636363;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
+
+
 
 /* Partie gestion du responsive */

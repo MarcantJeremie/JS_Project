@@ -6,20 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
   adress = adress[adress.length - 2];
   adress = "http://" + adress;
 
-  console.log(adress);
-
   playBtn.addEventListener("click", () => {
     window.location.href = adress + "/game/start";
   });
 
   let logBtn = document.getElementById("log-button");
 
-  adress = window.location.href;
-  adress = adress.split("/");
-  adress = adress[2];
-  adress = "http://" + adress;
-
-  console.log(adress);
 
   logBtn.addEventListener("click", () => {
     if (sessionStorage.getItem("IsConnect") == "true") {
@@ -31,12 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let addQuestionBtn = document.getElementById("add-question-button");
 
-  adress = window.location.href;
-  adress = adress.split("/");
-  adress = adress[2];
-  adress = "http://" + adress;
-
-  console.log(adress);
 
   addQuestionBtn.addEventListener("click", () => {
     window.location.href = adress + "/questions/create";

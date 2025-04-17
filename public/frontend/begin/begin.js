@@ -7,6 +7,8 @@ const little_text = document.querySelector(".little");
 const div_start_game = document.getElementById("start-game");
 const div_join_game = document.getElementById("div-join-game");
 const div_create_game = document.getElementById("div-create-game");
+const get_game_id = document.getElementById("get-id-game");
+
 
 const back_button = document.querySelectorAll(".back-button");
 
@@ -60,14 +62,46 @@ get_pseudo.addEventListener("input", () => {
   }
 });
 
-div_join_game.addEventListener("click", (e) => {
+function generateUniqueId() {
+  const timestamp = Date.now();
+  const randomSuffix = Math.floor(Math.random() * 1000);
+  return `${timestamp}-${randomSuffix}`;
+}
+
+div_join_game.addEventListener("submit", (e) => {
   e.preventDefault();
   let pseudo = get_pseudo.value;
-  // Pour clément
+  let userId = sessionStorage.getItem("UserLogin");
+  if (!userId){
+    userId = sessionStorage.getItem("gameId") || localStorage.getItem("gameId");
+    if (!userId){
+      userId = generateUniqueId();
+      sessionStorage.setItem("gameId", userId);
+      localStorage.setItem("gameId", userId);
+    }
+  }
+  let roomId = get_game_id.value;
+  roomId = roomId.trim();
+  roomId = roomId.toLowerCase();
+  window.joinRoom(roomId, userId, pseudo);
+  window.location.href = adress + "/game/lobby";
+
+
 });
 
-div_create_game.addEventListener("click", (e) => {
+div_create_game.addEventListener("submit", (e) => {
   e.preventDefault();
   let pseudo = get_pseudo.value;
-  // Pour Clément
+  let userId = sessionStorage.getItem("UserLogin");
+  if (!userId){
+    userId = sessionStorage.getItem("gameId") || localStorage.getItem("gameId");
+    if (!userId){
+      userId = generateUniqueId();
+      sessionStorage.setItem("gameId", userId);
+      localStorage.setItem("gameId", userId);
+    }
+  }
+  sessionStorage.setItem("gamePseudo", pseudo);
+  window.createRoom(userId, pseudo);
+  window.location.href = adress + "/game/lobby";
 });
