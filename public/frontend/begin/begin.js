@@ -81,6 +81,8 @@ div_join_game.addEventListener("submit", (e) => {
     }
   }
   let roomId = get_game_id.value;
+  roomId = roomId.trim();
+  roomId = roomId.toLowerCase();
   window.joinRoom(roomId, userId, pseudo);
   window.location.href = adress + "/game/lobby";
 

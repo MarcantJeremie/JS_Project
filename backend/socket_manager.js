@@ -2,6 +2,8 @@ const { getQuestion, searchForQuestions } = require("./game_manager");
 
 var rooms = new Map();
 
+
+
 const startGame = (io, roomId, params)=> setInterval(() => {
   
     let room = rooms.get(roomId);
@@ -84,12 +86,17 @@ module.exports = function(io){
         });
         
         socket.on("rejoinRoom", ({roomId, userId, context}) => {
-            if (context === "lobby" && rooms.get(roomId).started === true) {
+            const room = rooms.get(roomId);
+            if (!room) {
+                socket.emit("redirectCreateGame");
+                return;
+            }
+            if (context === "lobby" && room.started === true) {
                 socket.emit("redirectCreateGame");
                 return;
             }
             socket.join(roomId);
-            const room = rooms.get(roomId);
+            
             player = room.players[room.players.findIndex(player => player.id === userId)];
             if (player) player.socket = socket.id;
             console.log(`Socket ${socket.id} rejoined room ${roomId}`);
@@ -153,7 +160,10 @@ module.exports = function(io){
             }
             if (nb_quest == 0){
                 player.answers = [];
-                player.answers_verif = [];
+                player.score = 0;
+            }
+            if( player.answers.length >= room.questions.length){
+                return;
             }
             player.answers.push(response);
             console.log(player.answers);
@@ -172,7 +182,7 @@ module.exports = function(io){
             if (!player){
                 return;
             }
-            player.answers_verif.push(state);
+            if (state) player.score++;
             room.review_player++;
             if (room.review_player == room.players.length){
                 room.review_player = 0;

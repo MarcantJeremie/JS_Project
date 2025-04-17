@@ -22,7 +22,10 @@ const nextButton = document.getElementById("next_button");
 
 const socket = io();
 
-
+var adress = window.location.href;
+adress = adress.split("/");
+adress = adress[2];
+adress = "http://" + adress;
 
 
 socket.on("connect", () => {
@@ -110,6 +113,9 @@ socket.on("postgame_start", (room) =>{
             }
             else if(validateButton.classList.contains("valid")){
                 socket.emit("postgame_validate", roomId, true);
+                validateButton.classList.remove("valid");
+                validateButton.classList.add("invalid");
+                validateButton.innerHTML = "Invalide";
             }
         });
     }
@@ -130,9 +136,35 @@ socket.on("postgame_update", (room) =>{
         nextButton.classList.remove("hidden");
     }
     else{
-        validateButton.classList.add("hidden");
+        validateButton.classList.remove("valid");
+        validateButton.classList.add("invalid");
+        validateButton.innerHTML = "Invalide";
         nextButton.classList.add("hidden");
     }
+});
+
+
+socket.on("redirectHome", ()=>{
+    window.location.href = adress;
+    sessionStorage.removeItem("roomId");
+    sessionStorage.removeItem("gameName");
+    sessionStorage.removeItem("gameId");
+});
+
+socket.on("redirectCreateGame", ()=>{
+    window.location.href = adress + '/game/start';
+    sessionStorage.removeItem("roomId");
+    sessionStorage.removeItem("gameName");
+    sessionStorage.removeItem("gameId");
+});
+
+socket.on("postgame_end", ()=>{
+    postgame = false;
+    postGameDiv.classList.add("hidden");
+    answerField.classList.remove("hidden");
+    timerField.classList.remove("hidden");
+    validateButton.classList.remove("hidden");
+    nextButton.classList.remove("hidden");
 });
 
 const switchPostGame = () =>{
