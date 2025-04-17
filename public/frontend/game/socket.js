@@ -43,6 +43,9 @@ socket.on("connect", () => {
 
 socket.on("newQuestion", (question) => {
     document.getElementById("question").innerHTML = question.question;
+    document.getElementById("image_field").src = "../" + question.img_path;
+    document.getElementById("image_field").alt = question.question;
+
 });
 socket.on("timer", (timer)=>{
     document.getElementById("timer").innerHTML = timer;
@@ -57,6 +60,9 @@ document.getElementById("rep-field").addEventListener("input", (e) => {
 
 
 socket.on("need_response", (nb_quest) => {
+    if (!response){
+        response = " ";
+    }
     socket.emit("response", userId, roomId, response, nb_quest);
     document.getElementById("rep-field").value = "";
     response = "";
@@ -83,6 +89,8 @@ socket.on("postgame_start", (room) =>{
     const firstQuestion = room.questions[0];
     const firstPlayer = room.players[0];
     document.getElementById("question").innerHTML = firstQuestion.question;
+    document.getElementById("image_field").src = "../" + firstQuestion.img_path;
+    document.getElementById("image_field").alt = firstQuestion.question;
     postPseudoField.innerHTML = firstPlayer.name;
     postAnswerField.innerHTML = firstPlayer.answers[0];
     if (room.host === userId){
@@ -129,6 +137,8 @@ socket.on("postgame_update", (room) =>{
     const question = room.questions[room.review_quest];
     const player = room.players[room.review_player];
     document.getElementById("question").innerHTML = question.question;
+    document.getElementById("image_field").src = "../" + question.img_path;
+    document.getElementById("image_field").alt = question.question;
     postPseudoField.innerHTML = player.name;
     postAnswerField.innerHTML = player.answers[room.review_quest];
     if (room.host === userId){
