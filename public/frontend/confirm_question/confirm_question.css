@@ -22,6 +22,38 @@ nav{
     justify-content: flex-start;
     align-items: center;
 }
+#back-to-menu {
+    position: absolute;
+
+    top: 4%;
+    left: 1%;
+
+    color: var(--color2-5);
+    font-size: 5vh;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.3s;
+
+    cursor: pointer;
+}
+
+#back-to-menu:hover {
+    transform: translateX(-10%);
+}
+
+#back-to-menu>span {
+    font-size: 3vh;
+}
+
+#back-to-menu:active>span {
+    text-decoration: underline;
+}
+
 .open-sidebar-button {
     position: fixed;
     top: 20%;

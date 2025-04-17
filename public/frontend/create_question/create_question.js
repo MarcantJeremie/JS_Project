@@ -97,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function displayTags(filter = "") {
-        tagsList.innerHTML = ""; // Nettoyer la liste avant de la remplir
         let filteredTags = storedTags.filter(tag => tag.toLowerCase().includes(filter.toLowerCase()));
 
         filteredTags.forEach(tag => {
@@ -107,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
             tagItem.addEventListener("click", function () {
                 addTag(tag);
             });
-            tagsList.appendChild(tagItem);
         });
     }
 
