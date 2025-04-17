@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const tagsHidden = document.getElementById("tags-hidden");
     const tagsList = document.getElementById("tags-list");
 
-    // Liste de tags enregistrés (peut être récupérée d'une BDD plus tard)
-    let storedTags = ["HTML", "CSS", "JavaScript", "Python", "PHP", "React", "Vue", "Angular", "Node.js", "Java"];
+    let storedTags = [
+        "tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10",];
     let selectedTags = [];
 
     function updateHiddenInput() {
@@ -123,4 +123,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     displayTags(); // Afficher tous les tags au début
+});
+
+const adminButton = document.getElementById("admin");
+
+adminButton.addEventListener("click", () => {
+    console.log("Admin button clicked");
+    if (adminButton.classList.contains("hidden")){
+        return;
+    }
+    window.location.href = adress + "/questions/confirm";
 });

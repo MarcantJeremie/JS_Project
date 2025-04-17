@@ -26,10 +26,10 @@ const display_no_verified_question = (data) => {
   actual_tags.forEach((tag) => {
     window.addTagToUI(tag);
   });
-
-  document
-    .getElementById("img")
-    .setAttribute("src", "../../" + actual_img_path);
+  console.log(document.getElementById("img"));
+  console.log(actual_img_path);
+  document.getElementById("img").src = "../" + actual_img_path;
+  document.getElementById("img").alt = actual_question;
 };
 
 adress = window.location.href;
@@ -49,30 +49,30 @@ fetch(adress + "/questions/getNoVerifiedQuestions", {
     data.forEach((element) => {
       sidebar_questions.innerHTML += `<a id="${element._id}" class="no-verified-question"> ${element.question} </a>`;
     });
-  });
-
-document.querySelectorAll(".no-verified-question").forEach((element) => {
-  element.addEventListener("click", () => {
-    fetch(adress + "/questions/getQuestionById", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: element.id,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        display_no_verified_question(data);
+  }).then(() => {
+    document.querySelectorAll(".no-verified-question").forEach((element) => {
+      element.addEventListener("click", () => {
+        fetch(adress + "/questions/getQuestionById", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: element.id,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            display_no_verified_question(data);
+          });
       });
+    });
   });
-});
 
 document.getElementById("valid").addEventListener("click", () => {
   if (actual_id == "") return;
 
-  fetch("http://adresse-de-ton-serveur/approvedQuestion", {
+  fetch(adress +"/questions/approvedQuestion", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -87,15 +87,28 @@ document.getElementById("valid").addEventListener("click", () => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => {});
+    .then((data) => {
+      if (data.message == "Question approved") {
+        alert(data.message);
+        document.getElementById(actual_id).remove();
+        window.clearTagsFromUI();
+        document.getElementById("display_question").setAttribute("value", "");
+        document.getElementById("display_answer").setAttribute("value", "");
+        document.querySelector('select[name="difficulty"]').value = "easy";
+        document.getElementById("img").src = "../../files/uploads/default.png";
+        document.getElementById("img").alt = "default.png";
+      } else {
+        alert(data.message);
+      }
+    });
 });
 
-document.getElementById("non_valid", () => {
+document.getElementById("non_valid").addEventListener("click", () => {
   if (actual_id == "") return;
 
   document.getElementById(actual_id).remove();
 
-  fetch("http://adresse-de-ton-serveur/removeQuestion", {
+  fetch(adress + "/questions/removeQuestion", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -105,7 +118,19 @@ document.getElementById("non_valid", () => {
     }),
   })
     .then((response) => response.json())
-    .then((data) => {});
+    .then((data) => {
+      if (data.message == "Question deleted") {
+        alert(data.message);
+        window.clearTagsFromUI();
+        document.getElementById("display_question").setAttribute("value", "");
+        document.getElementById("display_answer").setAttribute("value", "");
+        document.querySelector('select[name="difficulty"]').value = "easy";
+        document.getElementById("img").src = "../../files/uploads/default.png";
+        document.getElementById("img").alt = "default.png";
+      } else {
+        alert(data.message);
+      }
+    });
 });
 
 // Pour les tags
@@ -113,7 +138,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const tagsContainer = document.getElementById("tags-container");
   const tagsInput = document.getElementById("tags-input");
   const tagsHidden = document.getElementById("tags-hidden");
-  const tagsList = document.getElementById("tags-list");
 
   // Liste de tags enregistrés (peut être récupérée d'une BDD plus tard)
   let storedTags = [
@@ -162,7 +186,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function displayTags(filter = "") {
-    tagsList.innerHTML = ""; // Nettoyer la liste avant de la remplir
     let filteredTags = storedTags.filter((tag) =>
       tag.toLowerCase().includes(filter.toLowerCase())
     );
@@ -174,7 +197,6 @@ document.addEventListener("DOMContentLoaded", function () {
       tagItem.addEventListener("click", function () {
         addTag(tag);
       });
-      tagsList.appendChild(tagItem);
     });
   }
 
