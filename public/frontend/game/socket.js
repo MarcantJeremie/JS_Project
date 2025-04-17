@@ -46,20 +46,16 @@ socket.on("timer", (timer) => {
   document.getElementById("timer").innerHTML = timer;
 });
 
-let resonse = "";
+let response = " ";
 
 document.getElementById("rep-field").addEventListener("input", (e) => {
-  response = e.target.value;
-  console.log(response);
+    response = e.target.value;
 });
 
 socket.on("need_response", (nb_quest) => {
-  if (!response) {
+    socket.emit("response", userId, roomId, response, nb_quest);
+    document.getElementById("rep-field").value = "";
     response = " ";
-  }
-  socket.emit("response", userId, roomId, response, nb_quest);
-  document.getElementById("rep-field").value = "";
-  response = "";
 });
 
 socket.on("postgame_change_button_state", (state) => {

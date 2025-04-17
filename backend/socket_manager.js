@@ -4,27 +4,28 @@ var rooms = new Map();
 
 
 
-const startGame = (io, roomId, params)=> setInterval(() => {
-  
+const startGame = (io, roomId, params) => {
     let room = rooms.get(roomId);
-    if (room.currentQuestion > room.questions.length) {
-        clearInterval(room.timer);
-        return;
-    }
-    room.timer = room.timer - 1;
-    io.emit("timer", room.timer);
-    if (room.timer == 0) {
-        io.to(roomId).emit("need_response", room.currentQuestion);
-        room.currentQuestion++;
-        room.timer = params.timer_duration;
-        if (room.currentQuestion == room.questions.length) {
-            postGameStart(io, roomId);
+    room.interval = setInterval(() => {
+        if (room.currentQuestion > room.questions.length) {
+            clearInterval(room.interval);
+            return;
         }
-        else if (room.currentQuestion < room.questions.length) {
-            io.to(roomId).emit("newQuestion", room.questions[room.currentQuestion]);
+        room.timer = room.timer - 1;
+        io.to(roomId).emit("timer", room.timer); // Correction ici : .to(roomId)
+        if (room.timer == 0) {
+            io.to(roomId).emit("need_response", room.currentQuestion);
+            room.currentQuestion++;
+            room.timer = params.timer_duration;
+            if (room.currentQuestion == room.questions.length) {
+                postGameStart(io, roomId);
+                clearInterval(room.interval); // Stop le timer ici aussi pour être safe
+            } else if (room.currentQuestion < room.questions.length) {
+                io.to(roomId).emit("newQuestion", room.questions[room.currentQuestion]);
+            }
         }
-    }
-}, 1000);
+    }, 1000);
+};
 
 const postGameStart = (io, roomId) => {
     let room = rooms.get(roomId);
@@ -32,6 +33,11 @@ const postGameStart = (io, roomId) => {
     room.review_quest = 0;
     room.review_player = 0;
     io.to(roomId).emit("postgame_start", room); 
+}
+
+function getSafeRoomData(room) {
+    const { interval, ...safeRoom } = room;
+    return safeRoom;
 }
 
 module.exports = function(io){
@@ -52,7 +58,7 @@ module.exports = function(io){
             callback({roomId, role: "Host"});
             console.log(rooms);
             console.log(rooms.get(roomId).players);
-            io.to(roomId).emit("updateRoomData", rooms.get(roomId));
+            io.to(roomId).emit("updateRoomData", getSafeRoomData(rooms.get(roomId)));
         })  
         
         socket.on("joinRoom", ({roomId, playerName, UserLogin}, callback) =>{
@@ -73,7 +79,7 @@ module.exports = function(io){
             callback({roomId, role: "Player"});
             console.log(rooms);
             console.log(rooms.get(roomId).players);
-            io.to(roomId).emit("updateRoomData", rooms.get(roomId));
+            io.to(roomId).emit("updateRoomData", getSafeRoomData(rooms.get(roomId)));
         })
 
         socket.on("getDisplayInfo", ({roomId}, callback) =>{
@@ -105,7 +111,7 @@ module.exports = function(io){
             }
     
             console.log(`Player ${userId} reconnected with socket ${socket.id}`);
-            io.to(roomId).emit("updateRoomData", room);
+            io.to(roomId).emit("updateRoomData", getSafeRoomData(room));
         });
 
         socket.on("disconnect", () => {
@@ -117,7 +123,7 @@ module.exports = function(io){
                     const updatedPlayers = room.players.filter(p => p.socket !== socket.id);
                     if (updatedPlayers.length !== room.players.length) {
                         room.players = updatedPlayers;
-                        io.to(roomId).emit("updateRoomData", room);
+                        io.to(roomId).emit("updateRoomData", getSafeRoomData(room));
                     }
                 });
             }, 10000); // 10 secondes de "grâce"
@@ -127,7 +133,7 @@ module.exports = function(io){
             const room = rooms.get(roomId);
             if (room) {
                 room.parameters = data;
-                io.to(roomId).emit("updateRoomData", room);
+                io.to(roomId).emit("updateRoomData", getSafeRoomData(room));
             }
             
         });
@@ -195,7 +201,7 @@ module.exports = function(io){
                 io.to(roomId).emit("postgame_end");
             }
             else{
-                io.to(roomId).emit("postgame_update", room);
+                io.to(roomId).emit("postgame_update", getSafeRoomData(room));
             }
         });
 

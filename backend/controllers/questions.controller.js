@@ -1,7 +1,20 @@
 const QuestionModel = require("../models/questions.model");
+const fs = require("fs");
+const path = require("path");
+
 
 module.exports.createQuestions = async (req, res) => {
-    
+    const deleteFileIfExists = (filename = "files/uploads/non-verified/" + req.file.filename) => {
+        if (req.file) {
+            const filePath = "public/" + filename;
+          fs.unlink(filePath, (err) => {
+            if (err) console.error("Erreur lors de la suppression du fichier :", err);
+            else console.log("Fichier supprimé :", filename);
+          });
+        }
+      };
+
+
     console.log(req.body);
   if (
     !req.body.question ||
@@ -9,6 +22,7 @@ module.exports.createQuestions = async (req, res) => {
     !req.body.tags ||
     !req.body.difficulty
   ) {
+    deleteFileIfExists();
     return res
       .status(400)
       .json({ message: "All fields marked by * are required" });
@@ -17,6 +31,7 @@ module.exports.createQuestions = async (req, res) => {
     req.body.verified = false;
   }
   if (!req.file) {
+    deleteFileIfExists();
     return res.status(400).json({ message: "Aucun fichier reçu" });
   }
   const filePath = "files/uploads/non-verified/" + req.file.filename;
@@ -25,7 +40,10 @@ module.exports.createQuestions = async (req, res) => {
     for (let i = 0; i < tags.length; i++) {
         tags[i] = tags[i].trim();
     }
-    
+    if(!req.session.login) {
+        deleteFileIfExists();
+        return res.status(400).json({ message: "You need to be logged in" });
+    }
   const question = await QuestionModel.create({
     question: req.body.question,
     answer: req.body.answer,
@@ -81,7 +99,7 @@ module.exports.approvedQuestions = async (req, res) => {
   await QuestionModel.updateOne(
     { _id: req.body.id },
     {
-      question: req.body.answer,
+      question: req.body.question,
       answer: req.body.answer,
       tags: req.body.tags,
       difficulty: req.body.difficulty,
@@ -90,11 +108,20 @@ module.exports.approvedQuestions = async (req, res) => {
       verified_on: Date.now(),
     }
   );
-  res.status(201).json("Question approved");
+  return res.status(201).json({message:"Question approved"});
 };
 
 module.exports.removeQuestion = async (req, res) => {
-  if (!req.body.id) {
+    const deleteFileIfExists = (filename) => {
+        if (filename) {
+            const filePath = "public/" + filename;
+          fs.unlink(filePath, (err) => {
+            if (err) console.error("Erreur lors de la suppression du fichier :", err);
+            else console.log("Fichier supprimé :", filename);
+          });
+        }
+      };
+    if (!req.body.id) {
     return res.status(400).json({ message: "Id's question is needed" });
   }
 
@@ -104,7 +131,8 @@ module.exports.removeQuestion = async (req, res) => {
       .status(400)
       .json({ message: "The question you want to approve doesn't exist" });
   }
-
+  const filePath = existingQuestion.img_path;
   await QuestionModel.deleteOne({ _id: req.body.id });
-  res.status(201).json("Question deleted");
+  deleteFileIfExists(filePath);
+  res.status(201).json({message:"Question deleted"});
 };
