@@ -1,0 +1,18 @@
+Pour ce projet de JS les membres du groupes ont été Jérémie MARCANT, Théo LESAGE, Clémentin MASQUELIER et Romain PIAT.
+
+Ce projet a pour objectif de reprendre le concept du kculture. Le but de ce jeu est de marquer des points et de 
+finir la partie avec un total plus élevé que celui des adversaires. Une partie s'organise en 2 temps : 
+- le temps de réponse aux questions avec un temps limité pour chacune d'entre elles,
+- le temps de correction des réponses réalisé par le créateur de la partie.
+
+Parmis les fonctionnalités mise en place il y a notamment :
+- permettre des parties en multijoueur avec des codes de parties uniques
+- permettre de choisir divers paramètres de la partie (temps de réponse, nombre de questions pour chaque niveau de 
+difficulté existant, ajout de tags, etc...)
+- permettre de créer ses propres questions
+- permettre aux administrateurs de valider/modifier/refuser les questions créées par les joueurs et de retirer des 
+joueurs d'une partie
+- permettre de jouer à une partie suivant toutes les règles du kculture (système de points, temps de réponse, 
+points bonus à attribuer en fin de partie, etc...)
+
+
