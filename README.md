@@ -52,7 +52,7 @@ Une fois ces choses installées, plusieurs choix s'offrent à vous :
 8. Sous Windows 11, rendez vous dans votre explorateur de fichier et plus particulièrement dans l'onglet `Afficher` de votre barre d'outil. Descendez votre curseur pour survoler le nouvel onglet `Afficher` puis cliquez sur `Extension de noms de fichiers`. Reprenez le fichier `.env` créé précedemment qui doit maintenant être affiché comme `.env.txt` et renommez le en supprimant le `.txt` à la fin. Une fenêtre pop-up doit sans doute s'afficher, appuyez sur entrez pour valider.
 
 9. Ouvrez ce fichier `.env` avec n'importe quel éditeur de texte ou de code et copiez collez le paragraphe suivant : 
->```MONGO_URI=mongodb+srv://gtrc:mongoPSWORDGTRC@clmt.tghrp.mongodb.net/gtrc```
+>```MONGO_URI=mongodb+srv://gtrc:mongoPSWORDGTRC@clmt.tghrp.mongodb.net/gtrc``` <br>
     ```PORT=4000``` <br>
     ```SESSION_SECRET=secretkey```
 
