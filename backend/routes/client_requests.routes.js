@@ -7,7 +7,6 @@ const publicPath = require('path').join(__dirname, '../../public');
 
 router.post('/getuser', async (req, res) => {
     const login = req.body.login;
-    console.log(login);
     const user = await User.findOne({ login: login });
     if (!user) {
         return res.status(400).json({ message: 'Invalid login' });

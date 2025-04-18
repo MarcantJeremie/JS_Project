@@ -74,6 +74,17 @@ Dans GTRCulture, vous pourrez :
 > Vous devrez ensuite communiquer votre IPV4 Locale à vos amis, celle-ci peut être trouvée en tapant la commande `ipconfig` dans un terminal. En général, celle ci est souvent de cette forme `192.168.1.<2-255>` <br>
 Une fois connectés au serveur, vos amis verront la même page que vous, il vous suffira alors de créer une partie en cliquant sur ``Jouer`` puis ``Créer``
 
+> Lorsque vous créérez une partie, vous aurez la possibilité d'en choisir les paramètres, parmis les paramètres vous pourrez choisir : 
+> - La durée du chronomètre correspondant à la durée disponible pour répondre à chaque question
+> - Le nombre de questions pour chaque difficulté, et ce parmis les 4 difficultés suivantes :
+>> - Facile
+>> - Moyen
+>> - Difficile
+>> - Autiste (c'est la difficulté maximale nécéssitant beaucoup de connaissances sur le sujet traité par la question)
+> - Les tags, qui correspondent aux thèmes que vous souhaitez que les questions traitent
+
+> Chaque partie dispose d'un code unique propre à la partie que vous avez créée, pour permettre à vos amis de rejoindre la partie, il vous suffit de leur communiquer le code que vous pourrez trouver flouté en haut de la page lobby. Il vous suffit de passer votre souris dessus afin de le déflouter
+
 ## Créer des questions
 > Pour créer une question, rendez vous sur la page d'accueil du jeu, vous pourrez alors créer un compte ou vous connecter si vous en avez déjà un en cliquant sur le bouton `Connexion` en haut à droite
 

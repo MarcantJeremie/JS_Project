@@ -62,10 +62,6 @@ try {
       alert("Password must be at least 6 characters long");
       return;
     }
-    console.log(login);
-    console.log(password);
-    console.log(email);
-    console.log(displayName);
 
     fetch(adress + "/register", {
       method: "POST",

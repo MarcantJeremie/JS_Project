@@ -47,7 +47,6 @@ module.exports.deleteAccount = async(req, res) => {
 
 module.exports.editUser = async(req, res) => {
     const user = await UserModel.findOne({login: req.body.login});
-    console.log(user);
     if(!user){
         return res.status(400).json({ message: 'User not found' });
     }

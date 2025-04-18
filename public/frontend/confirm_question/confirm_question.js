@@ -26,8 +26,6 @@ const display_no_verified_question = (data) => {
   actual_tags.forEach((tag) => {
     window.addTagToUI(tag);
   });
-  console.log(document.getElementById("img"));
-  console.log(actual_img_path);
   document.getElementById("img").src = "../" + actual_img_path;
   document.getElementById("img").alt = actual_question;
 };

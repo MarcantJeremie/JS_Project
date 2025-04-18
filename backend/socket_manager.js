@@ -56,8 +56,6 @@ module.exports = function(io){
                 console.log("Sockets currently in room", roomId, ":", sockets.map(s => s.id));
             });
             callback({roomId, role: "Host"});
-            console.log(rooms);
-            console.log(rooms.get(roomId).players);
             io.to(roomId).emit("updateRoomData", getSafeRoomData(rooms.get(roomId)));
         })  
         
@@ -77,8 +75,6 @@ module.exports = function(io){
                 console.log("Sockets currently in room", roomId, ":", sockets.map(s => s.id));
             });
             callback({roomId, role: "Player"});
-            console.log(rooms);
-            console.log(rooms.get(roomId).players);
             io.to(roomId).emit("updateRoomData", getSafeRoomData(rooms.get(roomId)));
         })
 
@@ -172,7 +168,6 @@ module.exports = function(io){
                 return;
             }
             player.answers.push(response);
-            console.log(player.answers);
         });
 
         socket.on("postgame_button_state", (roomId, state) => {
