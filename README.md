@@ -58,9 +58,11 @@ Une fois ces choses installées, plusieurs choix s'offrent à vous :
 
 10. Sauvegardez ce fichier
 
-11. Sous Windows, éxécutez le script `run_server.bat` situé à la racine du dossier, sous Linux ou MacOS, ouvrez un terminal dans le dossier du projet et éxécutez la commande `npm run server`
+11. Ouvrez un terminal dans le dossier du projet et tapez la commande `npm install`. Cela permettra d'installer tous les modules nodes dont nous avons besoin pour faire tourner le projet.
 
-12. Ouvrez votre navigateur internet et rendez vous sur `localhost:4000` pour découvrir notre projet
+12. Sous Windows, éxécutez le script `run_server.bat` situé à la racine du dossier, sous Linux ou MacOS, ouvrez un terminal dans le dossier du projet et éxécutez la commande `npm run server`
+
+13. Ouvrez votre navigateur internet et rendez vous sur `localhost:4000` pour découvrir notre projet
 
 # Fonctionalités
 
