@@ -24,7 +24,7 @@ body {
 #timer_container {
     border-radius: 50%;
     background-color: #FFFFFF;
-    width: 3%;
+    width: 35px;
 }
 
 #timer {
