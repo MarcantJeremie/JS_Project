@@ -31,12 +31,13 @@ module.exports.createQuestions = async (req, res) => {
   if (!req.body.verified) {
     req.body.verified = false;
   }
+  filePath = null;
   if (!req.file) {
-    deleteFileIfExists();
-    return res.status(400).json({ message: "Aucun fichier reçu" });
+    filePath = "files/GTRCulture_background.jpg";
   }
-  const filePath = "files/uploads/non-verified/" + req.file.filename;
-
+  else {
+    filePath = "files/uploads/non-verified/" + req.file.filename;
+  }
     tags = req.body.tags.split(",");
     for (let i = 0; i < tags.length; i++) {
         tags[i] = tags[i].trim();
