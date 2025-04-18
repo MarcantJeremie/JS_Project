@@ -24,6 +24,23 @@ const searchForQuestions = async (params) => {
             difficulty[questions[i].difficulty - 1]--;
         }
     }
+    if (questionsToReturn.length < 2) {
+        if (questions.length >= 2) {
+            for (let i = 0; i < questions.length; i++) {
+                if (questionsToReturn.length < totalQuestions){
+                    if(questions[i]!=questionsToReturn[0]) questionsToReturn.push(questions[i]);
+                }
+            }
+        }
+        else {
+            let other_questions = await Questions.find({verified: true});
+            for (let i = other_questions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [other_questions[i], other_questions[j]] = [other_questions[j], other_questions[i]];
+            }
+            questionsToReturn.push(other_questions[0]);
+        }
+    }
 
     for (let i = questionsToReturn.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
