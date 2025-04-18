@@ -24,7 +24,7 @@ creation_form.addEventListener("submit", (e) => {
         }
     }
     formData.append("creator", creator);
-    fetch(adress + "/questions/submit", {
+    fetch('/questions/submit', {
         method: "POST",
         body: formData,
     })

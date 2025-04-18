@@ -172,7 +172,7 @@ const fillTagList = (tags) => {
   });
 }
 
-fetch(adress + "/questions/tags", {
+fetch('/questions/tags', {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

@@ -64,7 +64,7 @@ window.removeItemWithExpiration = (key) => {
  */
 window.getUser = async (login) => {
   try {
-    const response = await fetch(address + "/requests/getuser", {
+    const response = await fetch('/requests/getuser', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

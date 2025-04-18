@@ -41,7 +41,7 @@ back_to_menu_button.addEventListener("click", () => {
   window.location.href = adress + "/";
 });
 
-fetch(adress + "/questions/getNoVerifiedQuestions", {
+fetch('/questions/getNoVerifiedQuestions', {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -57,7 +57,7 @@ fetch(adress + "/questions/getNoVerifiedQuestions", {
   .then(() => {
     document.querySelectorAll(".no-verified-question").forEach((element) => {
       element.addEventListener("click", () => {
-        fetch(adress + "/questions/getQuestionById", {
+        fetch('/questions/getQuestionById', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -77,7 +77,7 @@ fetch(adress + "/questions/getNoVerifiedQuestions", {
 document.getElementById("valid").addEventListener("click", () => {
   if (actual_id == "") return;
 
-  fetch(adress + "/questions/approvedQuestion", {
+  fetch('/questions/approvedQuestion', {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -113,7 +113,7 @@ document.getElementById("non_valid").addEventListener("click", () => {
 
   document.getElementById(actual_id).remove();
 
-  fetch(adress + "/questions/removeQuestion", {
+  fetch('/questions/removeQuestion', {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
