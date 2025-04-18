@@ -6,6 +6,7 @@ const {
   getAllNoVerifiedQuestions,
   approvedQuestions,
   removeQuestion,
+  getTags,
 } = require("../controllers/questions.controller");
 const multer = require("multer");
 
@@ -27,6 +28,7 @@ router.post("/getQuestionById", getQuestionById);
 router.post("/getNoVerifiedQuestions", getAllNoVerifiedQuestions);
 router.put("/approvedQuestion", approvedQuestions);
 router.delete("/removeQuestion", removeQuestion);
+router.post("/tags", getTags);
 
 router.get("/create", (req, res) => {
   res.sendFile(publicPath + "/frontend/create_question/create_question.html");
