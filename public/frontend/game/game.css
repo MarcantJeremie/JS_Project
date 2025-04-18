@@ -103,7 +103,7 @@ button {
 }
 
 /* Partie postgame */
-.hidden {
+.hidden, #scores.hidden, #bonuses.hidden {
     display: none;
 }
 

@@ -20,7 +20,8 @@ module.exports.createQuestions = async (req, res) => {
     !req.body.question ||
     !req.body.answer ||
     !req.body.tags ||
-    !req.body.difficulty
+    !req.body.difficulty ||
+    !req.body.creator
   ) {
     deleteFileIfExists();
     return res
@@ -40,7 +41,7 @@ module.exports.createQuestions = async (req, res) => {
     for (let i = 0; i < tags.length; i++) {
         tags[i] = tags[i].trim();
     }
-    if(!req.session.login) {
+    if(!req.body.creator) {
         deleteFileIfExists();
         return res.status(400).json({ message: "You need to be logged in" });
     }
@@ -51,7 +52,7 @@ module.exports.createQuestions = async (req, res) => {
     difficulty: req.body.difficulty,
     verified: req.body.verified,
     img_path: filePath,
-    created_by: req.session.login,
+    created_by: req.body.creator,
   });
   res.status(201).json(question);
 };
@@ -135,4 +136,18 @@ module.exports.removeQuestion = async (req, res) => {
   await QuestionModel.deleteOne({ _id: req.body.id });
   deleteFileIfExists(filePath);
   res.status(201).json({message:"Question deleted"});
+};
+
+
+module.exports.getTags = async (req, res) => {
+    const questions = await QuestionModel.find({ verified: true });
+    var tags = [];
+    questions.forEach((question) => {
+        question.tags.forEach((tag) => {
+            if (!tags.includes(tag)) {
+                tags.push(tag);
+            }
+        });
+    });
+    res.status(201).json({tags: tags});
 };

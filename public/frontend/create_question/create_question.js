@@ -14,6 +14,16 @@ creation_form = document.getElementById("creation");
 creation_form.addEventListener("submit", (e) => {
     e.preventDefault();
     formData = new FormData(creation_form);
+    creator = sessionStorage.getItem("UserLogin");
+    if (!creator){
+        creator = window.getItemWithExpiration("UserLogin");
+        if (!creator){
+            alert("You are not connected, please connect to create a question.");
+            window.location.href = adress + "/profile/login";
+            return;
+        }
+    }
+    formData.append("creator", creator);
     fetch(adress + "/questions/submit", {
         method: "POST",
         body: formData,
@@ -116,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tagsInput.addEventListener("keydown", function (event) {
         if (event.key === "Enter" && tagsInput.value.trim() !== "") {
             event.preventDefault();
-            addTag(tagsInput.value.trim());
+            addTag(tagsInput.value.trim().toUpperCase());
         }
     });
 
@@ -125,8 +135,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const adminButton = document.getElementById("admin");
 
+admin = sessionStorage.getItem("Admin");
+if (!admin){
+    admin = window.getItemWithExpiration("Admin");
+}
+if (admin){
+    adminButton.classList.remove("hidden");
+}
+
+
 adminButton.addEventListener("click", () => {
-    console.log("Admin button clicked");
     if (adminButton.classList.contains("hidden")){
         return;
     }

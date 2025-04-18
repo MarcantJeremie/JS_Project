@@ -137,16 +137,7 @@ window.selectedTagAddEventListener = () => {
 
 // Search
 
-document.querySelectorAll("#tag-list div").forEach((item) => {
-  item.addEventListener("click", () => {
-    let id_use = item.textContent.toLowerCase().trim();
-    if (!selected_tag.includes(id_use)) {
-      addTagToList(id_use, item.textContent);
 
-      if (window.is_host) selectedTagAddEventListener();
-    }
-  });
-});
 
 /**
  * Gére la barre de recherche des tags.
@@ -170,4 +161,39 @@ const search = () => {
 
 copy_code_party.addEventListener("click", () => {
   navigator.clipboard.writeText(show_code_party.innerText);
+});
+
+const fillTagList = (tags) => {
+  tag_list.innerHTML = "";
+  tags.forEach((tag) => {
+    tag_list.innerHTML += `
+      <div class="tag-list-elem">${tag}</div>
+    `;
+  });
+}
+
+fetch(adress + "/questions/tags", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+}).then((response) => {
+  if (response.ok) {
+    response.json().then((data) => {
+      fillTagList(data.tags);
+    }).then(()=>{
+      document.querySelectorAll(".tag-list-elem").forEach((item) => {
+        item.addEventListener("click", () => {
+          let id_use = item.textContent.toUpperCase().trim();
+          if (!selected_tag.includes(id_use)) {
+            addTagToList(id_use, id_use);
+      
+            if (window.is_host) selectedTagAddEventListener();
+          }
+        });
+      });
+    });
+  } else {
+    console.error("Erreur lors de la récupération des tags.");
+  }
 });

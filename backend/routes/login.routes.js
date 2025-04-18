@@ -51,7 +51,8 @@ router.post('/', async (req, res)=>{
         await User.updateOne({$or: [{ login: login }, { email: login }]}, { last_connected_on: Date.now() });
         req.session.login = login;
         console.log("User connected : ", login);
-        res.status(200).json({ msg: 'Connected' });
+        const admin = (await User.findOne({$or: [{ login: login }, { email: login }]}).select('+role') == "admin") ? true : false;
+        res.status(200).json({ msg: 'Connected', admin: admin});
     }
 }
 );

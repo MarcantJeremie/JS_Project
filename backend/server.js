@@ -53,21 +53,6 @@ app.use("/accounts", require("./routes/accounts.routes"));
 
 socketManager(io);
 
-
-// à mettre dans le html à mettre pour connecter les joueurs :
-// let userId = localStorage.getItem('userId');
-
-// if (!userId) {
-//     userId = Date.now();  // Utilisation de l'horodatage comme ID unique (ou tu peux utiliser un autre générateur d'ID)
-//     localStorage.setItem('userId', userId); // Sauvegarder dans le localStorage
-// }
-// const socket = io();
-// socket.on("connect", () => {
-//     socket.emit("join", userId);
-// });
-
-// import { getQuestion } from "./game_manager";
-
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
