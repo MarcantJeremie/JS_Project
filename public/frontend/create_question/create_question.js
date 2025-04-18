@@ -139,7 +139,7 @@ admin = sessionStorage.getItem("Admin");
 if (admin == null){
     admin = window.getItemWithExpiration("Admin");
 }
-if (admin){
+if (admin == "true"){
     adminButton.classList.remove("hidden");
 }
 
