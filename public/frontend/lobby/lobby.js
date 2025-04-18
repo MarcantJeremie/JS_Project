@@ -171,3 +171,27 @@ const search = () => {
 copy_code_party.addEventListener("click", () => {
   navigator.clipboard.writeText(show_code_party.innerText);
 });
+
+const fillTagList = (tags) => {
+  tag_list.innerHTML = "";
+  tags.forEach((tag) => {
+    tag_list.innerHTML += `
+      <div class="tag" id="${tag}">${tag}</div>
+    `;
+  });
+}
+
+fetch(adress + "/questions/tags", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+}).then((response) => {
+  if (response.ok) {
+    response.json().then((data) => {
+      fillTagList(data.tags);
+    });
+  } else {
+    console.error("Erreur lors de la récupération des tags.");
+  }
+});

@@ -83,7 +83,7 @@ module.exports = function(io){
         })
 
         socket.on("getDisplayInfo", ({roomId}, callback) =>{
-            let room = rooms.get(roomId);
+            let room = getSafeRoomData(rooms.get(roomId));
             if(room){
                 callback(room);
             }else{

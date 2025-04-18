@@ -136,3 +136,17 @@ module.exports.removeQuestion = async (req, res) => {
   deleteFileIfExists(filePath);
   res.status(201).json({message:"Question deleted"});
 };
+
+
+module.exports.getTags = async (req, res) => {
+    const questions = await QuestionModel.find({ verified: true });
+    var tags = [];
+    questions.forEach((question) => {
+        question.tags.forEach((tag) => {
+            if (!tags.includes(tag)) {
+                tags.push(tag);
+            }
+        });
+    });
+    res.status(201).json({tags: tags});
+};
