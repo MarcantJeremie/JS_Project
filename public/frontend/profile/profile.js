@@ -185,6 +185,7 @@ try {
   account_disconnect_button.addEventListener("click", () => {
     sessionStorage.removeItem("UserLogin");
     sessionStorage.removeItem("IsConnect");
+    sessionStorage.removeItem("Admin");
     localStorage.removeItem("UserLogin");
     localStorage.removeItem("DisplayName");
     localStorage.removeItem("CanPlay");
@@ -215,6 +216,7 @@ try {
           if (data.message === "Account deleted") {
             sessionStorage.removeItem("UserLogin");
             sessionStorage.removeItem("IsConnect");
+            sessionStorage.removeItem("Admin");
             localStorage.removeItem("UserLogin");
             localStorage.removeItem("DisplayName");
             localStorage.removeItem("CanPlay");
