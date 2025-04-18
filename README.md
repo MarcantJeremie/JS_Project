@@ -27,6 +27,7 @@ Une fois ces choses installées, plusieurs choix s'offrent à vous :
 
 4. Sous Windows, éxécutez le script `run_server.bat` situé à la racine du dossier, sous Linux ou MacOS, ouvrez un terminal dans le dossier du projet et éxécutez la commande `npm run server`
 
+5. Ouvrez votre navigateur internet et rendez vous sur `localhost:4000` pour découvrir notre projet
 
 
 
@@ -59,3 +60,36 @@ Une fois ces choses installées, plusieurs choix s'offrent à vous :
 
 11. Sous Windows, éxécutez le script `run_server.bat` situé à la racine du dossier, sous Linux ou MacOS, ouvrez un terminal dans le dossier du projet et éxécutez la commande `npm run server`
 
+12. Ouvrez votre navigateur internet et rendez vous sur `localhost:4000` pour découvrir notre projet
+
+# Fonctionalités
+
+Dans GTRCulture, vous pourrez :
+- [Tester votre culture sur différents sujets tout seul ou avec vos amis](#jouer-avec-vos-amis)
+- [Créer de nouvelles questions afin d'enrichir le jeu](#créer-des-questions)
+
+## Jouer avec vos amis
+> Le jeu n'étant pas encore hébergé en ligne, pour jouer avec voc amis, ceux-ci devront être connectés au même réseau que vous et vous devrez héberger le jeu sur votre machine. Pour ce faire, éxécutez simplement le script `run_server.bat` ou la commande `npm run server` dans un terminal.
+
+> Vous devrez ensuite communiquer votre IPV4 Locale à vos amis, celle-ci peut être trouvée en tapant la commande `ipconfig` dans un terminal. En général, celle ci est souvent de cette forme `192.168.1.<2-255>` <br>
+Une fois connectés au serveur, vos amis verront la même page que vous, il vous suffira alors de créer une partie en cliquant sur ``Jouer`` puis ``Créer``
+
+## Créer des questions
+> Pour créer une question, rendez vous sur la page d'accueil du jeu, vous pourrez alors créer un compte ou vous connecter si vous en avez déjà un en cliquant sur le bouton `Connexion` en haut à droite
+
+> Une fois votre compte créé et après vous être connecté, vous devrez revenir sur la page d'accueil afin de cliquer sur le bouton `Questions` situé à gauche de l'ancien bouton ``Connexion`` maintenant devenu ``Profil``. Vous aurez alors la possibilité de rentrer les informations de votre question et de la soumettre **aux administrateurs** du jeu afin de la faire valider par ceux-ci.
+
+### Validation des questions (réservée aux administrateurs)
+
+> Si lors de votre connexion vous vous êtes connecté avec un compte administrateur, alors sur la page `Création de question` vous aurez un bouton supplémentaire `Admin`. En cliquant sur celui-ci, vous arriverez sur la page de validation de question avec à gauche de la page : un menu déroulant permettant de sélectionner la question à vérifier. Et au milieu de la page des champs correspondants aux informations de la question que vous souhaitez vérifier. Vous aurez alors la possibilité de modifier ces champs puis de valider ou non la question. <br>
+Si vous la validez, alors elle sera disponible en jeu. Si en revanche vous la refusez, alors celle-ci sera supprimée de la base de donnée et devra être recréé si vous souhaitez de nouveau la soumettre à validation.
+
+# Crédits
+
+La rédaction du fichier README.md que vous êtes en train de lire a été assurée par **Clément MASQUELIER** et **Romain PIAT**
+
+La partie **Interface Utilisateur** a été réalisée par **Jérémie MARCANT**, **Romain PIAT** et **Théo LESAGE**
+
+La partie **Serveur** a été réalisée par **Clément MASQUELIER** et **Jérémie MARCANT**
+
+La partie **Jeu et les interactions entre les clients et le serveur** a été réalisée par **Clément MASQUELIER**
