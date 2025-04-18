@@ -137,16 +137,7 @@ window.selectedTagAddEventListener = () => {
 
 // Search
 
-document.querySelectorAll("#tag-list div").forEach((item) => {
-  item.addEventListener("click", () => {
-    let id_use = item.textContent.toLowerCase().trim();
-    if (!selected_tag.includes(id_use)) {
-      addTagToList(id_use, item.textContent);
 
-      if (window.is_host) selectedTagAddEventListener();
-    }
-  });
-});
 
 /**
  * Gére la barre de recherche des tags.
@@ -176,7 +167,7 @@ const fillTagList = (tags) => {
   tag_list.innerHTML = "";
   tags.forEach((tag) => {
     tag_list.innerHTML += `
-      <div class="tag" id="${tag}">${tag}</div>
+      <div class="tag-list-elem">${tag}</div>
     `;
   });
 }
@@ -190,6 +181,17 @@ fetch(adress + "/questions/tags", {
   if (response.ok) {
     response.json().then((data) => {
       fillTagList(data.tags);
+    }).then(()=>{
+      document.querySelectorAll(".tag-list-elem").forEach((item) => {
+        item.addEventListener("click", () => {
+          let id_use = item.textContent.toUpperCase().trim();
+          if (!selected_tag.includes(id_use)) {
+            addTagToList(id_use, id_use);
+      
+            if (window.is_host) selectedTagAddEventListener();
+          }
+        });
+      });
     });
   } else {
     console.error("Erreur lors de la récupération des tags.");
