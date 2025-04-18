@@ -66,10 +66,16 @@ button {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 500px;
+    max-width: 500px;
     text-align: center;
     cursor: default;
 }
+#question {
+    width: 60%;
+}
+/* #post_username, #post_game, #postgame_answer {
+    width: 90%;
+} */
 #postgame_answer {
     padding: none;
 }
@@ -88,7 +94,8 @@ button {
     background-color: #FFFFFF;
     color: #666666;
     border: none;
-    width: 500px;
+    max-width: 500px;
+    width: 60%;
     text-align: center;
 }
 
