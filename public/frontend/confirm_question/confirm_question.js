@@ -129,9 +129,9 @@ document.getElementById("non_valid").addEventListener("click", () => {
       if (data.message == "Question deleted") {
         alert(data.message);
         window.clearTagsFromUI();
-        document.getElementById("display_question").setAttribute("value", "");
-        document.getElementById("display_answer").setAttribute("value", "");
-        document.querySelector('select[name="difficulty"]').value = "easy";
+        document.getElementById("display_question").value = "";
+        document.getElementById("display_answer").value = "";
+        document.querySelector('select[name="difficulty"]').value = 1;
         document.getElementById("img").src = "../../files/uploads/default.png";
         document.getElementById("img").alt = "default.png";
       } else {
