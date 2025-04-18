@@ -49,7 +49,12 @@ const sendParameters = () => {
         tags.push(elem.getAttribute("id"));
     });
     total_question = nb_quest1 + nb_quest2 + nb_quest3 + nb_quest4;
-    socket.emit("hostParameters", {roomId, data: {total_question, tags, nb_quest1, nb_quest2, nb_quest3, nb_quest4, timer_duration}})
+    if (total_question > 1){
+        socket.emit("hostParameters", {roomId, data: {total_question, tags, nb_quest1, nb_quest2, nb_quest3, nb_quest4, timer_duration}})
+    }
+    else{
+        alert("Il faut au moins 2 question dans la partie !");
+    }
 }
 
 params.addEventListener("submit", (e) => {
