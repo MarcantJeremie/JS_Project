@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tagsInput.addEventListener("keydown", function (event) {
         if (event.key === "Enter" && tagsInput.value.trim() !== "") {
             event.preventDefault();
-            addTag(tagsInput.value.trim());
+            addTag(tagsInput.value.trim().toUpperCase());
         }
     });
 
@@ -134,6 +134,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const adminButton = document.getElementById("admin");
+
+admin = sessionStorage.getItem("Admin");
+if (!admin){
+    admin = window.getItemWithExpiration("Admin");
+}
+if (admin){
+    adminButton.classList.remove("hidden");
+}
+
 
 adminButton.addEventListener("click", () => {
     if (adminButton.classList.contains("hidden")){
