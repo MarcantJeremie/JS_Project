@@ -40,7 +40,7 @@ adress = "http://" + adress;
 const back_to_menu_button = document.getElementById("back-to-menu");
 
 back_to_menu_button.addEventListener("click", () => {
-    window.location.href = adress + "/";
+  window.location.href = adress + "/";
 });
 
 fetch(adress + "/questions/getNoVerifiedQuestions", {
@@ -55,7 +55,8 @@ fetch(adress + "/questions/getNoVerifiedQuestions", {
     data.forEach((element) => {
       sidebar_questions.innerHTML += `<a id="${element._id}" class="no-verified-question"> ${element.question} </a>`;
     });
-  }).then(() => {
+  })
+  .then(() => {
     document.querySelectorAll(".no-verified-question").forEach((element) => {
       element.addEventListener("click", () => {
         fetch(adress + "/questions/getQuestionById", {
@@ -78,7 +79,7 @@ fetch(adress + "/questions/getNoVerifiedQuestions", {
 document.getElementById("valid").addEventListener("click", () => {
   if (actual_id == "") return;
 
-  fetch(adress +"/questions/approvedQuestion", {
+  fetch(adress + "/questions/approvedQuestion", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -98,9 +99,9 @@ document.getElementById("valid").addEventListener("click", () => {
         alert(data.message);
         document.getElementById(actual_id).remove();
         window.clearTagsFromUI();
-        document.getElementById("display_question").setAttribute("value", "");
-        document.getElementById("display_answer").setAttribute("value", "");
-        document.querySelector('select[name="difficulty"]').value = "easy";
+        document.getElementById("display_question").value = "";
+        document.getElementById("display_answer").value = "";
+        document.querySelector('select[name="difficulty"]').value = 1;
         document.getElementById("img").src = "../../files/uploads/default.png";
         document.getElementById("img").alt = "default.png";
       } else {
