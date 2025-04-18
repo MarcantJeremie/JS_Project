@@ -118,9 +118,11 @@ try {
         } else {
           sessionStorage.setItem("IsConnect", "true");
           sessionStorage.setItem("UserLogin", login);
+          sessionStorage.setItem("Admin", data.admin);
           if (rememberme) {
             window.setItemWithExpiration("UserLogin", login, 30);
             window.setItemWithExpiration("CanPlay", "true", 30);
+            window.setItemWithExpiration("Admin", data.admin, 30);
             window.getUser(login).then((data) => {
               window.setItemWithExpiration("DisplayName", data.displayName, 30);
             });

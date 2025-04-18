@@ -37,6 +37,12 @@ adress = adress.split("/");
 adress = adress[2];
 adress = "http://" + adress;
 
+const back_to_menu_button = document.getElementById("back-to-menu");
+
+back_to_menu_button.addEventListener("click", () => {
+    window.location.href = adress + "/";
+});
+
 fetch(adress + "/questions/getNoVerifiedQuestions", {
   method: "POST",
   headers: {

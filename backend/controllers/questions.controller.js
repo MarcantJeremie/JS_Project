@@ -20,7 +20,8 @@ module.exports.createQuestions = async (req, res) => {
     !req.body.question ||
     !req.body.answer ||
     !req.body.tags ||
-    !req.body.difficulty
+    !req.body.difficulty ||
+    !req.body.creator
   ) {
     deleteFileIfExists();
     return res
@@ -40,7 +41,7 @@ module.exports.createQuestions = async (req, res) => {
     for (let i = 0; i < tags.length; i++) {
         tags[i] = tags[i].trim();
     }
-    if(!req.session.login) {
+    if(!req.body.creator) {
         deleteFileIfExists();
         return res.status(400).json({ message: "You need to be logged in" });
     }
@@ -51,7 +52,7 @@ module.exports.createQuestions = async (req, res) => {
     difficulty: req.body.difficulty,
     verified: req.body.verified,
     img_path: filePath,
-    created_by: req.session.login,
+    created_by: req.body.creator,
   });
   res.status(201).json(question);
 };
