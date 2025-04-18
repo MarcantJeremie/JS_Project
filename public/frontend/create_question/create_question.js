@@ -136,10 +136,10 @@ document.addEventListener("DOMContentLoaded", function () {
 const adminButton = document.getElementById("admin");
 
 admin = sessionStorage.getItem("Admin");
-if (!admin){
+if (admin == null){
     admin = window.getItemWithExpiration("Admin");
 }
-if (admin){
+if (admin == "true"){
     adminButton.classList.remove("hidden");
 }
 
