@@ -63,7 +63,7 @@ try {
       return;
     }
 
-    fetch(adress + "/register", {
+    fetch('/register', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +97,7 @@ try {
     password = form_data.get("L-password");
     rememberme = form_data.get("L-horns");
 
-    fetch(adress + "/login", {
+    fetch('/login', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -196,7 +196,7 @@ try {
 
     // fetch pour delete un compte
 
-    fetch(adress + "/accounts/delete", {
+    fetch('/accounts/delete', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -249,7 +249,7 @@ try {
     } else {
       newPassword = oldPassword;
     }
-    fetch(adress + "/accounts/edit", {
+    fetch('/accounts/edit', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
