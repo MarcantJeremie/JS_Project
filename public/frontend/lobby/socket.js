@@ -151,5 +151,5 @@ interval = setInterval(() => {
   if (!window.is_host) {
     return;
   }
-  // sendParameters();
+  sendParameters();
 }, 2000);
