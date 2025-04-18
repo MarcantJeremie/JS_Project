@@ -49,18 +49,18 @@ const sendParameters = () => {
         tags.push(elem.getAttribute("id"));
     });
     total_question = nb_quest1 + nb_quest2 + nb_quest3 + nb_quest4;
-    if (total_question > 1){
-        socket.emit("hostParameters", {roomId, data: {total_question, tags, nb_quest1, nb_quest2, nb_quest3, nb_quest4, timer_duration}})
-    }
-    else{
-        alert("Il faut au moins 2 question dans la partie !");
-    }
+    socket.emit("hostParameters", {roomId, data: {total_question, tags, nb_quest1, nb_quest2, nb_quest3, nb_quest4, timer_duration}})
+
 }
 
 params.addEventListener("submit", (e) => {
     e.preventDefault();
     sendParameters();
-
+    let total_question = parseInt(easy_question_number.value) + parseInt(medium_question_number.value) + parseInt(hard_question_number.value) + parseInt(accoustic_question_number.value);
+    if (total_question <2){
+        alert("Il faut au moins 2 question dans la partie !");
+        return;
+    }
     socket.emit("moveToGame", { roomId });
     
 });
